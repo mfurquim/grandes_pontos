@@ -1,14 +1,14 @@
-Universidade de Brasília – Faculdade UnB Gama
-Disciplina: Técnicas de Programação
-Professor: Maurício Serrano
-Período: 2º/2015
-Data de entrega: 24 de Agosto de 2015
-Estudantes:
+Universidade de Brasília – Faculdade UnB Gama<br>
+Disciplina: Técnicas de Programação<br>
+Professor: Maurício Serrano<br>
+Período: 2º/2015<br>
+Data de entrega: 24 de Agosto de 2015<br>
+Estudantes:<br>
 
-**11/0014863** - *Kleber Brito Moreira*  
-**11/0017561** - *Mateus Furquim*
-**11/0017692** - *Matheus Mello Nascimento* 
-**11/0064879** - *Nicolas Boarin* 
+**11/0014863** - *Kleber Brito Moreira*<br>
+**11/0017561** - *Mateus Furquim*<br>
+**11/0017692** - *Matheus Mello Nascimento*<br>
+**11/0064879** - *Nicolas Boarin*<br>
 
 #Stylesheet - Grandes Pontos
 
