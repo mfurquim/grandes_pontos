@@ -1,3 +1,5 @@
+
+
 /*
 var ATLAS = (function(atlJSON){
   var url = "/home/mfurquim/Documents/Big Point/Assets/Assets.png",
@@ -56,4 +58,24 @@ var ATLAS = (function(atlJSON){
     },
   };
 }(atlasJSON));
+*/
+
+/*
+Drawable.prototype = {
+  drawDrawable: function(dx, dy) {
+    this.dx = dx;
+    this.dy = dy;
+  }
+};
+
+function Drawable (spriteName, sx, sy, sw, sh) {
+  this.spriteName = spriteName;
+  this.sx = sx;
+  this.sy = sy;
+  this.sw = sw;
+  this.sh = sh;
+}
+
+var disc = new Drawable("Multi/disc_green.png", 2, 2, 42, 28);
+disc.drawDrawable(150, 150);
 */
