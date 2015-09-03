@@ -1,7 +1,7 @@
 var canvas = null,
     context = null,
     atlasJSON = null,
-    url = "/Assets/Assets.png";
+    url = "./Assets/Assets.png";
 
 function load() {
   context.fillText('Loading', 152, 152);
@@ -22,8 +22,23 @@ var setup = function() {
   atlasJSON.src = url;
 };
 
+function showCoordinates() {
+  var axisX = event.clientX;
+  var axisY = event.clientY;
+  console.log("Coordenada X: "+axisX+", Coordenada Y: "+axisY);
+
+}
+
+function writeInScreen() {
+  context.fillText("MouseClick verificado",193,548);
+}
+
+
 setup();
 context.fillText('Game Loaded', 152, 200);
+canvas.addEventListener("mousedown", showCoordinates, false);
+canvas.addEventListener("onmousedown",writeInScreen, false);
+
 /*
 Drawable.prototype = {
   drawDrawable: function(dx, dy) {
