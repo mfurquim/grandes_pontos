@@ -5,10 +5,16 @@ var canvas = null,
 		sprites = [],
 		url = "./Assets/Assets.png";
 
+var xmlhttp = new XMLHttpRequest();
+var urlJSON = "./Assets/Assets.json";
+var objJSON = null;
+
 function load() {
 	context.drawImage(atlasAsset, 2, 2, 42, 28, 150, 400, 42, 28);
 
+	console.log("4");
   var parsed = JSON.parse(jsonFile);
+	console.log("5");
 
   for(var key in parsed.frames) {
     var sprite = parsed.frames[key];
@@ -40,6 +46,20 @@ var setup = function() {
 
 	context.font = '40px Arial';
 	context.fillStyle = 'green';
+
+	console.log("1");
+
+	xmlhttp.onreadystatechange = function() {
+		console.log("2");
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		  jsonFile = xmlhttp.responseText;
+		}
+	}
+
+	console.log("3");
+
+	xmlhttp.open("GET", urlJSON, true);
+	xmlhttp.send();
 
 	atlasAsset = new Image();
 	atlasAsset.onload = load;
