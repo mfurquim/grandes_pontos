@@ -3,6 +3,11 @@ var jsonFile = '{"frames":[{"filename": "Multi/disc_green.png","frame": {"x":2,"
     sprites = [],
     url = "./Assets/Assets.png";
 
+/* Function load does not receive parameters.
+ * It is called immediately after giving the source of the image.
+ * It parses the JSON file and call defSprite.
+ * It returns nothing.
+ */
 function load() {
 	context.drawImage(atlasAsset, 2, 2, 42, 28, 150, 400, 42, 28);
 
@@ -12,26 +17,44 @@ function load() {
   for(var key in parsed.frames) {
     var sprite = parsed.frames[key];
 
-    var cx = -sprite.frame.w * 0.5;
-    var cy = -sprite.frame.h * 0.5;
+    var center_x = -sprite.frame.w * 0.5;
+    var center_y = -sprite.frame.h * 0.5;
 
-    defSprite(key, sprite.frame.x, sprite.frame.y, sprite.frame.w, sprite.frame.h, cx, cy);
+    defSprite(key, sprite.frame.x, sprite.frame.y, sprite.frame.w,
+      sprite.frame.h, center_x, center_y);
   }
 	console.log(sprites);
 }
 
-function defSprite(name, x, y, w, h, cx, cy) {
+/* Function defSprite receives 7 parameters:
+ * 1. The name of the image;
+ * 2,3. The (x,y) starting coordinate;
+ * 4,5. The width and height of the image;
+ * 6,7. The (x,y) center coordinate;
+ * It is called for each parsed sprite of the JSON file.
+ * It stores all the nedded information about images
+ * into the array called sprites.
+ * It returns nothing.
+ */
+function defSprite(name, coordinate_x, coordinate_y,
+  width, height, center_x, center_y) {
   var spt = {
   	"id": name,
-    "x": x,
-    "y": y,
-    "w": w,
-    "h": h,
-    "cx": cx | 0,
-    "cy": cy | 0};
+    "coordinate_x": coordinate_x,
+    "coordinate_y": coordinate_y,
+    "width": width,
+    "height": height,
+    "center_x": center_x == null ? 0 : center_x,
+    "center_y": center_y == null ? 0 : center_y
+  };
 	sprites.push(spt);
 }
 
+/* Function loadingAssets does not receive parameters.
+ * It is called on the main.js.
+ * It loads the Atlas image and calls the load function.
+ * It returns nothing.
+ */
 function loadingAssets() {
   atlasAsset = new Image();
   atlasAsset.onload = load;
