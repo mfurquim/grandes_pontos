@@ -26,39 +26,12 @@ function writeInScreen() {
   context.fillText("MouseClick verificado",193,548);
 }
 
-
 setup();
 context.fillText('Game Loaded', 152, 200);
-
-
-var bw = 484;
-var bh = 150;
-var p = 0;
-
-
-function drawBoard(){
-for (var x = 0; x <= bw; x += 44) {
-    context.moveTo(0.5 + x + p, p);
-    context.lineTo(0.5 + x + p, bh + p);
-}
-
-
-for (var x = 0; x <= bh; x += 30) {
-    context.moveTo(p, 0.5 + x + p);
-    context.lineTo(bw + p, 0.5 + x + p);
-}
-
-context.strokeStyle = "black";
-context.stroke();
-}
-
-drawBoard();
-
 
 // Draw Circle on Screen
 context.arc(590,300,40,0,2*Math.PI);
 context.stroke();
-
 
 // Draw DOM in Canvas
 var data = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
@@ -121,9 +94,7 @@ function specifiedCoordinates() {
   }
 }
 
-
 canvas.addEventListener("mousedown", specifiedCoordinates, false);
-
 
 /*
 Drawable.prototype = {
