@@ -11,7 +11,7 @@ var setup = function() {
 };
 
 setup();
-loadingAssets();
+ATLAS.loadingAssets();
 
 // It needs to wait a little for the sprites to be loaded
-window.setTimeout(drawSprite, 100, "Multi/disc_green.png", 0, 0);
+window.setTimeout(ATLAS.drawSprite, 100, "Multi/disc_green.png", 0, 0);
