@@ -2,12 +2,16 @@ var atlasAsset = null,
     sprites = [],
     url = "./Assets/Assets.png";
 
-
-function loadJSON(callback) {
+/* Function loadJSON receives a JSON path as parameter and a callback.
+ * It is called right after load().
+ * It loads JSON files.
+ * It returns the JSON file loaded.
+ */
+function loadJSON(file, callback) { 
     try{
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', './Assets/Assets-non-idented.json', true); // Replace 'my_data' with the path to your file
+    xobj.open('GET', file, true);
     xobj.onreadystatechange = function () {
           if (xobj.readyState == 4 && xobj.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -15,8 +19,8 @@ function loadJSON(callback) {
           }
     };
     xobj.send(null);
-  } catch(e) {
-    alert(e);
+  } catch( error_loadJSON ) {
+    alert( error_loadJSON );
   }
  }
 
@@ -27,9 +31,9 @@ function loadJSON(callback) {
  */
 function load() {
 
-  loadJSON(function(response) {
+  loadJSON("./Assets/Assets-non-idented.json", function(load_json) {
 
-    var parsed = JSON.parse(response);
+    var parsed = JSON.parse(load_json);
     for(var key in parsed.frames) {
       var sprite = parsed.frames[key];
 
