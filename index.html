@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+       
         <script type='text/javascript' id='lt_ws' src='http://localhost:42965/socket.io/lighttable/ws.js'></script>
         <style>
+        body{
+            margin: 0;  
+          }
         #gameCanvas {
           margin-top: 100px;
           /* background-color: #000;*/
@@ -28,11 +32,28 @@
               c = canvas.getContext("2d");
 
               init();
+            }
+
+            var mX;
+            var mY;
+            var clickedX;
+            var clickedY;
+
+            window.onclick = function(e){
+              mX = e.pageX;
+              mY = e.pageY;
+              console.log(mX + "," + mY);
+
+              if(Math.floor(mX/s.width) < s.cols && Math.floor(mY/s.height) < s.rows){
+                clickedX = Math.floor(mX/s.width);
+                clickedY = Math.floor(mY/s.height);
+                console.log(clickedX + "," + clickedY);
+              }  
             }    
 
             var box;
             box = new Image();
-            box.src = "box.jpg";
+            box.src = "box.png";
 
             function init(){
               drawCanvas();      
@@ -60,5 +81,8 @@
             <menu id="controls">     
             </menu>   
         </canvas>
+        <div id="controls">
+          
+        </div>
     </body>
 </html>
