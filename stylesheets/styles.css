@@ -2,10 +2,24 @@
 	background-color: black;	
 }*/
 
-#controls
-{
+body{
+	margin: 0;  
+}
+        
+#gameCanvas {
+    margin-top: 100px;
+          /* background-color: #000;*/
+}
+
+    #myCanvas {
+    margin: auto;
+	display: block;
+}
+
+#controls {
   bottom: 0;
   left: 0;
   position: absolute;
   width: 100%;
 }
+
