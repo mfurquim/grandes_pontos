@@ -14,14 +14,25 @@ var s = {
               init();
             };
 
+      //   function getMousePos(canvas) {
+      //   var rect = canvas.getBoundingClientRect();
+      //   return {
+      //     x: evt.clientX - rect.left,
+      //     y: evt.clientY - rect.top
+      //   };
+      // }
+            var mousePosition;
             var mX;
             var mY;
             var clickedX;
             var clickedY;
 
             window.onclick = function(e){
-              mX = e.pageX;
-              mY = e.pageY;
+           
+              // mX = e.pageX;
+              // mY = e.pageY;
+              mX = mousePosition.x ;
+              mY = mousePosition.y ;
               console.log(mX + "," + mY);
 
               if(Math.floor(mX/s.width) < s.cols && Math.floor(mY/s.height) < s.rows){
