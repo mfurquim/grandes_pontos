@@ -26,6 +26,8 @@ clickedX - mouse position in X axis when mouse left button is pressed
 
 clickedY - mouse position in Y axis when mouse left button is pressed
 
+box - image to de displayed in each grid cell
+
 */
 
 var s = {
