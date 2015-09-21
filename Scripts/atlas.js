@@ -7,6 +7,12 @@
  * public methods:
  *  loadingAssets,
  *  drawSprite.
+ *
+ * Variables:
+ * atlasAsset is an Object which contains an Atlas sheet with all images.
+ * sprites is an Array which contains useful information to draw and image
+ * url is a String which contains the path to the image Atlas
+ * sprite is an Object which contains its name, coordinates and dimension
  */
 
 var ATLAS = (function() {
