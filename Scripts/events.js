@@ -12,15 +12,15 @@ canvas - main canvas of the game
 
 c - canvas context
 
-s - screen configuration setup
-s.rows - number of rows in the grid system
-s.cols - number of cols in the grid system
-s.height - height in pixels of each grid cell
-s.width - width in pixels of each grid cell
+screenConfiguration - screen configuration setup
+screenConfiguration.rows - number of rows in the grid system
+screenConfiguration.cols - number of cols in the grid system
+screenConfiguration.height - height in pixels of each grid cell
+screenConfiguration.width - width in pixels of each grid cell
 
-mX - mouse position in X axis, starts in the top left corner
+mousePositionX - mouse position in X axis, starts in the top left corner
 
-mY - mouse position in Y axis, starts in the top left corner
+mousePositionY - mouse position in Y axis, starts in the top left corner
 
 clickedX - mouse position in X axis when mouse left button is pressed
 
@@ -30,65 +30,65 @@ box - image to de displayed in each grid cell
 
 */
 
-var s = {
-              rows: 10,
-              cols: 10,
-              width: 30,
-              height: 30   
-            };
+var screenConfiguration = {
+  rows: 10,
+  cols: 10,
+  width: 30,
+  height: 30   
+};
 
-            var c;
+var canvasContext;
 
-            window.onload = function(){
-              var canvas = document.getElementById("myCanvas");    
-              c = canvas.getContext("2d");
+window.onload = function() {
+  var canvas = document.getElementById("myCanvas");    
+  canvasContext = canvas.getContext("2d");
 
-              init();
-            };
+  init();
+};
 
-      //   function getMousePos(canvas) {
-      //   var rect = canvas.getBoundingClientRect();
-      //   return {
-      //     x: evt.clientX - rect.left,
-      //     y: evt.clientY - rect.top
-      //   };
-      // }
-            // var mousePosition;
-            var mX;
-            var mY;
-            var clickedX;
-            var clickedY;
+/*function getMousePos(canvas) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+}*/
+            
+// var mousePosition;
+var mousePositionX;
+var mousePositionY;
+var clickedX;
+var clickedY;
 
-            window.onclick = function(e){
-           
-              mX = e.pageX;
-              mY = e.pageY;
+window.onclick = function(e){
+  mousePositionX = e.pageX;
+  mousePositionY = e.pageY;
              
-              console.log(mX + "," + mY);
+  console.log(mousePositionX + "," + mousePositionY);
 
-              if(Math.floor(mX/s.width) < s.cols && Math.floor(mY/s.height) < s.rows){
-                clickedX = Math.floor(mX/s.width);
-                clickedY = Math.floor(mY/s.height);
-                console.log(clickedX + "," + clickedY);
-              }  
-            };
+/*if(Math.floor(mX/s.width) < s.cols && Math.floor(mY/s.height) < s.rows){
+clickedX = Math.floor(mX/s.width);
+clickedY = Math.floor(mY/s.height);
+console.log(clickedX + "," + clickedY);
+              }*/  
+};
 
-            var box;
-            box = new Image();
-            box.src = "box.png";
+var box;
+box = new Image();
+box.src = "box.png";
 
-            function init(){
-              drawCanvas();      
-            }
+function init(){
+  drawCanvas();      
+}
 
-            function drawCanvas(){
-              c.clearRect(0, 0, 400, 400);
+function drawCanvas(){
+  canvasContext.clearRect(0, 0, 400, 400);
 
-              for (var i = 0; i < s.rows; i++) {
-                for (var n = 0; n < s.cols; n++) {
-                  var x = n*s.width;
-                  var y = i*s.height;
-                  c.drawImage(box, x, y);        
-                 } 
-              }
-            }    
+  for (var i = 0; i < screenConfiguration.rows; i++) {
+    for (var n = 0; n < screenConfiguration.cols; n++) {
+      var x = n*screenConfiguration.width;
+      var y = i*screenConfiguration.height;
+      canvasContext.drawImage(box, x, y);        
+    } 
+  }
+}    
