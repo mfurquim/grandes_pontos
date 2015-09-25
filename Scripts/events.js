@@ -3,7 +3,7 @@ public methods:
 
 init() - Initialize the Canvas, calling the drawCanvas function
 
-drawCanvas() - Draw the canvas grid system according to the configuration 
+drawCanvas() - Draw the canvas grid system according to the configuration
 variable s
 
 Variables:
@@ -33,14 +33,14 @@ box - image to de displayed in each grid cell
 var screenConfiguration = {
   rows: 10,
   cols: 10,
-  width: 30,
-  height: 30   
+  width: 50,
+  height: 50
 };
 
 var canvasContext;
 
 window.onload = function() {
-  var canvas = document.getElementById("myCanvas");    
+  var canvas = document.getElementById("myCanvas");
   canvasContext = canvas.getContext("2d");
 
   init();
@@ -53,7 +53,7 @@ window.onload = function() {
       y: evt.clientY - rect.top
     };
 }*/
-            
+
 // var mousePosition;
 var mousePositionX;
 var mousePositionY;
@@ -63,14 +63,14 @@ var clickedY;
 window.onclick = function(e){
   mousePositionX = e.pageX;
   mousePositionY = e.pageY;
-             
+
   console.log(mousePositionX + "," + mousePositionY);
 
 /*if(Math.floor(mX/s.width) < s.cols && Math.floor(mY/s.height) < s.rows){
 clickedX = Math.floor(mX/s.width);
 clickedY = Math.floor(mY/s.height);
 console.log(clickedX + "," + clickedY);
-              }*/  
+}*/
 };
 
 var box;
@@ -78,7 +78,7 @@ box = new Image();
 box.src = "box.png";
 
 function init(){
-  drawCanvas();      
+  drawCanvas();
 }
 
 function drawCanvas(){
@@ -88,7 +88,7 @@ function drawCanvas(){
     for (var n = 0; n < screenConfiguration.cols; n++) {
       var x = n*screenConfiguration.width;
       var y = i*screenConfiguration.height;
-      canvasContext.drawImage(box, x, y);        
-    } 
+      canvasContext.drawImage(box, x, y);
+    }
   }
-}    
+}
