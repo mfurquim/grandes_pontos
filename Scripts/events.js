@@ -64,14 +64,14 @@ window.onclick = function(e){
   mousePositionX = e.pageX;
   mousePositionY = e.pageY;
 
-  console.log(mousePositionX + "," + mousePositionY);
+  // console.log(mousePositionX + "," + mousePositionY);
 
-/*if(Math.floor(mX/s.width) < s.cols && Math.floor(mY/s.height) < s.rows){
-clickedX = Math.floor(mX/s.width);
-clickedY = Math.floor(mY/s.height);
+if(Math.floor(mousePositionX/screenConfiguration.width) < screenConfiguration.cols && Math.floor(mousePositionY/screenConfiguration.height) < screenConfiguration.rows){
+clickedX = Math.floor(mousePositionX/screenConfiguration.width);
+clickedY = Math.floor(mousePositionY/screenConfiguration.height);
 console.log(clickedX + "," + clickedY);
-}*/
-};
+}
+ };
 
 var box;
 box = new Image();
