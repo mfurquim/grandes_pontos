@@ -42,7 +42,7 @@ var ATLAS = (function() {
     catch( error_loadJSON ) {
       alert( error_loadJSON );
     }
-  }
+  };
 
   /**
    * Function load does not receive parameters.
@@ -65,7 +65,7 @@ var ATLAS = (function() {
           sprite.frame.h, center_x, center_y);
       }
     });
-  }
+  };
 
   /**
    * Function defSprite receives 7 parameters:
@@ -86,11 +86,11 @@ var ATLAS = (function() {
       "coordinate_y": coordinate_y,
       "width": width,
       "height": height,
-      "center_x": center_x == null ? 0 : center_x,
-      "center_y": center_y == null ? 0 : center_y
+      "center_x": center_x === null ? 0 : center_x,
+      "center_y": center_y === null ? 0 : center_y
     };
   	sprites.push(sprite);
-  }
+  };
 
   /**
    * Function searchSprite receives 1 parameter:
@@ -110,7 +110,7 @@ var ATLAS = (function() {
       }
     }
     return null;
-  }
+  };
 
   return {
     /**
@@ -142,9 +142,9 @@ var ATLAS = (function() {
           sprite.width, sprite.height);
       }
       catch (sprite_null_error) {
-        alert(sprite_null_error)
+        alert(sprite_null_error);
         console.log(sprite);
       }
     }
-  }
+  };
 })();
