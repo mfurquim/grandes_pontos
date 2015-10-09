@@ -100,9 +100,9 @@ var ATLAS = (function() {
    * It returns the sprite upon succes, or null otherwise.
    */
   var searchSprite = function(name) {
-    console.log(sprites);
+    // console.log(sprites);
     for(var key in sprites) {
-      console.log(sprites[key]["name"]);
+      // console.log(sprites[key]["name"]);
       if (sprites[key]["name"] === name) {
         return sprites[key];
       } else {
@@ -135,7 +135,7 @@ var ATLAS = (function() {
      */
     drawSprite: function(name, destination_x, destination_y) {
       try {
-        console.log("drawSprite");
+        // console.log("drawSprite");
         var sprite = searchSprite(name);
         context.drawImage(atlasAsset, sprite.coordinate_x, sprite.coordinate_y,
           sprite.width, sprite.height, destination_x, destination_y,
@@ -143,7 +143,7 @@ var ATLAS = (function() {
       }
       catch (sprite_null_error) {
         alert(sprite_null_error);
-        console.log(sprite);
+        // console.log(sprite);
       }
     }
   };
