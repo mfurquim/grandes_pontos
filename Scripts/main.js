@@ -3,7 +3,7 @@ var canvas       = null,
 		offsetWidth  = 20,
 		offsetHeight = 20;
 
-		// Color constants
+// Color constants
 var GREEN  = 0,
 		BLUE   = 1,
 		RED    = 2,
@@ -11,6 +11,8 @@ var GREEN  = 0,
 		YELLOW = 4,
 		WHITE  = 5,
 		BLACK  = 6;
+
+var board = {};
 
 var setup = function() {
 	canvas = document.getElementById("myCanvas");
@@ -22,8 +24,6 @@ var setup = function() {
 
 setup();
 ATLAS.loadingAssets();
-
-
 
 
 // It needs to wait a little for the sprites to be loaded
@@ -38,15 +38,28 @@ function generateBoard(){
 
 function generatePawns(){
 	// Multi/pawn2_red.png
-	var pawn = [GREEN,BLUE,RED,PURPLE,YELLOW];
+	var pawn = [
+		{ color: GREEN},
+		{ color: BLUE },
+		{ color: RED },
+		{ color: PURPLE },
+		{ color: YELLOW }];
+
 	var posx = 50 * 11;
 	var posy = 50 * 5 - 15;
-	for (var currentPawn in pawn){
-		pawnToDraw = drawPawn(pawn[currentPawn]);
 
+	for (var currentPawn in pawn){
+		pawnToDraw = drawPawn(pawn[currentPawn].color);
+		// console.log(pawn[currentPawn]);
+		// console.log(pawn[currentPawn].color);
 		window.setTimeout(ATLAS.drawSprite, 100, pawnToDraw, posx, posy);
+
+		pawn[currentPawn].posx = posx;
+		pawn[currentPawn].posy = posy;
+		// console.log(pawn[currentPawn].posx,pawn[currentPawn].posy);
 		posy -= 50;
 	}
+	board.pawns = pawn;
 }
 
 function drawPawn(pawn){
@@ -75,10 +88,11 @@ var discCount=[];
 for(var i = 0; i<=6; i++){
 	discCount[i]=0;
 }
-
+board.discs = [];
 var discsInBoard=[];
 var currentDisc;
 for (var discX = 0;discX<11;discX++){
+	board.discs[discX]=[];
 	discsInBoard[discX]=[];
 	for (var discY = 1; discY<6;discY++) {
 		// console.log(discX,discY);
@@ -91,11 +105,19 @@ for (var discX = 0;discX<11;discX++){
 
 
 	if(validateDisc(discCount,discNumber)){
-	discsInBoard[discX][discY]=discNumber;
+	// discsInBoard[discX][discY]=discNumber;
+	discsInBoard[discX][discY]={color: discNumber};
 
-	currentDisc = drawDisc(discsInBoard[discX][discY]);
+	currentDisc = drawDisc(discsInBoard[discX][discY].color);
 	posX = discX * 50;
 	posY = discY * 50;
+
+	discsInBoard[discX][discY].posX = posX;
+	discsInBoard[discX][discY].posY = posY;
+
+	// console.log(discsInBoard[discX][discY]);
+	board.discs[discX][discY] = discsInBoard[discX][discY];
+
 
 	window.setTimeout(ATLAS.drawSprite, 100, currentDisc, posX, posY);
 }
@@ -108,6 +130,7 @@ discCount[discNumber]-=1;
 }
 	}
 }
+
 // console.log("********");
 // console.log(discsInBoard);
 }
