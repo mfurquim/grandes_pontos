@@ -31,8 +31,8 @@ box - image to de displayed in each grid cell
 */
 
 var screenConfiguration = {
-  rows: 10,
-  cols: 10,
+  rows: 11,
+  cols: 5,
   width: 50,
   height: 50
 };
@@ -66,11 +66,11 @@ window.onclick = function(e){
 
   // console.log(mousePositionX + "," + mousePositionY);
 
-if(Math.floor(mousePositionX/screenConfiguration.width) < screenConfiguration.cols && Math.floor(mousePositionY/screenConfiguration.height) < screenConfiguration.rows){
+ if(Math.floor(mousePositionX/screenConfiguration.width) < screenConfiguration.rows && Math.floor(mousePositionY/screenConfiguration.height) < screenConfiguration.cols){
 clickedX = Math.floor(mousePositionX/screenConfiguration.width);
 clickedY = Math.floor(mousePositionY/screenConfiguration.height);
 console.log(clickedX + "," + clickedY);
-}
+ }
  };
 
 var box;
@@ -78,7 +78,7 @@ box = new Image();
 box.src = "box.png";
 
 function init(){
-  drawCanvas();
+  // drawCanvas();
 }
 
 function drawCanvas(){
