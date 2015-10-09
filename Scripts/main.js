@@ -17,9 +17,47 @@ ATLAS.loadingAssets();
 // It needs to wait a little for the sprites to be loaded
 // Generate Board
 
+function generateBoard(){
+	// window.setTimeout(ATLAS.drawSprite, 100, "Multi/classic_red.png", 50, 0);
+	generateDiscs();
+	generatePawns();
 
+}
 
-function generateBoard() {
+function generatePawns(){
+	// Multi/pawn2_red.png
+	var pawn = [0,1,2,3,4];
+	var posx = 50 * 11;
+	var posy = 50 * 5 - 15;
+	for (var currentPawn in pawn){
+		pawnToDraw = drawPawn(pawn[currentPawn]);
+
+		window.setTimeout(ATLAS.drawSprite, 100, pawnToDraw, posx, posy);
+		posy -= 50;
+	}
+}
+
+function drawPawn(pawn){
+	var pawnDrawed;
+	if (pawn === 0){
+		pawnDrawed = "Multi/classic_green.png";
+	}
+	else if (pawn === 1){
+		pawnDrawed = "Multi/classic_blue.png";
+	}
+	else if (pawn === 2){
+		pawnDrawed = "Multi/classic_red.png";
+	}
+	else if (pawn === 3){
+		pawnDrawed = "Multi/classic_purple.png";
+	}
+	else if (pawn === 4){
+		pawnDrawed = "Multi/classic_yellow.png";
+	}
+	return pawnDrawed;
+}
+
+function generateDiscs() {
 var discCount=[];
 
 for(var i = 0; i<=6; i++){
@@ -30,7 +68,7 @@ var board=[];
 var currentDisc;
 for (var discX = 0;discX<11;discX++){
 	board[discX]=[];
-	for (var discY = 0; discY<5;discY++) {
+	for (var discY = 1; discY<6;discY++) {
 		// console.log(discX,discY);
 
  	discNumber = Math.floor(Math.random()*(7));
@@ -41,7 +79,7 @@ for (var discX = 0;discX<11;discX++){
 
 
 	if(validateDisc(discCount,discNumber)){
-	board[discX].push(discNumber);
+	board[discX][discY]=discNumber;
 
 	currentDisc = drawDisc(board[discX][discY]);
 	posX = discX * 50;
