@@ -5,3 +5,5 @@ Jogo desenvolvido utilizando XP e boas práticas aprendido na disciplina Técnic
 
 [![Throughput Graph](https://graphs.waffle.io/mfurquim/grandes_pontos/throughput.svg)](https://waffle.io/mfurquim/grandes_pontos/metrics) 
 
+[![UML](./uml.png)]() 
+
