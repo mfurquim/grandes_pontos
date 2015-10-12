@@ -42,7 +42,7 @@ var ATLAS = (function() {
     catch( error_loadJSON ) {
       alert( error_loadJSON );
     }
-  }
+  };
 
   /**
    * Function load does not receive parameters.
@@ -65,7 +65,7 @@ var ATLAS = (function() {
           sprite.frame.h, center_x, center_y);
       }
     });
-  }
+  };
 
   /**
    * Function defSprite receives 7 parameters:
@@ -86,11 +86,11 @@ var ATLAS = (function() {
       "coordinate_y": coordinate_y,
       "width": width,
       "height": height,
-      "center_x": center_x == null ? 0 : center_x,
-      "center_y": center_y == null ? 0 : center_y
+      "center_x": center_x === null ? 0 : center_x,
+      "center_y": center_y === null ? 0 : center_y
     };
   	sprites.push(sprite);
-  }
+  };
 
   /**
    * Function searchSprite receives 1 parameter:
@@ -100,9 +100,9 @@ var ATLAS = (function() {
    * It returns the sprite upon succes, or null otherwise.
    */
   var searchSprite = function(name) {
-    console.log(sprites);
+    // console.log(sprites);
     for(var key in sprites) {
-      console.log(sprites[key]["name"]);
+      // console.log(sprites[key]["name"]);
       if (sprites[key]["name"] === name) {
         return sprites[key];
       } else {
@@ -110,7 +110,7 @@ var ATLAS = (function() {
       }
     }
     return null;
-  }
+  };
 
   return {
     /**
@@ -135,16 +135,16 @@ var ATLAS = (function() {
      */
     drawSprite: function(name, destination_x, destination_y) {
       try {
-        console.log("drawSprite");
+        // console.log("drawSprite");
         var sprite = searchSprite(name);
         context.drawImage(atlasAsset, sprite.coordinate_x, sprite.coordinate_y,
           sprite.width, sprite.height, destination_x, destination_y,
           sprite.width, sprite.height);
       }
       catch (sprite_null_error) {
-        alert(sprite_null_error)
-        console.log(sprite);
+        alert(sprite_null_error);
+        // console.log(sprite);
       }
     }
-  }
+  };
 })();
