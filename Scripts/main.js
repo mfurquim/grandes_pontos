@@ -3,14 +3,61 @@ var canvas       = null,
 		offsetWidth  = 20,
 		offsetHeight = 20;
 
+
+/**
+ * The constructor to create a GameObject.
+ * a Sprite as defined in Atlas.js and a positionCoordinates (x,y)
+ */
+var GameObject = function (sprite, positionCoordinates) {
+	try {
+		_sprite.name = sprite.name;
+		_sprite.sourceCoordinates = sprite.sourceCoordinates;
+		_sprite.dimensions = sprite.dimensions;
+		_sprite.positionCoordinates = positionCoordinates;
+	}
+	catch (errorSprite) {
+		alert(errorSprite);
+	}
+}
+
+/**
+ * Draws itself given a context to draw on, and an atlasImage (the source)
+ */
+GameObject.prototype.drawItself(context, atlasImage) {
+	context.drawImage(atlasImage,
+		_sprite.sourceCoordinates.x,
+		_sprite.sourceCoordinates.y,
+		_sprite.dimensions.width,
+		_sprite.dimensions.height,
+		_sprite.positionCoordinates.x,
+		_sprite.positionCoordinates.y,
+		_sprite.dimensions.width,
+		_sprite.dimensions.height);
+}
+
+/**
+ * Moves a GameObject to positionCoordinates (x,y)
+ */
+GameObject.prototype.Move(positionCoordinates) {
+	context.drawImage(atlasImage,
+		_sprite.sourceCoordinates.x,
+		_sprite.sourceCoordinates.y,
+		_sprite.dimensions.width,
+		_sprite.dimensions.height,
+		_sprite.positionCoordinates.x,
+		_sprite.positionCoordinates.y,
+		_sprite.dimensions.width,
+		_sprite.dimensions.height);
+}
+
 // Color constants
 var GREEN  = 0,
-BLUE   = 1,
-RED    = 2,
-PURPLE = 3,
-YELLOW = 4,
-WHITE  = 5,
-BLACK  = 6;
+		BLUE   = 1,
+		RED    = 2,
+		PURPLE = 3,
+		YELLOW = 4,
+		WHITE  = 5,
+		BLACK  = 6;
 
 var board = {};
 
