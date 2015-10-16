@@ -8,22 +8,23 @@ var canvas       = null,
  * The constructor to create a GameObject.
  * a Sprite as defined in Atlas.js and a positionCoordinates (x,y)
  */
-var GameObject = function (sprite, positionCoordinates) {
+var GameObject = function (sprite, positionCoordinates, color) {
 	try {
 		_sprite.name = sprite.name;
 		_sprite.sourceCoordinates = sprite.sourceCoordinates;
 		_sprite.dimensions = sprite.dimensions;
 		_sprite.positionCoordinates = positionCoordinates;
+		_sprite.color = color;
 	}
 	catch (errorSprite) {
 		alert(errorSprite);
 	}
-}
+};
 
 /**
  * Draws itself given a context to draw on, and an atlasImage (the source)
  */
-GameObject.prototype.drawItself(context, atlasImage) {
+GameObject.prototype.drawItself = function(context, atlasImage) {
 	context.drawImage(atlasImage,
 		_sprite.sourceCoordinates.x,
 		_sprite.sourceCoordinates.y,
@@ -38,16 +39,8 @@ GameObject.prototype.drawItself(context, atlasImage) {
 /**
  * Moves a GameObject to positionCoordinates (x,y)
  */
-GameObject.prototype.Move(positionCoordinates) {
-	context.drawImage(atlasImage,
-		_sprite.sourceCoordinates.x,
-		_sprite.sourceCoordinates.y,
-		_sprite.dimensions.width,
-		_sprite.dimensions.height,
-		_sprite.positionCoordinates.x,
-		_sprite.positionCoordinates.y,
-		_sprite.dimensions.width,
-		_sprite.dimensions.height);
+GameObject.prototype.Move = function(positionCoordinates) {
+	_sprite.positionCoordinates = positionCoordinates;
 }
 
 // Color constants
@@ -66,7 +59,7 @@ var setup = function() {
 	context = canvas.getContext("2d");
 	canvas.width = (window.innerWidth - offsetWidth);
 	canvas.height = (window.innerHeight - offsetHeight);
-	generateBoard();
+	window.setTimeout(generateBoard, 100);
 };
 
 setup();
@@ -92,135 +85,135 @@ function generatePawns(){
 		{ color: PURPLE },
 		{ color: YELLOW }];
 
-		var posx = 50 * 11;
-		var posy = 50 * 4;
+	var posx = 50 * 11;
+	var posy = 50 * 4;
 
-		for (var currentPawn in pawn){
-			pawnToDraw = drawPawn(pawn[currentPawn].color);
-			// console.log(pawn[currentPawn]);
-			// console.log(pawn[currentPawn].color);
-			window.setTimeout(ATLAS.drawSprite, 100, pawnToDraw, posx, posy);
+	for (var currentPawn in pawn){
+		pawnToDraw = drawPawn(pawn[currentPawn].color);
+		// console.log(pawn[currentPawn]);
+		// console.log(pawn[currentPawn].color);
+		ATLAS.drawSprite(pawnToDraw, posx, posy);
 
-			pawn[currentPawn].posx = posx;
-			pawn[currentPawn].posy = posy;
-			// console.log(pawn[currentPawn].posx,pawn[currentPawn].posy);
-			posy -= 50;
-		}
-		board.pawns = pawn;
+		pawn[currentPawn].posx = posx;
+		pawn[currentPawn].posy = posy;
+		// console.log(pawn[currentPawn].posx,pawn[currentPawn].posy);
+		posy -= 50;
 	}
+	board.pawns = pawn;
+}
 
-	function drawPawn(pawn){
-		var pawnDrawed;
-		if (pawn === 0){
-			pawnDrawed = "Multi/classic_green.png";
-		}
-		else if (pawn === 1){
-			pawnDrawed = "Multi/classic_blue.png";
-		}
-		else if (pawn === 2){
-			pawnDrawed = "Multi/classic_red.png";
-		}
-		else if (pawn === 3){
-			pawnDrawed = "Multi/classic_purple.png";
-		}
-		else if (pawn === 4){
-			pawnDrawed = "Multi/classic_yellow.png";
-		}
-		return pawnDrawed;
+function drawPawn(pawn){
+	var pawnDrawed;
+	if (pawn === 0){
+		pawnDrawed = "Multi/classic_green.png";
 	}
+	else if (pawn === 1){
+		pawnDrawed = "Multi/classic_blue.png";
+	}
+	else if (pawn === 2){
+		pawnDrawed = "Multi/classic_red.png";
+	}
+	else if (pawn === 3){
+		pawnDrawed = "Multi/classic_purple.png";
+	}
+	else if (pawn === 4){
+		pawnDrawed = "Multi/classic_yellow.png";
+	}
+	return pawnDrawed;
+}
 
-	function generateDiscs() {
-		var discCount=[];
+function generateDiscs() {
+	var discCount=[];
 
-		for(var i = 0; i<=6; i++){
-			discCount[i]=0;
-		}
-		board.discs = [];
-		var discsInBoard=[];
-		var currentDisc;
-		for (var discX = 0;discX<11;discX++){
-			board.discs[discX]=[];
-			discsInBoard[discX]=[];
-			for (var discY = 1; discY<6;discY++) {
-				// console.log(discX,discY);
+	for(var i = 0; i<=6; i++){
+		discCount[i]=0;
+	}
+	board.discs = [];
+	var discsInBoard=[];
+	var currentDisc;
+	for (var discX = 0;discX<11;discX++){
+		board.discs[discX]=[];
+		discsInBoard[discX]=[];
+		for (var discY = 1; discY<6;discY++) {
+			// console.log(discX,discY);
 
-				discNumber = Math.floor(Math.random()*(7));
+			discNumber = Math.floor(Math.random()*(7));
 
-				discCount[discNumber]+=1;
+			discCount[discNumber]+=1;
 
-				// console.log(discCount[discNumber]);
-
-
-				if(validateDisc(discCount,discNumber)){
-					// discsInBoard[discX][discY]=discNumber;
-					discsInBoard[discX][discY]={color: discNumber};
-
-					currentDisc = drawDisc(discsInBoard[discX][discY].color);
-					posX = discX * 50;
-					posY = (discY - 1) * 50;
-
-					discsInBoard[discX][discY].posX = posX;
-					discsInBoard[discX][discY].posY = posY;
-
-					// console.log(discsInBoard[discX][discY]);
-					board.discs[discX][discY] = discsInBoard[discX][discY];
+			// console.log(discCount[discNumber]);
 
 
-					window.setTimeout(ATLAS.drawSprite, 100, currentDisc, posX, posY);
-				}
-				else {
-					discY-=1;
-					discCount[discNumber]-=1;
-				}
+			if(validateDisc(discCount,discNumber)){
+				// discsInBoard[discX][discY]=discNumber;
+				discsInBoard[discX][discY]={color: discNumber};
+
+				currentDisc = drawDisc(discsInBoard[discX][discY].color);
+				posX = discX * 50;
+				posY = (discY - 1) * 50;
+
+				discsInBoard[discX][discY].posX = posX;
+				discsInBoard[discX][discY].posY = posY;
+
+				// console.log(discsInBoard[discX][discY]);
+				board.discs[discX][discY] = discsInBoard[discX][discY];
+
+
+				ATLAS.drawSprite(currentDisc, posX, posY);
+			}
+			else {
+				discY-=1;
+				discCount[discNumber]-=1;
 			}
 		}
-
-		// console.log("********");
-		// console.log(discsInBoard);
 	}
 
-	function drawDisc(discNumber) {
-		var disc;
-		if(discNumber===GREEN){
-			disc = "Multi/disc_green.png";
-		}
-		else if (discNumber==BLUE){
-			disc = "Multi/disc_blue.png";
-		}
-		else if (discNumber==RED){
-			disc = "Multi/disc_red.png";
-		}
-		else if (discNumber==PURPLE){
-			disc = "Multi/disc_purple.png";
-		}
-		else if (discNumber==YELLOW){
-			disc = "Multi/disc_yellow.png";
-		}
-		else if (discNumber==WHITE){
-			disc = "Multi/disc_white.png";
-		}
-		else if (discNumber==BLACK){
-			disc = "Multi/disc_black.png";
-		}
-		return disc;
-	}
+	// console.log("********");
+	// console.log(discsInBoard);
+}
 
-	function validateDisc(discCount,discNumber){
-		// console.log("validando");
-		// console.log(discCount[discNumber]);
-		var isValid = true;
-		if (discCount[discNumber]>9){
-			isValid = false;
-		}
-		else if (discNumber==5 && discCount[5]>5){
-			isValid = false;
-		}
-		else if (discNumber==6 && discCount[6]>5){
-			isValid = false;
-		}
-		else {
-			//
-		}
-		// console.log(isValid);
-		return isValid;
+function drawDisc(discNumber) {
+	var disc;
+	if(discNumber===GREEN){
+		disc = "Multi/disc_green.png";
 	}
+	else if (discNumber==BLUE){
+		disc = "Multi/disc_blue.png";
+	}
+	else if (discNumber==RED){
+		disc = "Multi/disc_red.png";
+	}
+	else if (discNumber==PURPLE){
+		disc = "Multi/disc_purple.png";
+	}
+	else if (discNumber==YELLOW){
+		disc = "Multi/disc_yellow.png";
+	}
+	else if (discNumber==WHITE){
+		disc = "Multi/disc_white.png";
+	}
+	else if (discNumber==BLACK){
+		disc = "Multi/disc_black.png";
+	}
+	return disc;
+}
+
+function validateDisc(discCount,discNumber){
+	// console.log("validando");
+	// console.log(discCount[discNumber]);
+	var isValid = true;
+	if (discCount[discNumber]>9){
+		isValid = false;
+	}
+	else if (discNumber==5 && discCount[5]>5){
+		isValid = false;
+	}
+	else if (discNumber==6 && discCount[6]>5){
+		isValid = false;
+	}
+	else {
+		//
+	}
+	// console.log(isValid);
+	return isValid;
+}
