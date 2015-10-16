@@ -45,12 +45,12 @@ var ATLAS = (function() {
   };
 
   /**
-   * Function load does not receive parameters.
+   * Function storeSprite does not receive parameters.
    * It is called immediately after giving the source of the image.
    * It parses the JSON file and call defSprite.
    * It returns nothing.
    */
-  var load = function() {
+  var storeSprite = function() {
 
     loadJSON("./Assets/Assets-non-idented.json", function(load_json) {
 
@@ -82,12 +82,8 @@ var ATLAS = (function() {
     width, height, center_x, center_y) {
     var sprite = {
     	"name": name,
-      "coordinate_x": coordinate_x,
-      "coordinate_y": coordinate_y,
-      "width": width,
-      "height": height,
-      "center_x": center_x === null ? 0 : center_x,
-      "center_y": center_y === null ? 0 : center_y
+      "sourceCoordinates": {x:coordinate_x, y:coordinate_y},
+      "dimensions": {width:width, height: height}
     };
   	sprites.push(sprite);
   };
@@ -121,8 +117,16 @@ var ATLAS = (function() {
      */
     loadingAssets: function() {
       atlasAsset = new Image();
-      atlasAsset.onload = load;
+      atlasAsset.onload = storeSprite;
       atlasAsset.src = url;
+    },
+
+    fetchSprite: function(name) {
+      return searchSprite(name);
+    },
+
+    fetchAtlas: function() {
+      return atlasAsset;
     },
 
     /**

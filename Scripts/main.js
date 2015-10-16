@@ -8,13 +8,13 @@ var canvas       = null,
  * The constructor to create a GameObject.
  * a Sprite as defined in Atlas.js and a positionCoordinates (x,y)
  */
-var GameObject = function (sprite, positionCoordinates, color) {
+var GameObject = function (sprite, positionCoordinates) {
+	this._sprite = {};
 	try {
-		_sprite.name = sprite.name;
-		_sprite.sourceCoordinates = sprite.sourceCoordinates;
-		_sprite.dimensions = sprite.dimensions;
-		_sprite.positionCoordinates = positionCoordinates;
-		_sprite.color = color;
+		this._sprite.name = sprite.name;
+		this._sprite.sourceCoordinates = sprite.sourceCoordinates;
+		this._sprite.dimensions = sprite.dimensions;
+		this._sprite.positionCoordinates = positionCoordinates;
 	}
 	catch (errorSprite) {
 		alert(errorSprite);
@@ -26,14 +26,14 @@ var GameObject = function (sprite, positionCoordinates, color) {
  */
 GameObject.prototype.drawItself = function(context, atlasImage) {
 	context.drawImage(atlasImage,
-		_sprite.sourceCoordinates.x,
-		_sprite.sourceCoordinates.y,
-		_sprite.dimensions.width,
-		_sprite.dimensions.height,
-		_sprite.positionCoordinates.x,
-		_sprite.positionCoordinates.y,
-		_sprite.dimensions.width,
-		_sprite.dimensions.height);
+		this._sprite.sourceCoordinates.x,
+		this._sprite.sourceCoordinates.y,
+		this._sprite.dimensions.width,
+		this._sprite.dimensions.height,
+		this._sprite.positionCoordinates.x,
+		this._sprite.positionCoordinates.y,
+		this._sprite.dimensions.width,
+		this._sprite.dimensions.height);
 }
 
 /**
@@ -92,7 +92,12 @@ function generatePawns(){
 		pawnToDraw = drawPawn(pawn[currentPawn].color);
 		// console.log(pawn[currentPawn]);
 		// console.log(pawn[currentPawn].color);
-		ATLAS.drawSprite(pawnToDraw, posx, posy);
+		var sprt = ATLAS.fetchSprite(pawnToDraw);
+		console.log(sprt);
+		var atls = ATLAS.fetchAtlas();
+		var peao = new GameObject(sprt, positionCoordinates = {x:posx, y:posy});
+		peao.drawItself(context,atls);
+//		ATLAS.drawSprite(pawnToDraw, posx, posy);
 
 		pawn[currentPawn].posx = posx;
 		pawn[currentPawn].posy = posy;
@@ -147,19 +152,14 @@ function generateDiscs() {
 			if(validateDisc(discCount,discNumber)){
 				// discsInBoard[discX][discY]=discNumber;
 				discsInBoard[discX][discY]={color: discNumber};
-
 				currentDisc = drawDisc(discsInBoard[discX][discY].color);
-				posX = discX * 50;
-				posY = (discY - 1) * 50;
+				var sprt = ATLAS.fetchSprite(currentDisc);
+				console.log(sprt);
+				var atls = ATLAS.fetchAtlas();
+				var disco = new GameObject(sprt, positionCoordinates = {x:(discX * 50), y:((discY - 1) * 50)});
+				disco.drawItself(context,atls);
 
-				discsInBoard[discX][discY].posX = posX;
-				discsInBoard[discX][discY].posY = posY;
-
-				// console.log(discsInBoard[discX][discY]);
 				board.discs[discX][discY] = discsInBoard[discX][discY];
-
-
-				ATLAS.drawSprite(currentDisc, posX, posY);
 			}
 			else {
 				discY-=1;
