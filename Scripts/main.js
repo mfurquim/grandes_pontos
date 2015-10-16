@@ -3,54 +3,14 @@ var canvas       = null,
 		offsetWidth  = 20,
 		offsetHeight = 20;
 
-
-/**
- * The constructor to create a GameObject.
- * a Sprite as defined in Atlas.js and a positionCoordinates (x,y)
- */
-var GameObject = function (sprite, positionCoordinates) {
-	this._sprite = {};
-	try {
-		this._sprite.name = sprite.name;
-		this._sprite.sourceCoordinates = sprite.sourceCoordinates;
-		this._sprite.dimensions = sprite.dimensions;
-		this._sprite.positionCoordinates = positionCoordinates;
-	}
-	catch (errorSprite) {
-		alert(errorSprite);
-	}
-};
-
-/**
- * Draws itself given a context to draw on, and an atlasImage (the source)
- */
-GameObject.prototype.drawItself = function(context, atlasImage) {
-	context.drawImage(atlasImage,
-		this._sprite.sourceCoordinates.x,
-		this._sprite.sourceCoordinates.y,
-		this._sprite.dimensions.width,
-		this._sprite.dimensions.height,
-		this._sprite.positionCoordinates.x,
-		this._sprite.positionCoordinates.y,
-		this._sprite.dimensions.width,
-		this._sprite.dimensions.height);
-}
-
-/**
- * Moves a GameObject to positionCoordinates (x,y)
- */
-GameObject.prototype.Move = function(positionCoordinates) {
-	_sprite.positionCoordinates = positionCoordinates;
-}
-
 // Color constants
-var GREEN  = 0,
-		BLUE   = 1,
-		RED    = 2,
-		PURPLE = 3,
-		YELLOW = 4,
-		WHITE  = 5,
-		BLACK  = 6;
+const GREEN  = 0,
+			BLUE   = 1,
+			RED    = 2,
+			PURPLE = 3,
+			YELLOW = 4,
+			WHITE  = 5,
+			BLACK  = 6;
 
 var board = {};
 
@@ -59,14 +19,16 @@ var setup = function() {
 	context = canvas.getContext("2d");
 	canvas.width = (window.innerWidth - offsetWidth);
 	canvas.height = (window.innerHeight - offsetHeight);
+
+	ATLAS.loadingAssets();
+
+	// It needs to wait a little for the sprites to be loaded
 	window.setTimeout(generateBoard, 100);
 };
 
 setup();
-ATLAS.loadingAssets();
 
 
-// It needs to wait a little for the sprites to be loaded
 // Generate Board
 
 function generateBoard(){
@@ -93,7 +55,7 @@ function generatePawns(){
 		// console.log(pawn[currentPawn]);
 		// console.log(pawn[currentPawn].color);
 		var sprt = ATLAS.fetchSprite(pawnToDraw);
-		console.log(sprt);
+		// console.log(sprt);
 		var atls = ATLAS.fetchAtlas();
 		var peao = new GameObject(sprt, positionCoordinates = {x:posx, y:posy});
 		peao.drawItself(context,atls);
@@ -154,7 +116,7 @@ function generateDiscs() {
 				discsInBoard[discX][discY]={color: discNumber};
 				currentDisc = drawDisc(discsInBoard[discX][discY].color);
 				var sprt = ATLAS.fetchSprite(currentDisc);
-				console.log(sprt);
+				// console.log(sprt);
 				var atls = ATLAS.fetchAtlas();
 				var disco = new GameObject(sprt, positionCoordinates = {x:(discX * 50), y:((discY - 1) * 50)});
 				disco.drawItself(context,atls);
