@@ -1,61 +1,110 @@
-// Generate Board
+// Color constants
+const GREEN  = 0,
+			BLUE   = 1,
+			RED    = 2,
+			PURPLE = 3,
+			YELLOW = 4,
+			WHITE  = 5,
+			BLACK  = 6;
 
-function generateBoard(){
-	// window.setTimeout(ATLAS.drawSprite, 100, "Multi/classic_red.png", 50, 0);
+// Board object containing all the Discs and Panws
+var board = {};
+
+/**
+ * Generate Board creates Discs ans Pawn objects.
+ */
+function generateBoard() {
 	generateDiscs();
-	generatePawns();
+	board.pawns = generatePawns();
 
 }
 
-function generatePawns(){
-	// Multi/pawn2_red.png
-	var pawn = [
-		{ color: GREEN},
-		{ color: BLUE },
-		{ color: RED },
-		{ color: PURPLE },
-		{ color: YELLOW }];
+/**
+ * Draw board draws all objects in the board game (Discs and Pawns)
+ */
+function drawBoard(context) {
+	// Fetch atlas image containing all images
+	var atlas = ATLAS.fetchAtlas();
 
-	var posx = 50 * 11;
-	var posy = 50 * 4;
-
-	for (var currentPawn in pawn){
-		pawnToDraw = drawPawn(pawn[currentPawn].color);
-		// console.log(pawn[currentPawn]);
-		// console.log(pawn[currentPawn].color);
-		var sprt = ATLAS.fetchSprite(pawnToDraw);
-		// console.log(sprt);
-		var atls = ATLAS.fetchAtlas();
-		var peao = new GameObject(sprt, positionCoordinates = {x:posx, y:posy});
-		peao.drawItself(context,atls);
-//		ATLAS.drawSprite(pawnToDraw, posx, posy);
-
-		pawn[currentPawn].posx = posx;
-		pawn[currentPawn].posy = posy;
-		// console.log(pawn[currentPawn].posx,pawn[currentPawn].posy);
-		posy -= 50;
-	}
-	board.pawns = pawn;
+	// For each pawn, draw itself
+	board.pawns.forEach( function(item, index, array) {
+		item.drawItself(context, atlas);
+	});
 }
 
-function drawPawn(pawn){
-	var pawnDrawed;
-	if (pawn === 0){
-		pawnDrawed = "Multi/classic_green.png";
+/**
+ * Generate Pawns creates one Pawn object of each color
+ * and poised them in the board.
+ */
+function generatePawns() {
+	// All five pawns' colors
+	const COLOR_PAWNS = [GREEN,	BLUE, RED, PURPLE, YELLOW];
+
+	// Pawn's height plus offset (45 + 5)
+	const PAWN_HEIGHT = 50;
+
+	// Initial Pawns' position
+	const INITIAL_COORDINATES = {x: (50.0 * 11.0), y: (PAWN_HEIGHT * 4.0)};
+
+	// Array containing all five pawns
+	var pawns = [];
+
+	// Sprite of each pawn
+	var sprite = null;
+
+	/**
+	 * For each pawn, fetch its sprite and push to the array.
+	 * Its y coordinate is changed to be drawn on top of the previous one.
+	 */
+	COLOR_PAWNS.forEach( function(item, index, array) {
+		sprite = fetchPawn(item);
+		pawns.push(new GameObject(sprite, {
+			x:INITIAL_COORDINATES.x,
+			y:INITIAL_COORDINATES.y - (PAWN_HEIGHT * index)
+		}));
+	});
+
+	// Return array of pawns
+	return pawns;
+}
+
+function fetchPawn(pawnColor) {
+	const	GREEN_PAWN_NAME		= "Multi/classic_green.png",
+				BLUE_PAWN_NAME		= "Multi/classic_blue.png",
+				RED_PAWN_NAME			= "Multi/classic_red.png",
+				PURPLE_PAWN_NAME	= "Multi/classic_purple.png",
+				YELLOW_PAWN_NAME	= "Multi/classic_yellow.png";
+
+	var pawnSpriteName = "";
+
+	switch (pawnColor) {
+		case GREEN:
+			pawnSpriteName = GREEN_PAWN_NAME;
+			break;
+
+		case BLUE:
+			pawnSpriteName = BLUE_PAWN_NAME;
+			break;
+
+		case RED:
+			pawnSpriteName = RED_PAWN_NAME;
+			break;
+
+		case PURPLE:
+			pawnSpriteName = PURPLE_PAWN_NAME;
+			break;
+
+		case YELLOW:
+			pawnSpriteName = YELLOW_PAWN_NAME;
+			break;
+
+		default:
+			// Should never be reached. There are only five Pawn's colors.
 	}
-	else if (pawn === 1){
-		pawnDrawed = "Multi/classic_blue.png";
-	}
-	else if (pawn === 2){
-		pawnDrawed = "Multi/classic_red.png";
-	}
-	else if (pawn === 3){
-		pawnDrawed = "Multi/classic_purple.png";
-	}
-	else if (pawn === 4){
-		pawnDrawed = "Multi/classic_yellow.png";
-	}
-	return pawnDrawed;
+
+	var pawnSprite = ATLAS.fetchSprite(pawnSpriteName);
+
+	return pawnSprite;
 }
 
 function generateDiscs() {
