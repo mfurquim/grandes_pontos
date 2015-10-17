@@ -16,7 +16,6 @@ var board = {};
 function generateBoard() {
 	generateDiscs();
 	board.pawns = generatePawns();
-
 }
 
 /**
@@ -32,6 +31,7 @@ function drawBoard(context) {
 	});
 }
 
+
 /**
  * Generate Pawns creates one Pawn object of each color
  * and poised them in the board.
@@ -43,8 +43,20 @@ function generatePawns() {
 	// Pawn's height plus offset (45 + 5)
 	const PAWN_HEIGHT = 50;
 
+	// Disc's width plus offset (42 + 8)
+	const DISC_WIDTH	= 50;
+
+	// Number of discs in a row
+	const NUMBER_DISC_ROW = 11;
+
+	// Number of pawns to be drawn
+	const NUMBER_PAWN = 5;
+
 	// Initial Pawns' position
-	const INITIAL_COORDINATES = {x: (50.0 * 11.0), y: (PAWN_HEIGHT * 4.0)};
+	const INITIAL_COORDINATES = {
+		x: (DISC_WIDTH * NUMBER_DISC_ROW),
+		y: (PAWN_HEIGHT * (NUMBER_PAWN - 1))
+	};
 
 	// Array containing all five pawns
 	var pawns = [];
@@ -58,10 +70,14 @@ function generatePawns() {
 	 */
 	COLOR_PAWNS.forEach( function(item, index, array) {
 		sprite = fetchPawn(item);
-		pawns.push(new GameObject(sprite, {
+		var pawnObject = new GameObject(sprite, {
 			x:INITIAL_COORDINATES.x,
 			y:INITIAL_COORDINATES.y - (PAWN_HEIGHT * index)
-		}));
+		});
+
+		// Seal object to prevent properties addition
+		Object.seal(pawnObject);
+		pawns.push(pawnObject);
 	});
 
 	// Return array of pawns
