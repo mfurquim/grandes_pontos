@@ -1,0 +1,150 @@
+// Generate Board
+
+function generateBoard(){
+	// window.setTimeout(ATLAS.drawSprite, 100, "Multi/classic_red.png", 50, 0);
+	generateDiscs();
+	generatePawns();
+
+}
+
+function generatePawns(){
+	// Multi/pawn2_red.png
+	var pawn = [
+		{ color: GREEN},
+		{ color: BLUE },
+		{ color: RED },
+		{ color: PURPLE },
+		{ color: YELLOW }];
+
+	var posx = 50 * 11;
+	var posy = 50 * 4;
+
+	for (var currentPawn in pawn){
+		pawnToDraw = drawPawn(pawn[currentPawn].color);
+		// console.log(pawn[currentPawn]);
+		// console.log(pawn[currentPawn].color);
+		var sprt = ATLAS.fetchSprite(pawnToDraw);
+		// console.log(sprt);
+		var atls = ATLAS.fetchAtlas();
+		var peao = new GameObject(sprt, positionCoordinates = {x:posx, y:posy});
+		peao.drawItself(context,atls);
+//		ATLAS.drawSprite(pawnToDraw, posx, posy);
+
+		pawn[currentPawn].posx = posx;
+		pawn[currentPawn].posy = posy;
+		// console.log(pawn[currentPawn].posx,pawn[currentPawn].posy);
+		posy -= 50;
+	}
+	board.pawns = pawn;
+}
+
+function drawPawn(pawn){
+	var pawnDrawed;
+	if (pawn === 0){
+		pawnDrawed = "Multi/classic_green.png";
+	}
+	else if (pawn === 1){
+		pawnDrawed = "Multi/classic_blue.png";
+	}
+	else if (pawn === 2){
+		pawnDrawed = "Multi/classic_red.png";
+	}
+	else if (pawn === 3){
+		pawnDrawed = "Multi/classic_purple.png";
+	}
+	else if (pawn === 4){
+		pawnDrawed = "Multi/classic_yellow.png";
+	}
+	return pawnDrawed;
+}
+
+function generateDiscs() {
+	var discCount=[];
+
+	for(var i = 0; i<=6; i++){
+		discCount[i]=0;
+	}
+	board.discs = [];
+	var discsInBoard=[];
+	var currentDisc;
+	for (var discX = 0;discX<11;discX++){
+		board.discs[discX]=[];
+		discsInBoard[discX]=[];
+		for (var discY = 1; discY<6;discY++) {
+			// console.log(discX,discY);
+
+			discNumber = Math.floor(Math.random()*(7));
+
+			discCount[discNumber]+=1;
+
+			// console.log(discCount[discNumber]);
+
+
+			if(validateDisc(discCount,discNumber)){
+				// discsInBoard[discX][discY]=discNumber;
+				discsInBoard[discX][discY]={color: discNumber};
+				currentDisc = drawDisc(discsInBoard[discX][discY].color);
+				var sprt = ATLAS.fetchSprite(currentDisc);
+				// console.log(sprt);
+				var atls = ATLAS.fetchAtlas();
+				var disco = new GameObject(sprt, positionCoordinates = {x:(discX * 50), y:((discY - 1) * 50)});
+				disco.drawItself(context,atls);
+
+				board.discs[discX][discY] = discsInBoard[discX][discY];
+			}
+			else {
+				discY-=1;
+				discCount[discNumber]-=1;
+			}
+		}
+	}
+
+	// console.log("********");
+	// console.log(discsInBoard);
+}
+
+function drawDisc(discNumber) {
+	var disc;
+	if(discNumber===GREEN){
+		disc = "Multi/disc_green.png";
+	}
+	else if (discNumber==BLUE){
+		disc = "Multi/disc_blue.png";
+	}
+	else if (discNumber==RED){
+		disc = "Multi/disc_red.png";
+	}
+	else if (discNumber==PURPLE){
+		disc = "Multi/disc_purple.png";
+	}
+	else if (discNumber==YELLOW){
+		disc = "Multi/disc_yellow.png";
+	}
+	else if (discNumber==WHITE){
+		disc = "Multi/disc_white.png";
+	}
+	else if (discNumber==BLACK){
+		disc = "Multi/disc_black.png";
+	}
+	return disc;
+}
+
+function validateDisc(discCount,discNumber){
+	// console.log("validando");
+	// console.log(discCount[discNumber]);
+	var isValid = true;
+	if (discCount[discNumber]>9){
+		isValid = false;
+	}
+	else if (discNumber==5 && discCount[5]>5){
+		isValid = false;
+	}
+	else if (discNumber==6 && discCount[6]>5){
+		isValid = false;
+	}
+	else {
+		//
+	}
+	// console.log(isValid);
+	return isValid;
+}
