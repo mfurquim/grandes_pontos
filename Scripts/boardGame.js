@@ -14,8 +14,8 @@ var board = {};
  * Generate Board creates Discs ans Pawn objects.
  */
 function generateBoard() {
-	generateDiscs();
 	board.pawns = generatePawns();
+	board.discs = generateDiscs();
 }
 
 /**
@@ -25,12 +25,16 @@ function drawBoard(context) {
 	// Fetch atlas image containing all images
 	var atlas = ATLAS.fetchAtlas();
 
-	// For each pawn, draw itself
-	board.pawns.forEach( function(item, index, array) {
-		item.drawItself(context, atlas);
+	// For each pawn in pawns, draw itself
+	board.pawns.forEach( function(pawn, index, array) {
+		pawn.drawItself(context, atlas);
+	});
+
+	// For each disc in discs, draw itself
+	board.discs.forEach( function(disc, index, array) {
+		disc.drawItself(context, atlas);
 	});
 }
-
 
 /**
  * Generate Pawns creates one Pawn object of each color
@@ -38,13 +42,13 @@ function drawBoard(context) {
  */
 function generatePawns() {
 	// All five pawns' colors
-	const COLOR_PAWNS = [GREEN,	BLUE, RED, PURPLE, YELLOW];
+	const COLOR_PAWNS = [GREEN, BLUE, RED, PURPLE, YELLOW];
 
 	// Pawn's height plus offset (45 + 5)
 	const PAWN_HEIGHT = 50;
 
 	// Disc's width plus offset (42 + 8)
-	const DISC_WIDTH	= 50;
+	const DISC_WIDTH = 50;
 
 	// Number of discs in a row
 	const NUMBER_DISC_ROW = 11;
@@ -84,6 +88,57 @@ function generatePawns() {
 	return pawns;
 }
 
+/**
+ * Generate Discs creates discs object (5 for each color + 5 white and black)
+ * and poised them in the board.
+ */
+function generateDiscs() {
+	var discCount=[];
+
+	for(var i = 0; i<=6; i++){
+		discCount[i]=0;
+	}
+	discObjects = [];
+	discs = [];
+	var discsInBoard=[];
+	var currentDisc;
+	for (var discX = 0;discX<11;discX++){
+		discs[discX]=[];
+		discsInBoard[discX]=[];
+		for (var discY = 1; discY<6;discY++) {
+			// console.log(discX,discY);
+
+			discNumber = Math.floor(Math.random()*(7));
+
+			discCount[discNumber]+=1;
+
+			// console.log(discCount[discNumber]);
+
+
+			if(validateDisc(discCount,discNumber)){
+				// discsInBoard[discX][discY]=discNumber;
+				discsInBoard[discX][discY]={color: discNumber};
+				currentDisc = fetchDisc(discsInBoard[discX][discY].color);
+				// console.log(sprt);
+				var disco = new GameObject(currentDisc, positionCoordinates = {x:(discX * 50), y:((discY - 1) * 50)});
+				discObjects.push(disco);
+//				disco.drawItself(context,atls);
+
+				discs[discX][discY] = discsInBoard[discX][discY];
+			}
+			else {
+				discY-=1;
+				discCount[discNumber]-=1;
+			}
+		}
+	}
+
+	return discObjects;
+}
+
+/**
+ * Fetch pawn receives a color and returns its sprite
+ */
 function fetchPawn(pawnColor) {
 	const	GREEN_PAWN_NAME		= "Multi/classic_green.png",
 				BLUE_PAWN_NAME		= "Multi/classic_blue.png",
@@ -115,85 +170,67 @@ function fetchPawn(pawnColor) {
 			break;
 
 		default:
-			// Should never be reached. There are only five Pawn's colors.
+			// Should never be reached. There are only five Pawns's colors.
 	}
 
 	var pawnSprite = ATLAS.fetchSprite(pawnSpriteName);
-
 	return pawnSprite;
 }
 
-function generateDiscs() {
-	var discCount=[];
+/**
+ * Fetch disc receives a color and returns its sprite
+ */
+function fetchDisc(discColor) {
+	const	GREEN_DISC_NAME		= "Multi/disc_green.png",
+				BLUE_DISC_NAME		= "Multi/disc_blue.png",
+				RED_DISC_NAME			= "Multi/disc_red.png",
+				PURPLE_DISC_NAME	= "Multi/disc_purple.png",
+				YELLOW_DISC_NAME	= "Multi/disc_yellow.png",
+				WHITE_DISC_NAME		= "Multi/disc_white.png",
+				BLACK_DISC_NAME		= "Multi/disc_black.png";
 
-	for(var i = 0; i<=6; i++){
-		discCount[i]=0;
+	var discSpriteName = "";
+
+	switch (discColor) {
+		case GREEN:
+			discSpriteName = GREEN_DISC_NAME;
+			break;
+
+		case BLUE:
+			discSpriteName = BLUE_DISC_NAME;
+			break;
+
+		case RED:
+			discSpriteName = RED_DISC_NAME;
+			break;
+
+		case PURPLE:
+			discSpriteName = PURPLE_DISC_NAME;
+			break;
+
+		case YELLOW:
+			discSpriteName = YELLOW_DISC_NAME;
+			break;
+
+		case WHITE:
+			discSpriteName = WHITE_DISC_NAME;
+			break;
+
+		case BLACK:
+			discSpriteName = BLACK_DISC_NAME;
+			break;
+
+		default:
+			// Should never be reached. There are only seven Discs's colors.
 	}
-	board.discs = [];
-	var discsInBoard=[];
-	var currentDisc;
-	for (var discX = 0;discX<11;discX++){
-		board.discs[discX]=[];
-		discsInBoard[discX]=[];
-		for (var discY = 1; discY<6;discY++) {
-			// console.log(discX,discY);
 
-			discNumber = Math.floor(Math.random()*(7));
-
-			discCount[discNumber]+=1;
-
-			// console.log(discCount[discNumber]);
-
-
-			if(validateDisc(discCount,discNumber)){
-				// discsInBoard[discX][discY]=discNumber;
-				discsInBoard[discX][discY]={color: discNumber};
-				currentDisc = drawDisc(discsInBoard[discX][discY].color);
-				var sprt = ATLAS.fetchSprite(currentDisc);
-				// console.log(sprt);
-				var atls = ATLAS.fetchAtlas();
-				var disco = new GameObject(sprt, positionCoordinates = {x:(discX * 50), y:((discY - 1) * 50)});
-				disco.drawItself(context,atls);
-
-				board.discs[discX][discY] = discsInBoard[discX][discY];
-			}
-			else {
-				discY-=1;
-				discCount[discNumber]-=1;
-			}
-		}
-	}
-
-	// console.log("********");
-	// console.log(discsInBoard);
+	var discSprite = ATLAS.fetchSprite(discSpriteName);
+	return discSprite;
 }
 
-function drawDisc(discNumber) {
-	var disc;
-	if(discNumber===GREEN){
-		disc = "Multi/disc_green.png";
-	}
-	else if (discNumber==BLUE){
-		disc = "Multi/disc_blue.png";
-	}
-	else if (discNumber==RED){
-		disc = "Multi/disc_red.png";
-	}
-	else if (discNumber==PURPLE){
-		disc = "Multi/disc_purple.png";
-	}
-	else if (discNumber==YELLOW){
-		disc = "Multi/disc_yellow.png";
-	}
-	else if (discNumber==WHITE){
-		disc = "Multi/disc_white.png";
-	}
-	else if (discNumber==BLACK){
-		disc = "Multi/disc_black.png";
-	}
-	return disc;
-}
-
+/**
+ * Validate disc check whether there are enough discs of that color.
+ */
 function validateDisc(discCount,discNumber){
 	// console.log("validando");
 	// console.log(discCount[discNumber]);
