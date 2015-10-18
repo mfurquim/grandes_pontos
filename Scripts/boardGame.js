@@ -78,12 +78,12 @@ function drawBoard(context) {
 	var atlas = ATLAS.fetchAtlas();
 
 	// For each pawn in pawns, draw itself
-	board.pawns.forEach( function(pawn, index, array) {
+	board.pawns.forEach( function(pawn) {
 		pawn.drawItself(context, atlas);
 	});
 
 	// For each disc in discs, draw itself
-	board.discs.forEach( function(disc, index, array) {
+	board.discs.forEach( function(disc) {
 		disc.drawItself(context, atlas);
 	});
 }
@@ -101,7 +101,7 @@ function generatePawns() {
 	 * For each pawn, fetch its sprite and push the object into the array.
 	 * Its y coordinate is changed to be drawn on top of the previous one.
 	 */
-	COLOR_PAWNS.forEach( function(item, index, array) {
+	COLOR_PAWNS.forEach( function(item, index) {
 
 		var positionCoordinates = {
 			x:PAWN_INITIAL_COORDINATES.X + BOADR_OFFSET.X,
