@@ -25,9 +25,6 @@ const	GREEN_DISC_NAME		= "Multi/disc_green.png",
 const NUMBER_DISC_COLORS = 7;
 
 // Disc's width plus offset (42 + 8)
-const DISC_WIDTH = 50;
-
-// Disc's width plus offset (42 + 8)
 const DISC_DIMENSION = {WIDTH: 50, HEIGHT: 50};
 
 // Number of discs in a row
@@ -51,7 +48,7 @@ const PAWN_DIMENSION = {WIDTH: 50, HEIGHT: 50};
 
 // Initial Pawns' position is located at the board's right
 const PAWN_INITIAL_COORDINATES = {
-	X: (DISC_WIDTH * NUMBER_DISC_ROW),
+	X: (DISC_DIMENSION.WIDTH * NUMBER_DISC_ROW),
 	Y: (PAWN_DIMENSION.HEIGHT * (NUMBER_PAWNS - 1))
 };
 
@@ -111,8 +108,13 @@ function generatePawns() {
 
 		var sprite = fetchPawn(item);
 
+		var scale = {
+			width: 0.8,
+			height: 0.8
+		}
+
 		// Create and Seal object to prevent properties addition
-		var pawnObject = new GameObject(sprite, positionCoordinates);
+		var pawnObject = new GameObject(sprite, positionCoordinates, scale);
 		Object.seal(pawnObject);
 		pawns.push(pawnObject);
 	});
@@ -157,8 +159,13 @@ function generateDiscs() {
 
 				var discSprite = fetchDisc(discColor);
 
+				var scale = {
+					width: 1,
+					height: 1
+				}
+
 				// Create and Seal object to prevent properties addition
-				var discObject = new GameObject(discSprite, positionCoordinates);
+				var discObject = new GameObject(discSprite, positionCoordinates, scale);
 				Object.seal(discObject);
 				discs.push(discObject);
 			}

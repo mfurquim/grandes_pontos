@@ -7,7 +7,9 @@
  * @function
  * windows.onclick [will] call resolveTurn if the click was inside grid
  *
- * Author: Matheus Mello and Mateus Furquim
+ * @author
+ * Matheus Mello 
+ * Mateus M. F. Mendonça
  */
 
 var gridConfiguration = {
