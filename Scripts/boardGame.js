@@ -7,6 +7,56 @@ const GREEN  = 0,
 			WHITE  = 5,
 			BLACK  = 6;
 
+// Discs and Pawns sprite name
+const	GREEN_DISC_NAME		= "Multi/disc_green.png",
+			BLUE_DISC_NAME		= "Multi/disc_blue.png",
+			RED_DISC_NAME			= "Multi/disc_red.png",
+			PURPLE_DISC_NAME	= "Multi/disc_purple.png",
+			YELLOW_DISC_NAME	= "Multi/disc_yellow.png",
+			WHITE_DISC_NAME		= "Multi/disc_white.png",
+			BLACK_DISC_NAME		= "Multi/disc_black.png",
+			GREEN_PAWN_NAME		= "Multi/classic_green.png",
+			BLUE_PAWN_NAME		= "Multi/classic_blue.png",
+			RED_PAWN_NAME			= "Multi/classic_red.png",
+			PURPLE_PAWN_NAME	= "Multi/classic_purple.png",
+			YELLOW_PAWN_NAME	= "Multi/classic_yellow.png";
+
+// Number of discs' colors
+const NUMBER_DISC_COLORS = 7;
+
+// Disc's width plus offset (42 + 8)
+const DISC_WIDTH = 50;
+
+// Disc's width plus offset (42 + 8)
+const DISC_DIMENSION = {WIDTH: 50, HEIGHT: 50};
+
+// Number of discs in a row
+const NUMBER_DISC_ROW = 11;
+
+// Number of discs in a row
+const NUMBER_DISC_COL = 5;
+
+// Black and White discs are specials, other colors are regular ones
+const DISC_LIMIT = 9,
+			DISC_SPECIAL_LIMIT = 5;
+
+// All five pawns' colors
+const COLOR_PAWNS = [GREEN, BLUE, RED, PURPLE, YELLOW];
+
+// Number of pawns to be drawn
+const NUMBER_PAWNS = 5;
+
+// Pawn's height plus offset (45 + 5)
+const PAWN_DIMENSION = {WIDTH: 50, HEIGHT: 50};
+
+// Initial Pawns' position is located at the board's right
+const PAWN_INITIAL_COORDINATES = {
+	X: (DISC_WIDTH * NUMBER_DISC_ROW),
+	Y: (PAWN_DIMENSION.HEIGHT * (NUMBER_PAWNS - 1))
+};
+
+const BOADR_OFFSET = {X: 50, Y: 50}
+
 // Board object containing all the Discs and Panws
 var board = {};
 
@@ -14,6 +64,7 @@ var board = {};
  * Generate Board creates Discs ans Pawn objects.
  */
 function generateBoard() {
+
 	board.pawns = generatePawns();
 	board.discs = generateDiscs();
 }
@@ -22,6 +73,7 @@ function generateBoard() {
  * Draw board draws all objects in the board game (Discs and Pawns)
  */
 function drawBoard(context) {
+
 	// Fetch atlas image containing all images
 	var atlas = ATLAS.fetchAtlas();
 
@@ -41,45 +93,26 @@ function drawBoard(context) {
  * and poised them in the board.
  */
 function generatePawns() {
-	// All five pawns' colors
-	const COLOR_PAWNS = [GREEN, BLUE, RED, PURPLE, YELLOW];
-
-	// Pawn's height plus offset (45 + 5)
-	const PAWN_HEIGHT = 50;
-
-	// Disc's width plus offset (42 + 8)
-	const DISC_WIDTH = 50;
-
-	// Number of discs in a row
-	const NUMBER_DISC_ROW = 11;
-
-	// Number of pawns to be drawn
-	const NUMBER_PAWN = 5;
-
-	// Initial Pawns' position
-	const INITIAL_COORDINATES = {
-		x: (DISC_WIDTH * NUMBER_DISC_ROW),
-		y: (PAWN_HEIGHT * (NUMBER_PAWN - 1))
-	};
 
 	// Array containing all five pawns
 	var pawns = [];
 
-	// Sprite of each pawn
-	var sprite = null;
-
 	/**
-	 * For each pawn, fetch its sprite and push to the array.
+	 * For each pawn, fetch its sprite and push the object into the array.
 	 * Its y coordinate is changed to be drawn on top of the previous one.
 	 */
 	COLOR_PAWNS.forEach( function(item, index, array) {
-		sprite = fetchPawn(item);
-		var pawnObject = new GameObject(sprite, {
-			x:INITIAL_COORDINATES.x,
-			y:INITIAL_COORDINATES.y - (PAWN_HEIGHT * index)
-		});
 
-		// Seal object to prevent properties addition
+		var positionCoordinates = {
+			x:PAWN_INITIAL_COORDINATES.X + BOADR_OFFSET.X,
+			y:PAWN_INITIAL_COORDINATES.Y - (PAWN_DIMENSION.HEIGHT * index)
+				+ BOADR_OFFSET.Y
+		}
+
+		var sprite = fetchPawn(item);
+
+		// Create and Seal object to prevent properties addition
+		var pawnObject = new GameObject(sprite, positionCoordinates);
 		Object.seal(pawnObject);
 		pawns.push(pawnObject);
 	});
@@ -93,58 +126,56 @@ function generatePawns() {
  * and poised them in the board.
  */
 function generateDiscs() {
-	var discCount=[];
 
-	for(var i = 0; i<=6; i++){
-		discCount[i]=0;
+	// Keeping track of how many discs of a specific color has been already drawn
+	var discCount = [];
+
+	// There are no discs of any color right now
+	for (var i = 0; i < NUMBER_DISC_COLORS; i++) {
+		discCount[i] = 0;
 	}
-	discObjects = [];
-	discs = [];
-	var discsInBoard=[];
-	var currentDisc;
-	for (var discX = 0;discX<11;discX++){
-		discs[discX]=[];
-		discsInBoard[discX]=[];
-		for (var discY = 1; discY<6;discY++) {
-			// console.log(discX,discY);
 
-			discNumber = Math.floor(Math.random()*(7));
+	// Array of Disc Object
+	var discs = [];
 
-			discCount[discNumber]+=1;
+	// Fill the board with random discs along the x and y axis (rows and columns)
+	for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
+		for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
 
-			// console.log(discCount[discNumber]);
+			var discColor = Math.floor(Math.random()*(NUMBER_DISC_COLORS));
 
+			// If the number of discs of a given color does not exceed the maximum
+			if (validateDisc(discCount, discColor) === true) {
 
-			if(validateDisc(discCount,discNumber)){
-				// discsInBoard[discX][discY]=discNumber;
-				discsInBoard[discX][discY]={color: discNumber};
-				currentDisc = fetchDisc(discsInBoard[discX][discY].color);
-				// console.log(sprt);
-				var disco = new GameObject(currentDisc, positionCoordinates = {x:(discX * 50), y:((discY - 1) * 50)});
-				discObjects.push(disco);
-//				disco.drawItself(context,atls);
+				// One more disc of discColor will be drawn
+				discCount[discColor] += 1;
 
-				discs[discX][discY] = discsInBoard[discX][discY];
+				var positionCoordinates = {
+					x:((discX * DISC_DIMENSION.HEIGHT) + BOADR_OFFSET.X),
+					y:((discY * DISC_DIMENSION.WIDTH) + BOADR_OFFSET.Y)
+				}
+
+				var discSprite = fetchDisc(discColor);
+
+				// Create and Seal object to prevent properties addition
+				var discObject = new GameObject(discSprite, positionCoordinates);
+				Object.seal(discObject);
+				discs.push(discObject);
 			}
+			// If it's not valid, redo that disc
 			else {
 				discY-=1;
-				discCount[discNumber]-=1;
 			}
-		}
-	}
+		} // End for discY < NUMBER_DISC_COL
+	} // End for discX < NUMBER_DISC_ROW
 
-	return discObjects;
+	return discs;
 }
 
 /**
  * Fetch pawn receives a color and returns its sprite
  */
 function fetchPawn(pawnColor) {
-	const	GREEN_PAWN_NAME		= "Multi/classic_green.png",
-				BLUE_PAWN_NAME		= "Multi/classic_blue.png",
-				RED_PAWN_NAME			= "Multi/classic_red.png",
-				PURPLE_PAWN_NAME	= "Multi/classic_purple.png",
-				YELLOW_PAWN_NAME	= "Multi/classic_yellow.png";
 
 	var pawnSpriteName = "";
 
@@ -181,13 +212,6 @@ function fetchPawn(pawnColor) {
  * Fetch disc receives a color and returns its sprite
  */
 function fetchDisc(discColor) {
-	const	GREEN_DISC_NAME		= "Multi/disc_green.png",
-				BLUE_DISC_NAME		= "Multi/disc_blue.png",
-				RED_DISC_NAME			= "Multi/disc_red.png",
-				PURPLE_DISC_NAME	= "Multi/disc_purple.png",
-				YELLOW_DISC_NAME	= "Multi/disc_yellow.png",
-				WHITE_DISC_NAME		= "Multi/disc_white.png",
-				BLACK_DISC_NAME		= "Multi/disc_black.png";
 
 	var discSpriteName = "";
 
@@ -229,24 +253,18 @@ function fetchDisc(discColor) {
 }
 
 /**
- * Validate disc check whether there are enough discs of that color.
+ * Validate disc checks whether there are enough discs of that color.
  */
-function validateDisc(discCount,discNumber){
-	// console.log("validando");
-	// console.log(discCount[discNumber]);
-	var isValid = true;
-	if (discCount[discNumber]>9){
-		isValid = false;
+function validateDisc(discCount,discColor){
+
+	var isValid = false;
+
+	// Discs white and black are considered special discs
+	if (discColor === WHITE || discColor === BLACK) {
+		isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT)
+	} else {
+		isValid = (discCount[discColor] < DISC_LIMIT)
 	}
-	else if (discNumber==5 && discCount[5]>5){
-		isValid = false;
-	}
-	else if (discNumber==6 && discCount[6]>5){
-		isValid = false;
-	}
-	else {
-		//
-	}
-	// console.log(isValid);
+
 	return isValid;
 }
