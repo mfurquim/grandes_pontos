@@ -27,7 +27,7 @@ var ATLAS = (function() {
    * It returns the JSON file loaded.
    */
   var loadJSON = function(file, callback) {
-      try {
+    try {
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
       xobj.open('GET', file, true);

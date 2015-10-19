@@ -3,11 +3,12 @@ Disciplina: Técnicas de Programação
 Professor: Maurício Serrano  
 Período: 2º/2015  
 Data de entrega: 24 de Agosto de 2015  
+Atualizado dia: 19 de Outubro de 2015  
 Estudantes:  
   
-**11/0014863** - *Kleber Brito Moreira*  
-**11/0017561** - *Mateus Furquim*  
-**11/0017692** - *Matheus Mello Nascimento*  
+**11/0014863** - *Kleber B. Moreira*  
+**11/0017561** - *Mateus M. F. Mendonça*  
+**11/0017692** - *Matheus M. Nascimento*  
 **11/0064879** - *Nicolas Boarin*  
   
 #Stylesheet - Grandes Pontos
@@ -19,16 +20,15 @@ Comments must obey the following pattern:
 1.a) One-line comments must be written using a double slash '//' before the comment, followed by a space ‘ ‘ and a capital letter. Do not finish it with a period;
 
 ```javascript
-// This is the comment pattern
+// For each disc in discs, draw itself
 ```
 
 1.b) Comments in blocks must be written between the '/\*' and '\*/'. For each new line, there must have an asterisk aligned with the previous one;
 
 ```javascript
 /**
- * This is
- * the pattern
- * to be followed
+ * For each pawn, fetch its sprite and push the object into the array.
+ * Its y coordinate is changed to be drawn on top of the previous one.
  */
 ```
 
@@ -36,29 +36,33 @@ Comments must obey the following pattern:
 
 ```javascript
 /**
- * The method calculatePerimeter calculates the perimeter of a triangle
- * using its sides.
- * @return the triangle's perimeter
+ * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()
+ * @param mouseClick
  */
-function calculatePerimeter( side1, side2, side3 ) {
-  var result = side1+side2+side3;
-  return result;
+window.onclick = function(mouseClick){
+
+  // Object mouse containing the coordinate (x,y) of the event
+  var mousePosition = {
+    x: mouseClick.pageX,
+    y: mouseClick.pageY
+  };
+  //----
 }
 ```
 
 1.d) Comments explaining one line of the code must precede the line;
-boolean equality;
 
 ```javascript
-// Is the side 1 equal to side 2?
-var equality = (side1 == side2);
+// Create and Seal object to prevent properties addition
+var discObject = new GameObject(discSprite, positionCoordinates, scale);
+Object.seal(discObject);
 ```
 1.e) Comments exceeding 80 characters must be broken into multiple lines following the block pattern;
 
-```
-/* This is a coment which exceeds 80 characters. This is a coment which exceeds
- * 80 characters. This is a coment which exceeds 80 characters. This is a
- * coment which exceeds 80 characters.
+```javascript
+/**
+ * For each pawn, fetch its sprite and push the object into the array.
+ * Its y coordinate is changed to be drawn on top of the previous one.
  */
 ```
 
@@ -68,34 +72,43 @@ var equality = (side1 == side2);
 
 2.b) Classes names initiates with capital case.
 ```javascript
-var MyClass = new MyClass( name );
+var pawnObject = new GameObject(sprite, positionCoordinates, scale);
 ```
 
 2.c) Attributes names initiates with lower case.
 ```javascript
-var personAge;
+var isValid = false;
 ```
 
 2.d) Methods names initiates with lower case.
 ```javascript
-function setPersonName( name );
+GameObject.prototype.move = function(positionCoordinates) {
+	this._sprite.positionCoordinates = positionCoordinates;
+}
 ```
 
 2.e) Constants names must be capitalized and use underscore between names.
 ```javascript
-const MAX_PERSON_AGE = 120;
+// Number of discs' colors
+const NUMBER_DISC_COLORS = 7;
 ```
-2.f) To reduce the scope, a variable which is used only in the current scope must be declared as let:
+<!--2.f) To reduce the scope, a variable which is used only in the current scope must be declared as let:
 ```javascript
 let auxiliar = "This variable will vanish once it reaches the end of the scope";
 ```
-
-2.g) Only one variable must be declared per line.
+-->
+2.f) Only one variable must be declared per line.
+```javascript
+var	canvas			= null,
+	context			= null,
+	offsetWidth		= 20,
+	offsetHeight	= 20;
+```
 
 ##3. Strings
 3.a) Strings must be written between double quotes ' " ';
 ```javascript
-var string = "This is a string example written between double quotes";
+const GREEN_DISC_NAME = "Multi/disc_green.png";
 ```
 
 ##4. Indentation
@@ -103,13 +116,19 @@ var string = "This is a string example written between double quotes";
 4.a) The indentation must be written by two (2) spaces or an equivalent tab.
 
 ```javascript
-function getMethod() {
---// ...
---if ( condition1 == condition2 ) {
-----// ...
---}
-}
+function validateDisc(discCount, discColor) {
 
+--var isValid = false;
+
+--// Discs white and black are considered special discs
+--if (discColor === WHITE || discColor === BLACK) {
+----isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT)
+--} else {
+----isValid = (discCount[discColor] < DISC_LIMIT)
+--}
+
+--return isValid;
+}
 ```
 
 ##5. Braces
@@ -118,21 +137,19 @@ function getMethod() {
 5.b) Closing braces must be written aligned with the statement which opened the block;
 
 ```javascript
-var myObject = MyClass( parameter1, parameter2 ) {
-| function getMethod() {
-| | // ...
-| | if ( condition1 == condition2 ) {
-| | | // ...
-| | }
+function validateDisc(discCount, discColor) {
+|
+| var isValid = false;
+|
+| // Discs white and black are considered special discs
+| if (discColor === WHITE || discColor === BLACK) {
+| | isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT)
+| } else {
+| | isValid = (discCount[discColor] < DISC_LIMIT)
 | }
-| while ( condition3 == condition4 ) {
-| | // ...
-| | for ( var i = 0; i < count; i++) {
-| | | // ...
-| | }
-| }
+|
+| return isValid;
 }
-
 ```
 
 ##6. Classes
@@ -141,14 +158,28 @@ Classes must be according to the following model:
 6.a) There must have a blak line after the class signature.
 
 ```javascript
-function StyleSheet() {
+/**
+ * The constructor to create a GameObject
+ *
+ * @param
+ * Sprite as defined in Atlas.js
+ * positionCoordinates (x,y)
+ * scale (width, height)
+ */
+var GameObject = function (sprite, positionCoordinates, scale) {
+	this._sprite = {};
+	try {
+		this._sprite.name = sprite.name;
+		this._sprite.sourceCoordinates = sprite.sourceCoordinates;
+		this._sprite.dimensions = sprite.dimensions;
+		this._sprite.positionCoordinates = positionCoordinates;
+		this._sprite.scale = scale;
+	}
+	catch (errorSprite) {
+		alert(errorSprite);
+	}
+};
 
-  /**
-   * There must have a blank line between
-   * the class signature and the
-   * first line of code of the class
-   */
-}
 ```
 
 6.b) Prototypes must be used as inheritance:
@@ -181,19 +212,25 @@ console.log( physicalPerson.name ); // Nome da Pessoa
 7.g) There must have an `else` block after all `if` or `else if` block.
 
 ```javascript
-if ( this.personAge < 18 && /* There is more than 80 characters here */
-     this.personVIP == NULL) {
-  alert( "Not authorized to drive!" );
-} else {
-  // . . .
-}
+/**
+ * Is Inside Board checks whether the click was in the board
+ * @param gridClick
+ * @return insideBoard
+ */
+function isInsideBoard(gridClick) {
+  var insideBoard = false;
 
-if ( weekDay == 1 ) {
-  console.log( "Sunday" );
-} else if ( weekDay == 2 ) {
-  console.log( "Monday" );
-} else {
-  // ...
+  if (gridClick.x < gridConfiguration.rows &&
+      gridClick.y < gridConfiguration.cols &&
+      gridClick.x >= 0 &&
+      gridClick.y >= 0) {
+    insideBoard = true;
+  }
+  else {
+    insideBoard = false;
+  }
+
+  return insideBoard;
 }
 ```
 
@@ -213,8 +250,16 @@ while ( count < numElements ) {
 9.b) Semicolon must be placed immediately after the assignment and the comparison, and an empty space after it.
 
 ```javascript
-for ( int i = 0; i < numElements; i++ ) {
-  console.log( numElements );
+// Fill the board with random discs along the x and y axis (rows and columns)
+for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
+  for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
+    // ---
+    var positionCoordinates = {
+        x:((discX * DISC_DIMENSION.HEIGHT) + BOADR_OFFSET.X),
+        y:((discY * DISC_DIMENSION.WIDTH) + BOADR_OFFSET.Y)
+    }
+    // ---
+  }
 }
 ```
 
@@ -226,21 +271,44 @@ a. Defaults and cases must not be indented;
 10.c) `break` must be indented as well.
 
 ```javascript
-switch ( dayWeek ) {
-case 1:
-  console.log( "Sunday" );
-  break;
+function fetchDisc(discColor) {
+  var discSpriteName = "";
+  switch (discColor) {
+    case GREEN:
+      discSpriteName = GREEN_DISC_NAME;
+      break;
 
-case 2:
-  console.log( "Monday" );
-  break;
+    case BLUE:
+      discSpriteName = BLUE_DISC_NAME;
+      break;
 
-// ...
+    case RED:
+      discSpriteName = RED_DISC_NAME;
+      break;
 
-default:
-  console.log( "" );
-  break;
+    case PURPLE:
+      discSpriteName = PURPLE_DISC_NAME;
+      break;
+
+    case YELLOW:
+      discSpriteName = YELLOW_DISC_NAME;
+      break;
+
+    case WHITE:
+      discSpriteName = WHITE_DISC_NAME;
+      break;
+
+    case BLACK:
+      discSpriteName = BLACK_DISC_NAME;
+      break;
+
+    default:
+      // Should never be reached. There are only seven Discs's colors.
+  }
+  var discSprite = ATLAS.fetchSprite(discSpriteName);
+  return discSprite;
 }
+
 ```
 
 ##11. Treatment of Exceptions
@@ -248,13 +316,14 @@ default:
 
 ```
 try {
-  / block to be executed
+  this._sprite.name = sprite.name;
+  this._sprite.sourceCoordinates = sprite.sourceCoordinates;
+  this._sprite.dimensions = sprite.dimensions;
+  this._sprite.positionCoordinates = positionCoordinates;
+  this._sprite.scale = scale;
 }
-catch( exception ) {
-  // chatch's instructions block
-}
-  finally {
-// finally instructions block
+catch (errorSprite) {
+  alert(errorSprite);
 }
 ```
 
