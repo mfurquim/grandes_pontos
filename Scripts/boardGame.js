@@ -290,7 +290,7 @@ function fetchDisc(discColor) {
 /**
  * Validate disc checks whether there are enough discs of that color.
  */
-function validateDisc(discCount,discColor){
+function validateDisc(discCount, discColor) {
 
 	var isValid = false;
 
