@@ -7,15 +7,42 @@ const GREEN  = 0,
 			WHITE  = 5,
 			BLACK  = 6;
 
-// Discs and Pawns sprite name
-const	GREEN_DISC_NAME		= "Multi/disc_green.png",
+const IMAGE_MULTI			= "Multi",
+			IMAGE_SINGLE		= "Single",
+			IMAGE_BOARDERED	= "Bordered";
+
+const IMAGE_DISC		= "disc",
+			IMAGE_PAWN1		= "pawn1",
+			IMAGE_PAWN2		= "pawn2",
+			IMAGE_PAWN3		= "pawn3",
+			IMAGE_CLASSIC = "classic",
+			IMAGE_THIN		= "thin",
+			IMAGE_HUMAN		= "human"
+			IMAGE_MEEPLE	= "meeple";
+
+const IMAGE_GREEN 	= "green",
+			IMAGE_BLUE		= "blue",
+			IMAGE_RED			= "red",
+			IMAGE_PURPLE	= "purple",
+			IMAGE_YELLOW	= "yellow",
+			IMAGE_WHITE		= "white",
+			IMAGE_BLACK		= "black";
+
+var image_border	= IMAGE_MULTI,
+		image_type		= IMAGE_DISC,
+		image_color		= IMAGE_GREEN;
+
+// Discs sprite name
+const	GREEN_DISC_NAME		= image_border + "/" + image_type + "_" + image_color + ".png",
 			BLUE_DISC_NAME		= "Multi/disc_blue.png",
 			RED_DISC_NAME			= "Multi/disc_red.png",
 			PURPLE_DISC_NAME	= "Multi/disc_purple.png",
 			YELLOW_DISC_NAME	= "Multi/disc_yellow.png",
 			WHITE_DISC_NAME		= "Multi/disc_white.png",
-			BLACK_DISC_NAME		= "Multi/disc_black.png",
-			GREEN_PAWN_NAME		= "Multi/classic_green.png",
+			BLACK_DISC_NAME		= "Multi/disc_black.png";
+
+// Pawns sprite name
+const GREEN_PAWN_NAME		= "Multi/classic_green.png",
 			BLUE_PAWN_NAME		= "Multi/classic_blue.png",
 			RED_PAWN_NAME			= "Multi/classic_red.png",
 			PURPLE_PAWN_NAME	= "Multi/classic_purple.png",
