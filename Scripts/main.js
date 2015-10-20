@@ -21,4 +21,4 @@ var setup = function() {
 
 setup();
 
-alert("Press D to set debug On.");
+console.log("Press D to set debug On.");

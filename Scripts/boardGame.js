@@ -74,7 +74,7 @@ const PAWN_INITIAL_COORDINATES = {
 	Y: (PAWN_DIMENSION.HEIGHT * (NUMBER_PAWNS - 1))
 };
 
-const BOADR_OFFSET = {X: 50, Y: 200}
+const BOADR_OFFSET = {X: 50, Y: 100}
 
 // Board object containing all the Discs and Panws
 var board = {};
