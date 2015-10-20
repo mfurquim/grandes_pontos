@@ -4,7 +4,7 @@ var canvas       = null,
 		offsetHeight = 20;
 
 // If the debug flag is on, print debug information to console
-const DEBUG_ON = false;
+var DEBUG_ON = false;
 
 var setup = function() {
 	canvas = document.getElementById("myCanvas");
@@ -20,3 +20,5 @@ var setup = function() {
 };
 
 setup();
+
+alert("Press D to set debug On.");
