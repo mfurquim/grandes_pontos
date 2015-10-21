@@ -1,14 +1,14 @@
-/**
+  /**
  * ATLAS
  *
  * The ATLAS module loads an atlas sheet into an array
  * of objects called sprites, based on a JSON file.
  *
- * public methods:
+ * @function
  *  loadingAssets,
  *  drawSprite.
  *
- * Variables:
+ * @var
  * atlasAsset is an Object which contains an Atlas sheet with all images.
  * sprites is an Array which contains useful information to draw and image
  * url is a String which contains the path to the image Atlas
@@ -68,15 +68,16 @@ var ATLAS = (function() {
   };
 
   /**
-   * Function defSprite receives 7 parameters:
-   * 1. The name of the image;
-   * 2,3. The (x,y) starting coordinate;
-   * 4,5. The width and height of the image;
-   * 6,7. The (x,y) center coordinate;
    * It is called for each parsed sprite of the JSON file.
    * It stores all the nedded information about images
    * into the array called sprites.
    * It returns nothing.
+   *
+   * @param
+   * name is the name of the image.
+   * coordinate_x and coordinate_y are the starting coordinates
+   * width and heigh are the dimensions of the image
+   * center_x and center_y are the center coordiantes of the image
    */
   var defSprite = function(name, coordinate_x, coordinate_y,
     width, height, center_x, center_y) {
@@ -89,11 +90,12 @@ var ATLAS = (function() {
   };
 
   /**
-   * Function searchSprite receives 1 parameter:
-   * 1. Name of the sprite to search.
    * It is called on drawSprite.
    * It searches on the sprites array for the sprite with name.
    * It returns the sprite upon succes, or null otherwise.
+   *
+   * @param
+   * name is the name of the sprite that'll be seached
    */
   var searchSprite = function(name) {
     // console.log(sprites);
@@ -109,6 +111,7 @@ var ATLAS = (function() {
   };
 
   return {
+
     /**
      * Function loadingAssets does not receive parameters.
      * It is called on the main.js.
@@ -130,12 +133,13 @@ var ATLAS = (function() {
     },
 
     /**
-     * Function searchSprite receives 3 parameters:
-     * 1. Name of the sprite to draw;
-     * 2,3. The (x,y) drawing coordinate.
      * It is called on main.js.
      * It draws any sprite upon request.
      * It returns 1 if it could not find the sprite to draw.
+     *
+     * @param
+     * name stands for the name of the sprite to draw
+     * destination_x and destination_y are for the drawing coordinates
      */
     drawSprite: function(name, destination_x, destination_y) {
       try {

@@ -6,9 +6,11 @@
  *
  * @function
  * windows.onclick [will] call resolveTurn if the click was inside grid
+ * mousePosition.toConsole function to print the grid coordinates on the console
+ * isInsideBoard checks whether the click was in the board
  *
  * @author
- * Matheus Mello 
+ * Matheus Mello
  * Mateus M. F. Mendonça
  */
 
@@ -18,13 +20,14 @@ var gridConfiguration = {
   width: DISC_DIMENSION.WIDTH,
   height: DISC_DIMENSION.HEIGHT,
   offset: {
-    x: BOADR_OFFSET.X,
-    y: BOADR_OFFSET.Y
+    x: BOARD_OFFSET.X,
+    y: BOARD_OFFSET.Y
   }
 };
 
 /**
  * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()
+ *
  * @param mouseClick
  */
 window.onclick = function(mouseClick){
@@ -74,7 +77,9 @@ window.onclick = function(mouseClick){
 
 /**
  * Is Inside Board checks whether the click was in the board
+ *
  * @param gridClick
+ *
  * @return insideBoard
  */
 function isInsideBoard(gridClick) {
