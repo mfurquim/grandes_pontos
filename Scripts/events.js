@@ -3,6 +3,7 @@
  *
  * @var
  * gridConfiguration describes the rows, columns, width, height and offset
+ * gridClick containing the grid cell (x,y) of the click
  *
  * @function
  * windows.onclick [will] call resolveTurn if the click was inside grid

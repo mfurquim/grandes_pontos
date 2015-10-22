@@ -7,6 +7,9 @@
  * move changes the coordinate (x,y)
  * scale changes the object scale (width, height)
  *
+ * @var
+ * GameObject responsible for handling all the objectss in the game
+ *
  * @author
  * Mateus M. F. Mendonça
  */

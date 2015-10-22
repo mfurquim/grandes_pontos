@@ -5,8 +5,11 @@
  * of objects called sprites, based on a JSON file.
  *
  * @function
- *  loadingAssets,
- *  drawSprite.
+ * loadJSON receives a JSON path and loads it
+ * loadingAssets loads the Atlas image and calls the load function
+ * storeSprite parses the JSON file and call defSprite
+ * drawSprite draws any sprite upon request
+ * defSprite stores all the nedded information about images into sprites
  *
  * @var
  * atlasAsset is an Object which contains an Atlas sheet with all images.
@@ -114,8 +117,8 @@ var ATLAS = (function() {
 
     /**
      * Function loadingAssets does not receive parameters.
-     * It is called on the main.js.
      * It loads the Atlas image and calls the load function.
+     * It is called on the main.js.
      * It returns nothing.
      */
     loadingAssets: function() {
