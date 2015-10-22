@@ -8,7 +8,7 @@
  * windows.onclick [will] call resolveTurn if the click was inside grid
  *
  * @author
- * Matheus Mello 
+ * Matheus Mello
  * Mateus M. F. Mendonça
  */
 
@@ -22,6 +22,39 @@ var gridConfiguration = {
     y: BOADR_OFFSET.Y
   }
 };
+
+// Listen to key pressing events
+window.addEventListener("keypress", doKeyDown, false);
+
+// Listen to key pressing events
+function doKeyDown(event) {
+
+  switch (event.code) {
+    // If the key D is pressed, Swap DEBUG_ON flag
+    case "KeyD":
+      DEBUG_ON = DEBUG_ON ? false : true;
+      console.log("Debug is: " + String(DEBUG_ON));
+      break;
+
+    // If the key C is pressed, change pawn's style
+    case "KeyC":
+      if (DEBUG_ON) {
+        var border = prompt("Pawn's border (Multi, Single or Bordered)");
+        var type = prompt("Pawn's type (pawn1, pawn2, pawn3, classic, thin, human or meeple)");
+        var color = prompt("Pawn's color (green, blue, red, purple, yellow)");
+        var position = prompt("Pawn's position (0,4)");
+        board.pawns[position].changeName(border, type, color);
+      }
+      break;
+
+    default:
+    if (DEBUG_ON) {
+      console.log(event);
+    }
+  }
+
+  drawBoard(context);
+}
 
 /**
  * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()
@@ -37,16 +70,14 @@ window.onclick = function(mouseClick){
 
   // A debug function to print the mouse coordinates on the console
   mousePosition.toConsole = function () {
-    console.log("Mouse position: (" +
-      String(mousePosition.x) + ", " +
-      String(mousePosition.y) + ")");
+    if (DEBUG_ON === true) {
+      console.log("Mouse position: (" +
+        String(mousePosition.x) + ", " +
+        String(mousePosition.y) + ")");
+    }
   };
 
-  if (DEBUG_ON === true) {
-    mousePosition.toConsole()
-  } else {
-    // Do not print mousePosition debug information to console
-  }
+  mousePosition.toConsole()
 
   // Object gridClick containing the grid cell (x,y) of the click
   var gridClick = {
@@ -60,15 +91,18 @@ window.onclick = function(mouseClick){
 
   // A debug function to print the grid coordinates on the console
   gridClick.toConsole = function () {
-    console.log("Grid Click: (" +
-      String(gridClick.x) + ", " +
-      String(gridClick.y) + ")");
+    if (DEBUG_ON === true) {
+      console.log("Grid Click: (" +
+        String(gridClick.x) + ", " +
+        String(gridClick.y) + ")");
+    }
   };
 
   if (isInsideBoard(gridClick) === true) {
     gridClick.toConsole();
     // Call function to resolve the turn based on the gridClick.
-    // resolveTurn(gridClick);
+    resolveTurn(gridClick);
+    drawBoard(context);
   }
 };
 

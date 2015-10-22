@@ -7,15 +7,37 @@ const GREEN  = 0,
 			WHITE  = 5,
 			BLACK  = 6;
 
-// Discs and Pawns sprite name
+// Constants to capture images
+const IMAGE_BORDER_MULTI		= "Multi",
+			IMAGE_BORDER_SINGLE		= "Single",
+			IMAGE_BORDER_BORDERED	= "Bordered",
+			IMAGE_TYPE_DISC				= "disc",
+			IMAGE_TYPE_PAWN1			= "pawn1",
+			IMAGE_TYPE_PAWN2			= "pawn2",
+			IMAGE_TYPE_PAWN3			= "pawn3",
+			IMAGE_TYPE_CLASSIC 		= "classic",
+			IMAGE_TYPE_THIN				= "thin",
+			IMAGE_TYPE_HUMAN			= "human"
+			IMAGE_TYPE_MEEPLE			= "meeple",
+			IMAGE_COLOR_GREEN 		= "green",
+			IMAGE_COLOR_BLUE			= "blue",
+			IMAGE_COLOR_RED				= "red",
+			IMAGE_COLOR_PURPLE		= "purple",
+			IMAGE_COLOR_YELLOW		= "yellow",
+			IMAGE_COLOR_WHITE			= "white",
+			IMAGE_COLOR_BLACK			= "black";
+
+// Discs sprite name
 const	GREEN_DISC_NAME		= "Multi/disc_green.png",
 			BLUE_DISC_NAME		= "Multi/disc_blue.png",
 			RED_DISC_NAME			= "Multi/disc_red.png",
 			PURPLE_DISC_NAME	= "Multi/disc_purple.png",
 			YELLOW_DISC_NAME	= "Multi/disc_yellow.png",
 			WHITE_DISC_NAME		= "Multi/disc_white.png",
-			BLACK_DISC_NAME		= "Multi/disc_black.png",
-			GREEN_PAWN_NAME		= "Multi/classic_green.png",
+			BLACK_DISC_NAME		= "Multi/disc_black.png";
+
+// Pawns sprite name
+const GREEN_PAWN_NAME		= "Multi/classic_green.png",
 			BLUE_PAWN_NAME		= "Multi/classic_blue.png",
 			RED_PAWN_NAME			= "Multi/classic_red.png",
 			PURPLE_PAWN_NAME	= "Multi/classic_purple.png",
@@ -52,7 +74,7 @@ const PAWN_INITIAL_COORDINATES = {
 	Y: (PAWN_DIMENSION.HEIGHT * (NUMBER_PAWNS - 1))
 };
 
-const BOADR_OFFSET = {X: 50, Y: 50}
+const BOADR_OFFSET = {X: 50, Y: 100}
 
 // Board object containing all the Discs and Panws
 var board = {};
@@ -70,6 +92,12 @@ function generateBoard() {
  * Draw board draws all objects in the board game (Discs and Pawns)
  */
 function drawBoard(context) {
+
+	/**
+	 * Clean the canvas' context before drawing,
+	 * otherwise images will be drawn on top of each other.
+	 */
+	context.clearRect(0,0,canvas.width,canvas.height);
 
 	// Fetch atlas image containing all images
 	var atlas = ATLAS.fetchAtlas();

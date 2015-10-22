@@ -1,0 +1,2 @@
+var resolveTurn = function(gridClick) {
+}

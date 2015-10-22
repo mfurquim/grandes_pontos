@@ -99,7 +99,7 @@ var ATLAS = (function() {
     // console.log(sprites);
     for(var key in sprites) {
       // console.log(sprites[key]["name"]);
-      if (sprites[key]["name"] === name) {
+      if (sprites[key].name === name) {
         return sprites[key];
       } else {
         // Does nothing. Keep transversing the array for a match
@@ -127,28 +127,6 @@ var ATLAS = (function() {
 
     fetchAtlas: function() {
       return atlasAsset;
-    },
-
-    /**
-     * Function searchSprite receives 3 parameters:
-     * 1. Name of the sprite to draw;
-     * 2,3. The (x,y) drawing coordinate.
-     * It is called on main.js.
-     * It draws any sprite upon request.
-     * It returns 1 if it could not find the sprite to draw.
-     */
-    drawSprite: function(name, destination_x, destination_y) {
-      try {
-        // console.log("drawSprite");
-        var sprite = searchSprite(name);
-        context.drawImage(atlasAsset, sprite.coordinate_x, sprite.coordinate_y,
-          sprite.width, sprite.height, destination_x, destination_y,
-          sprite.width, sprite.height);
-      }
-      catch (sprite_null_error) {
-        alert(sprite_null_error);
-        // console.log(sprite);
-      }
     }
   };
 })();
