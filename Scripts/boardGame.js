@@ -1,3 +1,22 @@
+/**
+ * boardGame.js
+ *
+ * @function
+ * generateBoard creates Discs and Pawn objects
+ * drawBoard draws all objects in the board game (Discs and Pawns)
+ * generatePawns creates one Pawn object of each color,
+ * and poised them in the board
+ * generateDiscs creates discs object (5 for each color + 5 white and black)
+ * and poised them in the board
+ * fetchPawn receives a color and returns its sprite
+ * fetchDisc receives a color and returns its sprite
+ *
+ * @var
+ *
+ *
+ */
+
+
 // Color constants
 const GREEN  = 0,
 			BLUE   = 1,
@@ -58,7 +77,7 @@ const BOARD_OFFSET = {X: 50, Y: 50}
 var board = {};
 
 /**
- * Generate Board creates Discs ans Pawn objects.
+ * Generate Board creates Discs and Pawn objects.
  */
 function generateBoard() {
 
@@ -67,7 +86,10 @@ function generateBoard() {
 }
 
 /**
- * Draw board draws all objects in the board game (Discs and Pawns)
+ * Draw board draws all objects in the board game (Discs and Pawns).
+ *
+ * @param
+ * context that will be used for the drawing
  */
 function drawBoard(context) {
 
@@ -180,7 +202,10 @@ function generateDiscs() {
 }
 
 /**
- * Fetch pawn receives a color and returns its sprite
+ * Fetch pawn receives a color and returns its sprite.
+ *
+ * @param
+ * pawnColor specifies the color that the pawn will receive
  */
 function fetchPawn(pawnColor) {
 
@@ -216,7 +241,10 @@ function fetchPawn(pawnColor) {
 }
 
 /**
- * Fetch disc receives a color and returns its sprite
+ * Fetch disc receives a color and returns its sprite.
+ *
+ * @param
+ * discColor to check the color of the discs
  */
 function fetchDisc(discColor) {
 

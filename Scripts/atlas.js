@@ -1,4 +1,4 @@
-  /**
+/**
  * ATLAS
  *
  * The ATLAS module loads an atlas sheet into an array

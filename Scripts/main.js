@@ -6,6 +6,7 @@ var canvas       = null,
 // If the debug flag is on, print debug information to console
 const DEBUG_ON = false;
 
+// Starts the game
 var setup = function() {
 	canvas = document.getElementById("myCanvas");
 	context = canvas.getContext("2d");

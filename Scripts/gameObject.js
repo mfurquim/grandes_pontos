@@ -1,14 +1,14 @@
 /**
- * GameObject.js
+ * gameObject.js
  *
  * @function
- * GameObject creates a GameObject object
+ * GameObject (constructor) creates a GameObject object
  * drawItself add its image to the context
  * move changes the coordinate (x,y)
  * scale changes the object scale (width, height)
  *
  * @var
- * GameObject responsible for handling all the objectss in the game
+ * GameObject responsible for handling all the objects in the game
  *
  * @author
  * Mateus M. F. Mendonça
