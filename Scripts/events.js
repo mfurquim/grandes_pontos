@@ -2,13 +2,13 @@
  * event.js
  *
  * @var
- * gridConfiguration describes the rows, columns, width, height and offset
- * gridClick containing the grid cell (x,y) of the click
+ * gridConfiguration describes the rows, columns, width, height and offset.
+ * gridClick containing the grid cell (x,y) of the click.
  *
  * @function
- * windows.onclick [will] call resolveTurn if the click was inside grid
- * mousePosition.toConsole function to print the grid coordinates on the console
- * isInsideBoard checks whether the click was in the board
+ * windows.onclick [will] call resolveTurn if the click was inside grid.
+ * mousePosition.toConsole function to print the grid coordinates on the console.
+ * isInsideBoard checks whether the click was in the boar.d
  *
  * @author
  * Matheus Mello
@@ -27,9 +27,10 @@ var gridConfiguration = {
 };
 
 /**
- * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()
+ * Window On Click adjust the mouseClick to gridClick and calls resolveTurn().
  *
- * @param mouseClick
+ * @param
+ * mouseClick.
  */
 window.onclick = function(mouseClick){
 
@@ -71,17 +72,19 @@ window.onclick = function(mouseClick){
 
   if (isInsideBoard(gridClick) === true) {
     gridClick.toConsole();
-    // Call function to resolve the turn based on the gridClick.
+    // Call function to resolve the turn based on the gridClick
     // resolveTurn(gridClick);
   }
 };
 
 /**
- * Is Inside Board checks whether the click was in the board
+ * Is Inside Board checks whether the click was in the board.
  *
- * @param gridClick
+ * @param
+ * gridClick represents where the user clicked in the grid.
  *
- * @return insideBoard
+ * @return
+ * insideBoard.
  */
 function isInsideBoard(gridClick) {
   var insideBoard = false;

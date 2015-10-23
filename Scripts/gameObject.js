@@ -1,14 +1,14 @@
 /**
  * gameObject.js
  *
- * @function
- * GameObject (constructor) creates a GameObject object
- * drawItself add its image to the context
- * move changes the coordinate (x,y)
- * scale changes the object scale (width, height)
- *
  * @var
- * GameObject responsible for handling all the objects in the game
+ * GameObject responsible for handling all the objects in the game.
+ *
+ * @function
+ * GameObject (constructor) creates a GameObject object.
+ * drawItself add its image to the context.
+ * move changes the coordinate (x,y).
+ * scale changes the object scale (width, height).
  *
  * @author
  * Mateus M. F. Mendonça
@@ -19,9 +19,9 @@
  * The constructor to create a GameObject
  *
  * @param
- * Sprite as defined in Atlas.js
- * positionCoordinates (x,y)
- * scale (width, height)
+ * Sprite as defined in Atlas.js.
+ * positionCoordinates (x,y).
+ * scale (width, height).
  */
 var GameObject = function (sprite, positionCoordinates, scale) {
 	this._sprite = {};
@@ -38,11 +38,11 @@ var GameObject = function (sprite, positionCoordinates, scale) {
 };
 
 /**
- * Draws itself given a context to draw on, and an atlasImage (the source)
+ * Draws itself given a context to draw on, and an atlasImage (the source).
  *
  * @param
- * context to draw on
- * atlasImage to crop the sprite from
+ * context to draw on.
+ * atlasImage to crop the sprite from.
  */
 GameObject.prototype.drawItself = function(context, atlasImage) {
 	context.drawImage(atlasImage,
@@ -57,20 +57,20 @@ GameObject.prototype.drawItself = function(context, atlasImage) {
 }
 
 /**
- * Moves a GameObject
+ * Moves a GameObject.
  *
  * @param
- * positionCoordinates (x,y)
+ * positionCoordinates (x,y).
  */
 GameObject.prototype.move = function(positionCoordinates) {
 	this._sprite.positionCoordinates = positionCoordinates;
 }
 
 /**
- * Scale a GameObject
+ * Scale a GameObject.
  *
  * @param
- * scale (width, height)
+ * scale (width, height).
  */
 GameObject.prototype.scale = function(scale) {
 	this._sprite.scale = scale;

@@ -1,3 +1,16 @@
+/**
+ * event.js
+ *
+ * @var
+ * canvas that will be used to create the sprites.
+ * context that will be set for the canvas.
+ * offsetWidth and offsetHeight are the limits off the board
+ * setup responsible to initialize the game
+ *
+ * @function
+ * setup (constructor) responsible to initialize the game.
+ */
+
 var canvas       = null,
 		context      = null,
 		offsetWidth  = 20,

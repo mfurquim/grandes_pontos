@@ -2,18 +2,14 @@
  * boardGame.js
  *
  * @function
- * generateBoard creates Discs and Pawn objects
- * drawBoard draws all objects in the board game (Discs and Pawns)
+ * generateBoard creates Discs and Pawn objects.
+ * drawBoard draws all objects in the board game (Discs and Pawns).
  * generatePawns creates one Pawn object of each color,
- * and poised them in the board
- * generateDiscs creates discs object (5 for each color + 5 white and black)
- * and poised them in the board
- * fetchPawn receives a color and returns its sprite
- * fetchDisc receives a color and returns its sprite
- *
- * @var
- *
- *
+ * and poised them in the board.
+ * generateDiscs creates discs object (5 for each color + 5 white and black).
+ * and poised them in the board.
+ * fetchPawn receives a color and returns its sprite.
+ * fetchDisc receives a color and returns its sprite.
  */
 
 

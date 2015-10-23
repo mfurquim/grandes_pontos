@@ -4,18 +4,18 @@
  * The ATLAS module loads an atlas sheet into an array
  * of objects called sprites, based on a JSON file.
  *
- * @function
- * loadJSON receives a JSON path and loads it
- * loadingAssets loads the Atlas image and calls the load function
- * storeSprite parses the JSON file and call defSprite
- * drawSprite draws any sprite upon request
- * defSprite stores all the nedded information about images into sprites
- *
  * @var
  * atlasAsset is an Object which contains an Atlas sheet with all images.
- * sprites is an Array which contains useful information to draw and image
- * url is a String which contains the path to the image Atlas
- * sprite is an Object which contains its name, coordinates and dimension
+ * sprites is an Array which contains useful information to draw and image.
+ * url is a String which contains the path to the image Atlas.
+ * sprite is an Object which contains its name, coordinates and dimension.
+ *
+ * @function
+ * loadJSON receives a JSON path and loads it.
+ * loadingAssets loads the Atlas image and calls the load function.
+ * storeSprite parses the JSON file and call defSprite.
+ * drawSprite draws any sprite upon request.
+ * defSprite stores all the nedded information about images into sprites.
  */
 
 var ATLAS = (function() {
@@ -78,9 +78,9 @@ var ATLAS = (function() {
    *
    * @param
    * name is the name of the image.
-   * coordinate_x and coordinate_y are the starting coordinates
-   * width and heigh are the dimensions of the image
-   * center_x and center_y are the center coordiantes of the image
+   * coordinate_x and coordinate_y are the starting coordinates.
+   * width and heigh are the dimensions of the image.
+   * center_x and center_y are the center coordiantes of the image.
    */
   var defSprite = function(name, coordinate_x, coordinate_y,
     width, height, center_x, center_y) {
@@ -98,7 +98,7 @@ var ATLAS = (function() {
    * It returns the sprite upon succes, or null otherwise.
    *
    * @param
-   * name is the name of the sprite that'll be seached
+   * name is the name of the sprite that'll be seached.
    */
   var searchSprite = function(name) {
     // console.log(sprites);
@@ -141,8 +141,8 @@ var ATLAS = (function() {
      * It returns 1 if it could not find the sprite to draw.
      *
      * @param
-     * name stands for the name of the sprite to draw
-     * destination_x and destination_y are for the drawing coordinates
+     * name stands for the name of the sprite to draw.
+     * destination_x and destination_y are for the drawing coordinates.
      */
     drawSprite: function(name, destination_x, destination_y) {
       try {
