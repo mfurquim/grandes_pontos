@@ -1,0 +1,426 @@
+\documentclass[12pt,openright,a4paper,conference,onecolumn,twoside,english,french,spanish]{IEEEtran}
+
+\usepackage{shaded}
+\usepackage{multirow}
+\usepackage{cmap}	
+\usepackage{lmodern}	
+\usepackage[T1]{fontenc}	
+\usepackage[utf8]{inputenc}		
+\usepackage{lastpage}		
+%\usepackage{indentfirst}
+\usepackage{color}	
+\usepackage{graphicx}	
+\usepackage{units}
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf]{abntex2cite}
+\usepackage{bold-extra}
+\usepackage{eso-pic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amssymb, amsmath, pxfonts} %permite simbolos matemáticos
+\usepackage{mathrsfs} %permite uso de fontes para conjuntos
+\usepackage[normalem]{ulem} %permite sublinhar palavras
+\usepackage{mathrsfs} %permite o uso de letras trabalhadas
+\usepackage[top=3cm,left=3cm,right=2cm,bottom=3cm]{geometry} %margens
+\usepackage{graphicx} %permite inserir figuras
+
+\begin{document}
+
+Universidade de Brasília -- Faculdade UnB Gama\\Disciplina: Técnicas de
+Programação\\Professor: Maurício Serrano\\Período: 2º/2015\\Data de
+entrega: 24 de Agosto de 2015\\Atualizado dia: 19 de Outubro de
+2015\\Estudantes:
+
+\textbf{11/0014863} - \emph{Kleber B. Moreira}\\\textbf{11/0017561} -
+\emph{Mateus M. F. Mendonça}\\\textbf{11/0017692} - \emph{Matheus M.
+Nascimento}\\\textbf{11/0064879} - \emph{Nicolas Boarin}
+
+\section{Stylesheet - Grandes Pontos}\label{stylesheet---grandes-pontos}
+
+\subsection{1. Comments}\label{comments}
+
+Comments must obey the following pattern:
+
+1.a) One-line comments must be written using a double slash `//' before
+the comment, followed by a space ` ` and a capital letter. Do not finish
+it with a period;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// For each disc in discs, draw itself}
+\end{Highlighting}
+\end{Shaded}
+
+1.b) Comments in blocks must be written between the `/*' and `*/'. For
+each new line, there must have an asterisk aligned with the previous
+one;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{/**}
+\CommentTok{ * For each pawn, fetch its sprite and push the object into the array.}
+\CommentTok{ * Its y coordinate is changed to be drawn on top of the previous one.}
+\CommentTok{ */}
+\end{Highlighting}
+\end{Shaded}
+
+1.c) Comments which precede methods must be written in blocks explaining
+its use and its return:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{/**}
+\CommentTok{ * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()}
+\CommentTok{ * }\KeywordTok{@param}\CommentTok{ }\KeywordTok{mouseClick}
+\CommentTok{ */}
+\OtherTok{window}\NormalTok{.}\FunctionTok{onclick} \NormalTok{= }\KeywordTok{function}\NormalTok{(mouseClick)\{}
+
+  \CommentTok{// Object mouse containing the coordinate (x,y) of the event}
+  \KeywordTok{var} \NormalTok{mousePosition = \{}
+    \DataTypeTok{x}\NormalTok{: }\OtherTok{mouseClick}\NormalTok{.}\FunctionTok{pageX}\NormalTok{,}
+    \DataTypeTok{y}\NormalTok{: }\OtherTok{mouseClick}\NormalTok{.}\FunctionTok{pageY}
+  \NormalTok{\};}
+  \CommentTok{//----}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+1.d) Comments explaining one line of the code must precede the line;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Create and Seal object to prevent properties addition}
+\KeywordTok{var} \NormalTok{discObject = }\KeywordTok{new} \FunctionTok{GameObject}\NormalTok{(discSprite, positionCoordinates, scale);}
+\OtherTok{Object}\NormalTok{.}\FunctionTok{seal}\NormalTok{(discObject);}
+\end{Highlighting}
+\end{Shaded}
+
+1.e) Comments exceeding 80 characters must be broken into multiple lines
+following the block pattern;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{/**}
+\CommentTok{ * For each pawn, fetch its sprite and push the object into the array.}
+\CommentTok{ * Its y coordinate is changed to be drawn on top of the previous one.}
+\CommentTok{ */}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{2. Types and Names}\label{types-and-names}
+
+2.a) Names of Classes, Attributes, and Methods must follow the CamelCase
+pattern, which consists in capitalizing the initial letters of each
+word.
+
+2.b) Classes names initiates with capital case.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{var} \NormalTok{pawnObject = }\KeywordTok{new} \FunctionTok{GameObject}\NormalTok{(sprite, positionCoordinates, scale);}
+\end{Highlighting}
+\end{Shaded}
+
+2.c) Attributes names initiates with lower case.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{var} \NormalTok{isValid = }\KeywordTok{false}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+2.d) Methods names initiates with lower case.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{GameObject}\NormalTok{.}\OtherTok{prototype}\NormalTok{.}\FunctionTok{move} \NormalTok{= }\KeywordTok{function}\NormalTok{(positionCoordinates) \{}
+    \KeywordTok{this}\NormalTok{.}\OtherTok{_sprite}\NormalTok{.}\FunctionTok{positionCoordinates} \NormalTok{= positionCoordinates;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+2.e) Constants names must be capitalized and use underscore between
+names.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Number of discs' colors}
+\KeywordTok{const} \NormalTok{NUMBER_DISC_COLORS = }\DecValTok{7}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+2.f) Only one variable must be declared per line.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{var} \NormalTok{canvas          = }\KeywordTok{null}\NormalTok{,}
+    \NormalTok{context         = }\KeywordTok{null}\NormalTok{,}
+    \NormalTok{offsetWidth     = }\DecValTok{20}\NormalTok{,}
+    \NormalTok{offsetHeight    = }\DecValTok{20}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{3. Strings}\label{strings}
+
+3.a) Strings must be written between double quotes `"';
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{const} \NormalTok{GREEN_DISC_NAME = }\StringTok{"Multi/disc_green.png"}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{4. Indentation}\label{indentation}
+
+4.a) The indentation must be written by two (2) spaces or an equivalent
+tab.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{function} \FunctionTok{validateDisc}\NormalTok{(discCount, discColor) \{}
+
+\NormalTok{--}\KeywordTok{var} \NormalTok{isValid = }\KeywordTok{false}\NormalTok{;}
+
+\NormalTok{--}\CommentTok{// Discs white and black are considered special discs}
+\NormalTok{--}\KeywordTok{if} \NormalTok{(discColor === WHITE || discColor === BLACK) \{}
+\NormalTok{----isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT)}
+\NormalTok{--\} }\KeywordTok{else} \NormalTok{\{}
+\NormalTok{----isValid = (discCount[discColor] < DISC_LIMIT)}
+\NormalTok{--\}}
+
+\NormalTok{--}\KeywordTok{return} \NormalTok{isValid;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{5. Braces}\label{braces}
+
+5.a) Opening braces must be used on the same line of the block
+structure, after an empty space;
+
+5.b) Closing braces must be written aligned with the statement which
+opened the block;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{function} \FunctionTok{validateDisc}\NormalTok{(discCount, discColor) \{}
+\NormalTok{|}
+\NormalTok{| }\KeywordTok{var} \NormalTok{isValid = }\KeywordTok{false}\NormalTok{;}
+\NormalTok{|}
+\NormalTok{| }\CommentTok{// Discs white and black are considered special discs}
+\NormalTok{| }\KeywordTok{if} \NormalTok{(discColor === WHITE || discColor === BLACK) \{}
+\NormalTok{| | isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT)}
+\NormalTok{| \} }\KeywordTok{else} \NormalTok{\{}
+\NormalTok{| | isValid = (discCount[discColor] < DISC_LIMIT)}
+\NormalTok{| \}}
+\NormalTok{|}
+\NormalTok{| }\KeywordTok{return} \NormalTok{isValid;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{6. Classes}\label{classes}
+
+Classes must be according to the following model:
+
+6.a) There must have a blak line after the class signature.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{/**}
+\CommentTok{ * The constructor to create a GameObject}
+\CommentTok{ *}
+\CommentTok{ * }\KeywordTok{@param}
+\CommentTok{ * Sprite as defined in Atlas.js}
+\CommentTok{ * positionCoordinates (x,y)}
+\CommentTok{ * scale (width, height)}
+\CommentTok{ */}
+\KeywordTok{var} \NormalTok{GameObject = }\KeywordTok{function} \NormalTok{(sprite, positionCoordinates, scale) \{}
+    \KeywordTok{this}\NormalTok{.}\FunctionTok{_sprite} \NormalTok{= \{\};}
+    \KeywordTok{try} \NormalTok{\{}
+        \KeywordTok{this}\NormalTok{.}\OtherTok{_sprite}\NormalTok{.}\FunctionTok{name} \NormalTok{= }\OtherTok{sprite}\NormalTok{.}\FunctionTok{name}\NormalTok{;}
+        \KeywordTok{this}\NormalTok{.}\OtherTok{_sprite}\NormalTok{.}\FunctionTok{sourceCoordinates} \NormalTok{= }\OtherTok{sprite}\NormalTok{.}\FunctionTok{sourceCoordinates}\NormalTok{;}
+        \KeywordTok{this}\NormalTok{.}\OtherTok{_sprite}\NormalTok{.}\FunctionTok{dimensions} \NormalTok{= }\OtherTok{sprite}\NormalTok{.}\FunctionTok{dimensions}\NormalTok{;}
+        \KeywordTok{this}\NormalTok{.}\OtherTok{_sprite}\NormalTok{.}\FunctionTok{positionCoordinates} \NormalTok{= positionCoordinates;}
+        \KeywordTok{this}\NormalTok{.}\OtherTok{_sprite}\NormalTok{.}\FunctionTok{scale} \NormalTok{= scale;}
+    \NormalTok{\}}
+    \KeywordTok{catch} \NormalTok{(errorSprite) \{}
+        \FunctionTok{alert}\NormalTok{(errorSprite);}
+    \NormalTok{\}}
+\NormalTok{\};}
+\end{Highlighting}
+\end{Shaded}
+
+6.b) Prototypes must be used as inheritance:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{function} \FunctionTok{Person}\NormalTok{( name ) \{}
+  \KeywordTok{var} \NormalTok{name = name;}
+\NormalTok{\}}
+
+\OtherTok{PhysicalPerson}\NormalTok{.}\FunctionTok{prototype} \NormalTok{= }\KeywordTok{new} \FunctionTok{Person}\NormalTok{();}
+
+\KeywordTok{var} \NormalTok{physicalPerson = }\KeywordTok{new} \FunctionTok{PhysicalPerson}\NormalTok{( }\StringTok{"Nome da Pessoa"} \NormalTok{);}
+\OtherTok{console}\NormalTok{.}\FunctionTok{log}\NormalTok{( }\OtherTok{physicalPerson}\NormalTok{.}\FunctionTok{name} \NormalTok{); }\CommentTok{// Nome da Pessoa}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{7. Control Structure:
+\texttt{if}}\label{control-structure-if}
+
+7.a) There must have a blank space immediately after the keyword if.
+
+7.b) There must have a blank space between the parentheses and the
+\texttt{if} condition.
+
+7.c) The comparison operators must have a blank space immediately before
+and after.
+
+7.d) If the line exceeds 80 characters, it must be broken into multiple
+lines and the condition must be aligned with the previous one.
+
+7.e) The body must be written between braces, even when it is a single
+line.
+
+7.f) Blocks of \texttt{Else if} or \texttt{else} must be initiated on
+the same line of the closing braces.
+
+7.g) There must have an \texttt{else} block after all \texttt{if} or
+\texttt{else if} block.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{/**}
+\CommentTok{ * Is Inside Board checks whether the click was in the board}
+\CommentTok{ * }\KeywordTok{@param}\CommentTok{ }\KeywordTok{gridClick}
+\CommentTok{ * }\KeywordTok{@return}\CommentTok{ insideBoard}
+\CommentTok{ */}
+\KeywordTok{function} \FunctionTok{isInsideBoard}\NormalTok{(gridClick) \{}
+  \KeywordTok{var} \NormalTok{insideBoard = }\KeywordTok{false}\NormalTok{;}
+
+  \KeywordTok{if} \NormalTok{(}\OtherTok{gridClick}\NormalTok{.}\FunctionTok{x} \NormalTok{< }\OtherTok{gridConfiguration}\NormalTok{.}\FunctionTok{rows} \NormalTok{&&}
+      \OtherTok{gridClick}\NormalTok{.}\FunctionTok{y} \NormalTok{< }\OtherTok{gridConfiguration}\NormalTok{.}\FunctionTok{cols} \NormalTok{&&}
+      \OtherTok{gridClick}\NormalTok{.}\FunctionTok{x} \NormalTok{>= }\DecValTok{0} \NormalTok{&&}
+      \OtherTok{gridClick}\NormalTok{.}\FunctionTok{y} \NormalTok{>= }\DecValTok{0}\NormalTok{) \{}
+    \NormalTok{insideBoard = }\KeywordTok{true}\NormalTok{;}
+  \NormalTok{\}}
+  \KeywordTok{else} \NormalTok{\{}
+    \NormalTok{insideBoard = }\KeywordTok{false}\NormalTok{;}
+  \NormalTok{\}}
+
+  \KeywordTok{return} \NormalTok{insideBoard;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{8. Control structure:
+\texttt{while}}\label{control-structure-while}
+
+8.a) \texttt{While} follows the \texttt{if} pattern:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{while} \NormalTok{( count < numElements ) \{}
+  \NormalTok{sumElements = sumElements + }\DecValTok{1}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{9. Control structure:
+\texttt{for}}\label{control-structure-for}
+
+9.a) The \texttt{for} structure follows the \texttt{if} pattern.
+
+9.b) Semicolon must be placed immediately after the assignment and the
+comparison, and an empty space after it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Fill the board with random discs along the x and y axis (rows and columns)}
+\KeywordTok{for} \NormalTok{(}\KeywordTok{var} \NormalTok{discX = }\DecValTok{0}\NormalTok{; discX < NUMBER_DISC_ROW; discX++) \{}
+  \KeywordTok{for} \NormalTok{(}\KeywordTok{var} \NormalTok{discY = }\DecValTok{0}\NormalTok{; discY < NUMBER_DISC_COL; discY++) \{}
+    \CommentTok{// ---}
+    \KeywordTok{var} \NormalTok{positionCoordinates = \{}
+        \DataTypeTok{x}\NormalTok{:((discX * }\OtherTok{DISC_DIMENSION}\NormalTok{.}\FunctionTok{HEIGHT}\NormalTok{) + }\OtherTok{BOADR_OFFSET}\NormalTok{.}\FunctionTok{X}\NormalTok{),}
+        \DataTypeTok{y}\NormalTok{:((discY * }\OtherTok{DISC_DIMENSION}\NormalTok{.}\FunctionTok{WIDTH}\NormalTok{) + }\OtherTok{BOADR_OFFSET}\NormalTok{.}\FunctionTok{Y}\NormalTok{)}
+    \NormalTok{\}}
+    \CommentTok{// ---}
+  \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{10. Control structure:
+\texttt{switch}}\label{control-structure-switch}
+
+a. Defaults and cases must not be indented;
+
+10.b) Case blocks and default blocks must be indented.
+
+10.c) \texttt{break} must be indented as well.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{function} \FunctionTok{fetchDisc}\NormalTok{(discColor) \{}
+  \KeywordTok{var} \NormalTok{discSpriteName = }\StringTok{""}\NormalTok{;}
+  \KeywordTok{switch} \NormalTok{(discColor) \{}
+    \KeywordTok{case} \DataTypeTok{GREEN}\NormalTok{:}
+      \NormalTok{discSpriteName = GREEN_DISC_NAME;}
+      \KeywordTok{break}\NormalTok{;}
+
+    \KeywordTok{case} \DataTypeTok{BLUE}\NormalTok{:}
+      \NormalTok{discSpriteName = BLUE_DISC_NAME;}
+      \KeywordTok{break}\NormalTok{;}
+
+    \KeywordTok{case} \DataTypeTok{RED}\NormalTok{:}
+      \NormalTok{discSpriteName = RED_DISC_NAME;}
+      \KeywordTok{break}\NormalTok{;}
+
+    \KeywordTok{case} \DataTypeTok{PURPLE}\NormalTok{:}
+      \NormalTok{discSpriteName = PURPLE_DISC_NAME;}
+      \KeywordTok{break}\NormalTok{;}
+
+    \KeywordTok{case} \DataTypeTok{YELLOW}\NormalTok{:}
+      \NormalTok{discSpriteName = YELLOW_DISC_NAME;}
+      \KeywordTok{break}\NormalTok{;}
+
+    \KeywordTok{case} \DataTypeTok{WHITE}\NormalTok{:}
+      \NormalTok{discSpriteName = WHITE_DISC_NAME;}
+      \KeywordTok{break}\NormalTok{;}
+
+    \KeywordTok{case} \DataTypeTok{BLACK}\NormalTok{:}
+      \NormalTok{discSpriteName = BLACK_DISC_NAME;}
+      \KeywordTok{break}\NormalTok{;}
+
+    \KeywordTok{default}\NormalTok{:}
+      \CommentTok{// Should never be reached. There are only seven Discs's colors.}
+  \NormalTok{\}}
+  \KeywordTok{var} \NormalTok{discSprite = }\OtherTok{ATLAS}\NormalTok{.}\FunctionTok{fetchSprite}\NormalTok{(discSpriteName);}
+  \KeywordTok{return} \NormalTok{discSprite;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{11. Treatment of Exceptions}\label{treatment-of-exceptions}
+
+11.a) The \texttt{try}, \texttt{catch}, and \texttt{finally} blocks
+should be on their own line, after each closing braces.
+
+\begin{verbatim}
+try {
+  this._sprite.name = sprite.name;
+  this._sprite.sourceCoordinates = sprite.sourceCoordinates;
+  this._sprite.dimensions = sprite.dimensions;
+  this._sprite.positionCoordinates = positionCoordinates;
+  this._sprite.scale = scale;
+}
+catch (errorSprite) {
+  alert(errorSprite);
+}
+\end{verbatim}
+
+\subsection{12. Coding language}\label{coding-language}
+
+The coding language for programming techniques applying is English.
+\end{document}
