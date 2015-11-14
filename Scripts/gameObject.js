@@ -9,6 +9,7 @@
  *
  * @author
  * Mateus M. F. Mendonça
+ * Matheus Mello Nascimento
  */
 
 
@@ -21,9 +22,9 @@
  * scale (width, height)
  *
  */
-var GameObject = function (sprite, positionCoordinates, scale) {
+var GameObject = function (sprite, positionCoordinates, color, scale) {
 	this._sprite = {};
-	
+
 	try {
 		this._sprite.name = sprite.name;
 		this._sprite.sourceCoordinates = sprite.sourceCoordinates;
@@ -34,6 +35,7 @@ var GameObject = function (sprite, positionCoordinates, scale) {
 	}
 
 	this._positionCoordinates = positionCoordinates;
+	this._color = color;
 	this._sprite.scale = scale;
 };
 
