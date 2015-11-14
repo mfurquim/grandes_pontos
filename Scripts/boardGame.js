@@ -74,7 +74,7 @@ const PAWN_INITIAL_COORDINATES = {
 	Y: (PAWN_DIMENSION.HEIGHT * (NUMBER_PAWNS - 1))
 };
 
-const BOADR_OFFSET = {X: 50, Y: 100};
+const BOARD_OFFSET = {X: 50, Y: 100};
 
 // Board object containing all the Discs and Panws
 var board = {};
@@ -129,9 +129,9 @@ function generatePawns() {
 	COLOR_PAWNS.forEach( function(item, index) {
 
 		var positionCoordinates = {
-			x:PAWN_INITIAL_COORDINATES.X + BOADR_OFFSET.X,
+			x:PAWN_INITIAL_COORDINATES.X + BOARD_OFFSET.X,
 			y:PAWN_INITIAL_COORDINATES.Y - (PAWN_DIMENSION.HEIGHT * index)
-				+ BOADR_OFFSET.Y
+				+ BOARD_OFFSET.Y
 		};
 
 		var sprite = fetchPawn(item);
@@ -181,8 +181,8 @@ function generateDiscs() {
 				discCount[discColor] += 1;
 
 				var positionCoordinates = {
-					x:((discX * DISC_DIMENSION.HEIGHT) + BOADR_OFFSET.X),
-					y:((discY * DISC_DIMENSION.WIDTH) + BOADR_OFFSET.Y)
+					x:((discX * DISC_DIMENSION.HEIGHT) + BOARD_OFFSET.X),
+					y:((discY * DISC_DIMENSION.WIDTH) + BOARD_OFFSET.Y)
 				};
 
 				var discSprite = fetchDisc(discColor);
