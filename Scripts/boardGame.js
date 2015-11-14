@@ -169,8 +169,11 @@ function generateDiscs() {
 	var discs = [];
 
 	// Fill the board with random discs along the x and y axis (rows and columns)
-	for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
-		for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
+
+		for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
+			for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
+
+
 
 			var discColor = Math.floor(Math.random()*(NUMBER_DISC_COLORS));
 
