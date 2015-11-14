@@ -142,7 +142,7 @@ function generatePawns() {
 		};
 
 		// Create and Seal object to prevent properties addition
-		var pawnObject = new GameObject(sprite, positionCoordinates, scale);
+		var pawnObject = new GameObject(sprite, positionCoordinates, item, scale);
 		Object.seal(pawnObject);
 		pawns.push(pawnObject);
 	});
@@ -193,7 +193,7 @@ function generateDiscs() {
 				};
 
 				// Create and Seal object to prevent properties addition
-				var discObject = new GameObject(discSprite, positionCoordinates, scale);
+				var discObject = new GameObject(discSprite, positionCoordinates, discColor, scale);
 				Object.seal(discObject);
 				discs.push(discObject);
 			}
