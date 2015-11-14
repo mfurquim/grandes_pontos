@@ -83,7 +83,24 @@ window.onmousemove = function(mouseMove){
 };
 
 function getClickedElement(gridClick) {
-  return gridClick;
+  for (var i = board.pawns.length-1; i >= 0; i--) {
+    //console.log(board.pawns[i]);
+    var currentPawn = board.pawns[i];
+
+    var pawnGrid = {
+      x : (currentPawn._positionCoordinates.x - gridConfiguration.offset.x) /
+      gridConfiguration.width,
+      y : (currentPawn._positionCoordinates.y - gridConfiguration.offset.y) /
+      gridConfiguration.height,
+    };
+
+    //console.log(pawnGrid);
+
+    if (gridClick.x == pawnGrid.x && gridClick.y == pawnGrid.y) {
+      //console.log(currentPawn._color);
+      nextPossibleMove(currentPawn);
+    }
+  }
 }
 
 window.onclick = function(mouseClick){

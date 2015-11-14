@@ -17,10 +17,12 @@
 
 function nextPossibleMove (hoveredPawn){
   //console.log(board.pawns[2].color);
-  pawnColor = hoveredPawn.color;
-  for (var i = board.discs.length; i >= 0; i--) {
-    if (board.discs[i].color == pawnColor) {
-      console.log(pawnColor," ### ", board.discs[i].color);
+  //console.log(hoveredPawn);
+  pawnColor = hoveredPawn._color;
+
+  for (var i = board.discs.length-1; i >= 0; i--) {
+    if (board.discs[i]._color == pawnColor) {
+      console.log(pawnColor," ### ", board.discs[i]._color);
       break;
     }
   }
