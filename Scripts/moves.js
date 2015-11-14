@@ -23,7 +23,14 @@ function nextPossibleMove (hoveredPawn){
   for (var i = board.discs.length-1; i >= 0; i--) {
     if (board.discs[i]._color == pawnColor) {
       //console.log(pawnColor," ### ", board.discs[i]._color);
-      
+
+      var nextCoordinate = {
+        x : board.discs[i]._positionCoordinates.x,
+        y : board.discs[i]._positionCoordinates.y
+      };
+
+/** Draw Function **/
+
       break;
     }
   }
