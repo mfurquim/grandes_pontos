@@ -132,14 +132,14 @@ function generatePawns() {
 			x:PAWN_INITIAL_COORDINATES.X + BOADR_OFFSET.X,
 			y:PAWN_INITIAL_COORDINATES.Y - (PAWN_DIMENSION.HEIGHT * index)
 				+ BOADR_OFFSET.Y
-		}
+		};
 
 		var sprite = fetchPawn(item);
 
 		var scale = {
 			width: 0.8,
 			height: 0.8
-		}
+		};
 
 		// Create and Seal object to prevent properties addition
 		var pawnObject = new GameObject(sprite, positionCoordinates, scale);
@@ -183,14 +183,14 @@ function generateDiscs() {
 				var positionCoordinates = {
 					x:((discX * DISC_DIMENSION.HEIGHT) + BOADR_OFFSET.X),
 					y:((discY * DISC_DIMENSION.WIDTH) + BOADR_OFFSET.Y)
-				}
+				};
 
 				var discSprite = fetchDisc(discColor);
 
 				var scale = {
 					width: 1,
 					height: 1
-				}
+				};
 
 				// Create and Seal object to prevent properties addition
 				var discObject = new GameObject(discSprite, positionCoordinates, scale);
@@ -296,9 +296,9 @@ function validateDisc(discCount, discColor) {
 
 	// Discs white and black are considered special discs
 	if (discColor === WHITE || discColor === BLACK) {
-		isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT)
+		isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT);
 	} else {
-		isValid = (discCount[discColor] < DISC_LIMIT)
+		isValid = (discCount[discColor] < DISC_LIMIT);
 	}
 
 	return isValid;
