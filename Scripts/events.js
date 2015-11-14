@@ -93,14 +93,20 @@ function getClickedElement(gridClick) {
       y : (currentPawn._positionCoordinates.y - gridConfiguration.offset.y) /
       gridConfiguration.height,
     };
-
-    //console.log(pawnGrid);
+    if (DEBUG_ON === true) {
+    console.log(pawnGrid);
+  }
 
     if (gridClick.x == pawnGrid.x && gridClick.y == pawnGrid.y) {
-      //console.log(currentPawn._color);
+      if (DEBUG_ON === true) {
+      console.log(currentPawn._color);
+    }
       nextPossibleMove(currentPawn);
     }
   }
+  // Call function to resolve the turn based on the gridClick.
+  resolveTurn(gridClick);
+  drawBoard(context);
 }
 
 window.onclick = function(mouseClick){
