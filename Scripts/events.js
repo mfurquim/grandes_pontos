@@ -18,8 +18,8 @@ var gridConfiguration = {
   width: DISC_DIMENSION.WIDTH,
   height: DISC_DIMENSION.HEIGHT,
   offset: {
-    x: BOADR_OFFSET.X,
-    y: BOADR_OFFSET.Y
+    x: BOARD_OFFSET.X,
+    y: BOARD_OFFSET.Y
   }
 };
 
@@ -77,7 +77,7 @@ window.onclick = function(mouseClick){
     }
   };
 
-  mousePosition.toConsole()
+  mousePosition.toConsole();
 
   // Object gridClick containing the grid cell (x,y) of the click
   var gridClick = {
@@ -87,7 +87,7 @@ window.onclick = function(mouseClick){
     y: Math.floor(
       (mousePosition.y - gridConfiguration.offset.y)/
       gridConfiguration.height)
-  }
+  };
 
   // A debug function to print the grid coordinates on the console
   gridClick.toConsole = function () {
