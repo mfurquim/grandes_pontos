@@ -60,6 +60,10 @@ function doKeyDown(event) {
  * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()
  * @param mouseClick
  */
+window.onmouseover = function(){
+  
+};
+
 window.onclick = function(mouseClick){
 
   // Object mouse containing the coordinate (x,y) of the event
