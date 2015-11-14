@@ -60,9 +60,31 @@ function doKeyDown(event) {
  * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()
  * @param mouseClick
  */
-window.onmouseover = function(){
-  
+window.onmousemove = function(mouseMove){
+
+  var mousePosition = {
+    x: mouseMove.pageX,
+    y: mouseMove.pageY
+  };
+
+  var gridClick = {
+    x: Math.floor(
+      (mousePosition.x - gridConfiguration.offset.x)/
+      gridConfiguration.width),
+    y: Math.floor(
+      (mousePosition.y - gridConfiguration.offset.y)/
+      gridConfiguration.height)
+  };
+
+  if (isInsideBoard(gridClick) === true) {
+    console.log(getClickedElement(gridClick));
+  }
+
 };
+
+function getClickedElement(gridClick) {
+  return gridClick;
+}
 
 window.onclick = function(mouseClick){
 
@@ -71,6 +93,7 @@ window.onclick = function(mouseClick){
     x: mouseClick.pageX,
     y: mouseClick.pageY
   };
+
 
   // A debug function to print the mouse coordinates on the console
   mousePosition.toConsole = function () {
@@ -118,7 +141,7 @@ window.onclick = function(mouseClick){
 function isInsideBoard(gridClick) {
   var insideBoard = false;
 
-  if (gridClick.x < gridConfiguration.rows &&
+  if (gridClick.x < gridConfiguration.rows+1 &&
       gridClick.y < gridConfiguration.cols &&
       gridClick.x >= 0 &&
       gridClick.y >= 0) {
