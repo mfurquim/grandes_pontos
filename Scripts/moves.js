@@ -52,13 +52,13 @@ function nextPossibleMove (hoveredPawn){
     }
 
 
-
+    //console.log(board.discs[i]);
     board.discs[i].changeName("Bordered","disc",color);
 
 
 
-      break;
+      return board.discs[i];
     }
   }
-  
+
 }

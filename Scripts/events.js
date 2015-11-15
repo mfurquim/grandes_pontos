@@ -62,6 +62,8 @@ function doKeyDown(event) {
  */
 window.onmousemove = function(mouseMove){
 
+
+
   var mousePosition = {
     x: mouseMove.pageX,
     y: mouseMove.pageY
@@ -77,12 +79,16 @@ window.onmousemove = function(mouseMove){
   };
 
   if (isInsideBoard(gridClick) === true) {
-    console.log(getClickedElement(gridClick));
+    getClickedElement(gridClick);
   }
 
 };
 
 function getClickedElement(gridClick) {
+
+  var nextMove = 10;
+  var color = 10;
+
   for (var i = board.pawns.length-1; i >= 0; i--) {
     //console.log(board.pawns[i]);
     var currentPawn = board.pawns[i];
@@ -99,9 +105,34 @@ function getClickedElement(gridClick) {
 
     if (gridClick.x == pawnGrid.x && gridClick.y == pawnGrid.y) {
       if (DEBUG_ON === true) {
-      console.log(currentPawn._color);
+      //console.log(currentPawn._color);
     }
-      nextPossibleMove(currentPawn);
+      nextMove = nextPossibleMove(currentPawn);
+    }
+    else {
+      switch (nextMove._color) {
+        case 0: color = "green";
+        break;
+        case 1: color = "blue";
+        break;
+        case 2: color = "red";
+        break;
+        case 3: color = "purple";
+        break;
+        case 4: color = "yellow";
+        break;
+        case 5: color = "white";
+        break;
+        case 6: color = "black";
+        break;
+      }
+      //console.log(color);
+
+      if (nextMove !== null && typeof nextMove === 'object') {
+      //  console.log(nextMove);
+        nextMove.changeName("Multi","disc",color);
+      }
+
     }
   }
   // Call function to resolve the turn based on the gridClick.
