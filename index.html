@@ -13,20 +13,23 @@
 <link rel="stylesheet" href="stylesheets/styles.css">
 
 </head>
+<div id="container">
+  <div id="splashScreen">
+    <h1>Big Points</h1>
+    <input id="startButton" type="button" value="Start Game"/>
+  </div>
 
-<div id="SplashScreen">
-<h1>Big Points</h1>
-<input id="StartButton" type="button" value="Start Game"/>
+  <canvas id="myCanvas" style="display: none;">
+    This text is displayed if your browser does not support HTML5 Canvas.
+    <!-- <menu id="controls">
+    </menu> -->
+  </canvas>
 </div>
-
-<canvas id="myCanvas" style="display: none;">
-  This text is displayed if your browser does not support HTML5 Canvas.
-  <menu id="controls">
-  </menu>
-</canvas>
 <script>
-    $("#StartButton").click(function () {
-        $("#SplashScreen").hide();
+    $("#startButton").click(function () {
+        // $("#splashScreen").hide();
+
+        $('#splashScreen').fadeOut('slow');
         $("#myCanvas").show();
     });
 </script>
