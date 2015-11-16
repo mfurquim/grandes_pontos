@@ -17,10 +17,11 @@ function nextPossibleMove (hoveredPawn){
   //console.log(hoveredPawn);
   pawnColor = hoveredPawn._color;
 
-  for (var j = NUMBER_DISC_COL; j >= 0; j--) {
-    for (var i = NUMBER_DISC_ROW; i >= 0; i--) {
-      console.log("(" + String(i) + "," + String(j) + ")");
-      currentDisc = board.discs[(i*j)-1];
+  for (var j = NUMBER_DISC_COL; j > 0; j--) {
+    for (var i = NUMBER_DISC_ROW; i > 0; i--) {
+      var num = ((i-1)*5)+(j-1);
+      console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
+      currentDisc = board.discs[num];
       if (currentDisc._color == pawnColor) {
         var nextCoordinate = {
           x : currentDisc._positionCoordinates.x,
