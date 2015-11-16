@@ -19,6 +19,7 @@ function nextPossibleMove (hoveredPawn){
 
   for (var j = NUMBER_DISC_COL; j >= 0; j--) {
     for (var i = NUMBER_DISC_ROW; i >= 0; i--) {
+      console.log("(" + String(i) + "," + String(j) + ")");
       currentDisc = board.discs[(i*j)-1];
       if (currentDisc._color == pawnColor) {
         var nextCoordinate = {
