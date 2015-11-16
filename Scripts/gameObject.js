@@ -86,7 +86,9 @@ GameObject.prototype.scale = function(scale) {
  */
 GameObject.prototype.changeName = function(border, type, color) {
 	var newName = this.makeName(border, type, color);
-	console.log(newName);
+	if (DEBUG_ON) {
+		console.log(newName);
+	}
 	var newSprite = ATLAS.fetchSprite(newName);
 	try {
 		this._sprite.name = newSprite.name;
