@@ -65,6 +65,7 @@ var ATLAS = (function() {
           sprite.frame.h, center_x, center_y);
       }
     });
+    console.log("Assets Loaded!");
   };
 
   /**
