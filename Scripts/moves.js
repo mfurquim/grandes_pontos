@@ -56,3 +56,37 @@ function nextPossibleMove (hoveredPawn){
     }
   }
 }
+
+function next (hoveredPawn){
+  //console.log(board.pawns[2].color);
+  //console.log(hoveredPawn);
+  pawnColor = hoveredPawn._color;
+
+  for (var j = NUMBER_DISC_COL; j > 0; j--) {
+    for (var i = NUMBER_DISC_ROW; i > 0; i--) {
+      var num = ((i-1)*5)+(j-1);
+      console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
+      currentDisc = board.discs[num];
+      if (currentDisc._color == pawnColor) {
+        var nextCoordinate = {
+          x : currentDisc._positionCoordinates.x,
+          y : currentDisc._positionCoordinates.y
+        };
+
+
+
+
+
+      console.log("##################",hoveredPawn);
+      console.log(">>>>",nextCoordinate);
+      hoveredPawn._positionCoordinates = nextCoordinate;
+      currentDisc._positionCoordinates = [50,50];
+      currentDisc._color = 10;
+      // hoveredPawn.move(nextCoordinate);
+
+
+        return currentDisc;
+      }
+    }
+  }
+}
