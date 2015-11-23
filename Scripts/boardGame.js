@@ -74,7 +74,7 @@ const PAWN_INITIAL_COORDINATES = {
 	Y: (PAWN_DIMENSION.HEIGHT * (NUMBER_PAWNS - 1))
 };
 
-const BOADR_OFFSET = {X: 50, Y: 100}
+const BOARD_OFFSET = {X: 50, Y: 100};
 
 // Board object containing all the Discs and Panws
 var board = {};
@@ -129,20 +129,20 @@ function generatePawns() {
 	COLOR_PAWNS.forEach( function(item, index) {
 
 		var positionCoordinates = {
-			x:PAWN_INITIAL_COORDINATES.X + BOADR_OFFSET.X,
+			x:PAWN_INITIAL_COORDINATES.X + BOARD_OFFSET.X,
 			y:PAWN_INITIAL_COORDINATES.Y - (PAWN_DIMENSION.HEIGHT * index)
-				+ BOADR_OFFSET.Y
-		}
+				+ BOARD_OFFSET.Y
+		};
 
 		var sprite = fetchPawn(item);
 
 		var scale = {
 			width: 0.8,
 			height: 0.8
-		}
+		};
 
 		// Create and Seal object to prevent properties addition
-		var pawnObject = new GameObject(sprite, positionCoordinates, scale);
+		var pawnObject = new GameObject(sprite, positionCoordinates, item, scale);
 		Object.seal(pawnObject);
 		pawns.push(pawnObject);
 	});
@@ -169,8 +169,11 @@ function generateDiscs() {
 	var discs = [];
 
 	// Fill the board with random discs along the x and y axis (rows and columns)
-	for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
-		for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
+
+		for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
+			for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
+
+
 
 			var discColor = Math.floor(Math.random()*(NUMBER_DISC_COLORS));
 
@@ -181,19 +184,19 @@ function generateDiscs() {
 				discCount[discColor] += 1;
 
 				var positionCoordinates = {
-					x:((discX * DISC_DIMENSION.HEIGHT) + BOADR_OFFSET.X),
-					y:((discY * DISC_DIMENSION.WIDTH) + BOADR_OFFSET.Y)
-				}
+					x:((discX * DISC_DIMENSION.HEIGHT) + BOARD_OFFSET.X),
+					y:((discY * DISC_DIMENSION.WIDTH) + BOARD_OFFSET.Y)
+				};
 
 				var discSprite = fetchDisc(discColor);
 
 				var scale = {
 					width: 1,
 					height: 1
-				}
+				};
 
 				// Create and Seal object to prevent properties addition
-				var discObject = new GameObject(discSprite, positionCoordinates, scale);
+				var discObject = new GameObject(discSprite, positionCoordinates, discColor, scale);
 				Object.seal(discObject);
 				discs.push(discObject);
 			}
@@ -296,9 +299,9 @@ function validateDisc(discCount, discColor) {
 
 	// Discs white and black are considered special discs
 	if (discColor === WHITE || discColor === BLACK) {
-		isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT)
+		isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT);
 	} else {
-		isValid = (discCount[discColor] < DISC_LIMIT)
+		isValid = (discCount[discColor] < DISC_LIMIT);
 	}
 
 	return isValid;

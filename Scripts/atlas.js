@@ -52,7 +52,7 @@ var ATLAS = (function() {
    */
   var storeSprite = function() {
 
-    loadJSON("./Assets/Assets-non-idented.json", function(load_json) {
+    loadJSON("./Assets/Assets.json", function(load_json) {
 
       var parsed = JSON.parse(load_json);
       for(var key in parsed.frames) {

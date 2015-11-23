@@ -16,7 +16,7 @@ var setup = function() {
 
 	// It needs to wait a little for the sprites to be loaded
 	window.setTimeout(generateBoard, 100);
-	window.setTimeout(drawBoard, 150, context);
+	window.setTimeout(drawBoard, 200, context);
 };
 
 setup();

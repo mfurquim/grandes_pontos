@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="Scripts/game.js" defer></script>
-<script src="Scripts/atlas.js" defer></script>
-<script src="Scripts/boardGame.js" defer></script>
-<script src="Scripts/gameObject.js" defer></script>
-<script src="Scripts/events.js" defer></script>
-<script src="Scripts/main.js" defer></script>
+<script src="jquery-1.11.3.js"></script>
+
 <link rel="stylesheet" href="stylesheets/styles.css">
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 <title>Grandes Pontos</title>
 <link rel="stylesheet" href="stylesheets/styles.css">
+
 </head>
-<canvas id="myCanvas">
-  This text is displayed if your browser does not support HTML5 Canvas.
-  <menu id="controls">
-  </menu>
-</canvas>
+<div id="container">
+  <div id="splashScreen">
+    <h1>Big Points</h1>
+    <input id="startButton" type="button" value="Start Game"/>
+  </div>
+
+  <canvas id="myCanvas" style="display: none;">
+    This text is displayed if your browser does not support HTML5 Canvas.
+    <!-- <menu id="controls">
+    </menu> -->
+  </canvas>
+</div>
+<script>
+    $("#startButton").click(function () {
+        // $("#splashScreen").hide();
+
+        $('#splashScreen').fadeOut('slow');
+        $("#myCanvas").show();
+        // $generateBoard();
+    });
+</script>
 <div id="controls">
 </div>
+<script src="Scripts/game.js" defer></script>
+<script src="Scripts/atlas.js" defer></script>
+<script src="Scripts/boardGame.js" defer></script>
+<script src="Scripts/player.js" defer></script>
+<script src="Scripts/gameObject.js" defer></script>
+<script src="Scripts/events.js" defer></script>
+<script src="Scripts/moves.js" defer></script>
+<script src="Scripts/main.js" defer></script>
 </body>
 </html>
