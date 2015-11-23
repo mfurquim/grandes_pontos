@@ -2,8 +2,8 @@
  * Moves.js
  *
  * @function
- *
- *
+ * nextPossibleMove shows next moves the user can do with the hovered pawn
+ * next moves the hovered pawn to the next disc that matches its color
  *
  *
  *
