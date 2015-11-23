@@ -19,20 +19,21 @@ function nextPossibleMove (hoveredPawn){
 
   for (var j = NUMBER_DISC_COL; j > 0; j--) {
     for (var i = NUMBER_DISC_ROW; i > 0; i--) {
-/*
-      var num = ((i-1)*5)+(j-1);
-*/
       var num = 0;
       if (j % 2 === 0) {
         num = ((NUMBER_DISC_ROW-i)*5)+(j-1);
-        console.log("Par");
-        console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
+        if (DEBUG_ON) {
+          console.log("Par");
+          console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
+        }
       } else {
         num = ((i-1)*5)+(j-1);
-        console.log("Impar");
-        console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
+        if (DEBUG_ON) {
+          console.log("Impar");
+          console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
+        }
       }
-//      console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
+
       currentDisc = board.discs[num];
       if (currentDisc._color === pawnColor) {
         var nextCoordinate = {
@@ -63,7 +64,6 @@ function nextPossibleMove (hoveredPawn){
         //console.log(currentDisc);
         currentDisc.changeName("Bordered","disc",color);
 
-        console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
         return currentDisc;
       }
     }
@@ -86,16 +86,14 @@ function next (hoveredPawn){
           y : currentDisc._positionCoordinates.y
         };
 
-
-
-
-
-      console.log("##################",hoveredPawn);
-      console.log(">>>>",nextCoordinate);
-      hoveredPawn._positionCoordinates = nextCoordinate;
-      currentDisc._positionCoordinates = [50,50];
-      currentDisc._color = 10;
-      // hoveredPawn.move(nextCoordinate);
+        if (DEBUG_ON) {
+          console.log("##################",hoveredPawn);
+          console.log(">>>>",nextCoordinate);
+        }
+        hoveredPawn._positionCoordinates = nextCoordinate;
+        currentDisc._positionCoordinates = [50,50];
+        currentDisc._color = 10;
+        // hoveredPawn.move(nextCoordinate);
 
 
         return currentDisc;
