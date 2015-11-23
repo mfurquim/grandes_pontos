@@ -77,6 +77,31 @@ window.onmousemove = function(mouseMove){
   };
 
   if (isInsideBoard(gridClick) === true) {
+    getHoveredElement(gridClick);
+  }
+
+  // Call function to resolve the turn based on the gridClick.
+  resolveTurn(gridClick);
+  drawBoard(context);
+};
+
+window.onclick = function(mouseClick){
+  console.log(mouseClick);
+  var mousePosition = {
+    x: mouseClick.pageX,
+    y: mouseClick.pageY
+  };
+
+  var gridClick = {
+    x: Math.floor(
+      (mousePosition.x - gridConfiguration.offset.x)/
+      gridConfiguration.width),
+    y: Math.floor(
+      (mousePosition.y - gridConfiguration.offset.y)/
+      gridConfiguration.height)
+  };
+
+  if (isInsideBoard(gridClick) === true) {
     getClickedElement(gridClick);
   }
 
@@ -86,6 +111,61 @@ window.onmousemove = function(mouseMove){
 };
 
 function getClickedElement(gridClick) {
+
+  var nextMove = 10;
+  var color = 10;
+
+  for (var i = board.pawns.length-1; i >= 0; i--) {
+    //console.log(board.pawns[i]);
+    var currentPawn = board.pawns[i];
+
+    var pawnGrid = {
+      x : (currentPawn._positionCoordinates.x - gridConfiguration.offset.x) /
+      gridConfiguration.width,
+      y : (currentPawn._positionCoordinates.y - gridConfiguration.offset.y) /
+      gridConfiguration.height,
+    };
+
+    if (gridClick.x == pawnGrid.x && gridClick.y == pawnGrid.y) {
+      if (DEBUG_ON === true) {
+        //console.log(currentPawn._color);
+      }
+      if (DEBUG_ON === true) {
+        console.log(currentPawn);
+      }
+      nextMove = next(currentPawn);
+    }
+    else {
+      switch (nextMove._color) {
+        case 0: color = "green";
+        break;
+        case 1: color = "blue";
+        break;
+        case 2: color = "red";
+        break;
+        case 3: color = "purple";
+        break;
+        case 4: color = "yellow";
+        break;
+        case 5: color = "white";
+        break;
+        case 6: color = "black";
+        break;
+      }
+      //console.log(color);
+
+      if (nextMove !== null && typeof(nextMove) === 'object') {
+        //  console.log(nextMove);
+        //  nextMove.changeName("Multi","disc",color);
+      }
+
+    }
+  }
+}
+
+
+
+function getHoveredElement(gridClick) {
 
   var nextMove = 10;
   var color = 10;
@@ -131,59 +211,60 @@ function getClickedElement(gridClick) {
 
       if (nextMove !== null && typeof(nextMove) === 'object') {
         //  console.log(nextMove);
-        nextMove.changeName("Bordered","disc",color);
+        //  nextMove.changeName("Multi","disc",color);
       }
 
     }
   }
 }
 
-window.onclick = function(mouseClick){
-
-  // Object mouse containing the coordinate (x,y) of the event
-  var mousePosition = {
-    x: mouseClick.pageX,
-    y: mouseClick.pageY
-  };
-
-
-  // A debug function to print the mouse coordinates on the console
-  mousePosition.toConsole = function () {
-    if (DEBUG_ON === true) {
-      console.log("Mouse position: (" +
-        String(mousePosition.x) + ", " +
-        String(mousePosition.y) + ")");
-    }
-  };
-
-  mousePosition.toConsole();
-
-  // Object gridClick containing the grid cell (x,y) of the click
-  var gridClick = {
-    x: Math.floor(
-      (mousePosition.x - gridConfiguration.offset.x)/
-      gridConfiguration.width),
-    y: Math.floor(
-      (mousePosition.y - gridConfiguration.offset.y)/
-      gridConfiguration.height)
-  };
-
-  // A debug function to print the grid coordinates on the console
-  gridClick.toConsole = function () {
-    if (DEBUG_ON === true) {
-      console.log("Grid Click: (" +
-        String(gridClick.x) + ", " +
-        String(gridClick.y) + ")");
-    }
-  };
-
-  if (isInsideBoard(gridClick) === true) {
-    gridClick.toConsole();
-    // Call function to resolve the turn based on the gridClick.
-    resolveTurn(gridClick);
-    drawBoard(context);
-  }
-};
+// window.onclick = function(mouseClick){
+//
+//
+//   // Object mouse containing the coordinate (x,y) of the event
+//   var mousePosition = {
+//     x: mouseClick.pageX,
+//     y: mouseClick.pageY
+//   };
+//
+//
+//   // A debug function to print the mouse coordinates on the console
+//   mousePosition.toConsole = function () {
+//     if (DEBUG_ON === true) {
+//       console.log("Mouse position: (" +
+//         String(mousePosition.x) + ", " +
+//         String(mousePosition.y) + ")");
+//     }
+//   };
+//
+//   mousePosition.toConsole();
+//
+//   // Object gridClick containing the grid cell (x,y) of the click
+//   var gridClick = {
+//     x: Math.floor(
+//       (mousePosition.x - gridConfiguration.offset.x)/
+//       gridConfiguration.width),
+//     y: Math.floor(
+//       (mousePosition.y - gridConfiguration.offset.y)/
+//       gridConfiguration.height)
+//   };
+//
+//   // A debug function to print the grid coordinates on the console
+//   gridClick.toConsole = function () {
+//     if (DEBUG_ON === true) {
+//       console.log("Grid Click: (" +
+//         String(gridClick.x) + ", " +
+//         String(gridClick.y) + ")");
+//     }
+//   };
+//
+//   if (isInsideBoard(gridClick) === true) {
+//     gridClick.toConsole();
+//     // Call function to resolve the turn based on the gridClick.
+//     resolveTurn(gridClick);
+//     drawBoard(context);
+//   }
+// };
 
 /**
  * Is Inside Board checks whether the click was in the board
