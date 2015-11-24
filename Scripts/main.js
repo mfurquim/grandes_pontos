@@ -6,6 +6,14 @@ var canvas       = null,
 // If the debug flag is on, print debug information to console
 var DEBUG_ON = false;
 
+var tryDrawing = function() {
+	if (getBoard().pawns === undefined) {
+		window.setTimeout(tryDrawing, 100);
+		return ;
+	}
+	drawBoard(context);
+};
+
 var setup = function() {
 	canvas = document.getElementById("myCanvas");
 	context = canvas.getContext("2d");
@@ -18,7 +26,7 @@ var setup = function() {
 
 	// It needs to wait a little for the sprites to be loaded
 	window.setTimeout(generateBoard, 1000);
-	window.setTimeout(drawBoard, 2000, context);
+	tryDrawing();
 };
 
 setup();
