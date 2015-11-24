@@ -14,6 +14,8 @@ var setup = function() {
 
 	ATLAS.loadingAssets();
 
+	EVENTS.init();
+
 	// It needs to wait a little for the sprites to be loaded
 	window.setTimeout(generateBoard, 1000);
 	window.setTimeout(drawBoard, 2000, context);
