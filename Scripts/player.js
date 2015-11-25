@@ -93,15 +93,15 @@ Player.prototype.drawItself = function(context, atlasImage) {
 
 Player.prototype.collectDisc = function(miniDisc) {
 	var miniScale = {
-		width: 0.16,
-		height: 0.16
+		width: 0.20,
+		height: 0.20
 	};
 
 	var color = miniDisc.getColor();
 
 	miniDisc.scale(miniScale);
 	var miniPositionCoordinates = {
-		x:8*color + this._positionCoordinates.x + this._sprite.dimensions.width,
+		x:8*color + this._positionCoordinates.x + this._sprite.dimensions.width + 2,
 		y:4*this._countDiscs[color]
 	};
 
