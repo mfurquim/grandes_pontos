@@ -85,7 +85,7 @@ var board = {};
  * Generate Board creates Discs ans Pawn objects.
  */
 function generateBoard() {
-
+	board.podium = new Podium();
 	board.players = generatePlayers();
 	board.pawns = generatePawns();
 	board.discs = generateDiscs();
@@ -122,6 +122,8 @@ function drawBoard(context) {
 	board.players.forEach( function(player) {
 		player.drawItself(context, atlas);
 	});
+
+	board.podium.drawItself(context, atlas);
 }
 
 function generatePlayers() {
