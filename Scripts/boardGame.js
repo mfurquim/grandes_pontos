@@ -7,6 +7,8 @@ const GREEN  = 0,
 			WHITE  = 5,
 			BLACK  = 6;
 
+const NUM_PLAYERS = 4;
+
 // Constants to capture images
 const IMAGE_BORDER_MULTI		= "Multi",
 			IMAGE_BORDER_SINGLE		= "Single",
@@ -84,6 +86,7 @@ var board = {};
  */
 function generateBoard() {
 
+	board.players = generatePlayers();
 	board.pawns = generatePawns();
 	board.discs = generateDiscs();
 }
@@ -115,6 +118,29 @@ function drawBoard(context) {
 	board.discs.forEach( function(disc) {
 		disc.drawItself(context, atlas);
 	});
+
+	board.players.forEach( function(player) {
+		player.drawItself(context, atlas);
+	});
+}
+
+function generatePlayers() {
+	var players = [];
+
+	for (var i = 0; i < NUM_PLAYERS; i++) {
+		var sprite = fetchPlayer(i);
+		var playerObject = new Player(sprite,i);
+		Object.seal(playerObject);
+		players.push(playerObject);
+	}
+
+	return players;
+}
+
+function fetchPlayer(number) {
+	var spriteName = "gamepad"+(number+1)+".png";
+	var sprite = ATLAS.fetchSprite(spriteName);
+	return sprite;
 }
 
 /**
