@@ -117,7 +117,7 @@ var EVENTS = (function() {
     }
 
     drawBoard(context);
-  }
+  };
 
   var getClickedElement = function (gridClick) {
 
