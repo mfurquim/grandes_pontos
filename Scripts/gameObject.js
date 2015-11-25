@@ -51,9 +51,10 @@ GameObject.prototype.drawItself = function(context, atlasImage) {
 		console.log("GameObject: " + this._sprite.name +
 			"\nSource: (" + this._sprite.sourceCoordinates.x + "," +
 			this._sprite.sourceCoordinates.y + ")" +
-			"\nDimension: (" + this._positionCoordinates.x + "," +
+			"\nCoordinates: (" + this._positionCoordinates.x + "," +
 			this._positionCoordinates.y + ")");
 	}
+
 	context.drawImage(atlasImage,
 		this._sprite.sourceCoordinates.x,
 		this._sprite.sourceCoordinates.y,
@@ -72,7 +73,10 @@ GameObject.prototype.drawItself = function(context, atlasImage) {
  * positionCoordinates (x,y)
  */
 GameObject.prototype.move = function(positionCoordinates) {
-	this._sprite.positionCoordinates = positionCoordinates;
+	console.log("GameObject:move->(" +
+	positionCoordinates.x + "," +
+	positionCoordinates.y + ")");
+	this._positionCoordinates = positionCoordinates;
 }
 
 GameObject.prototype.getCoordinates = function() {

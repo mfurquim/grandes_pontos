@@ -62,7 +62,7 @@ Player.prototype.drawItself = function(context, atlasImage) {
 	if (DEBUG_ON) {
 		console.log("Player: " + this._sprite.name +
 			"\nSource: (" + this._sprite.sourceCoordinates.x + "," +
-			"\nDimension: (" + this._positionCoordinates.x + "," +
+			"\nCoordinates: (" + this._positionCoordinates.x + "," +
 			this._positionCoordinates.y + ")");
 	}
 
@@ -77,8 +77,10 @@ Player.prototype.drawItself = function(context, atlasImage) {
 		this._sprite.dimensions.height * this._sprite.scale.height);
 
 	this._pool.forEach( function(miniDisc) {
+		/*
 		console.log("Drawing Pool");
 		console.log(miniDisc.getCoordinates());
+		*/
 		miniDisc.drawItself(context, atlasImage);
 	});
 
@@ -99,7 +101,7 @@ Player.prototype.collectDisc = function(miniDisc) {
 
 	miniDisc.scale(miniScale);
 	var miniPositionCoordinates = {
-		x:8*color + this._positionCoordinates.x + 100,
+		x:8*color + this._positionCoordinates.x + this._sprite.dimensions.width,
 		y:4*this._countDiscs[color]
 	};
 
