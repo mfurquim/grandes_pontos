@@ -25,8 +25,6 @@ var tryGeneratingBoard = function() {
 	tryDrawing();
 };
 
-window.setTimeout(generateBoard, 1000);
-
 var setup = function() {
 	canvas = document.getElementById("myCanvas");
 	context = canvas.getContext("2d");

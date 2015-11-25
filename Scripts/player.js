@@ -12,7 +12,7 @@
 
 const INITIAL_COORDINATE = {
 	X:BOARD_OFFSET.X,
-	Y:BOARD_OFFSET.Y - (DISC_DIMENSION.HEIGHT + 20)}
+	Y:BOARD_OFFSET.Y - (DISC_DIMENSION.HEIGHT + 50)}
 
 
 /**
@@ -38,9 +38,12 @@ var Player = function (sprite, number, scale) {
 	}
 
 	this._number = number;
-	this._positionCoordinates.x = INITIAL_COORDINATE.X + (number*125);
+	this._positionCoordinates = {};
+	this._positionCoordinates.x = INITIAL_COORDINATE.X + (number*150);
 	this._positionCoordinates.y = INITIAL_COORDINATE.Y;
-	this._sprite.scale = scale | 1;
+	this._sprite.scale = {};
+	this._sprite.scale.width = 1;
+	this._sprite.scale.height = 1;
 };
 
 /**
@@ -51,6 +54,14 @@ var Player = function (sprite, number, scale) {
  * atlasImage to crop the sprite from
  */
 Player.prototype.drawItself = function(context, atlasImage) {
+	if (DEBUG_ON) {
+		console.log("Source: (" + this._sprite.sourceCoordinates.x + "," +
+		this._sprite.sourceCoordinates.y + ")" +
+		"\nDimension: (" + this._positionCoordinates.x + "," +
+		this._positionCoordinates.y + ")");
+	}
+
+//context.drawImage(ATLAS.fetchAtlas(), 1586,266,50,50,175,30,50,50);
 	context.drawImage(atlasImage,
 		this._sprite.sourceCoordinates.x,
 		this._sprite.sourceCoordinates.y,
