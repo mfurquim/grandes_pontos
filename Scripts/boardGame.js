@@ -88,6 +88,10 @@ function generateBoard() {
 	board.discs = generateDiscs();
 }
 
+var getBoard = function() {
+	return board;
+}
+
 /**
  * Draw board draws all objects in the board game (Discs and Pawns)
  */
