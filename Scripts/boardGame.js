@@ -129,7 +129,7 @@ function generatePlayers() {
 
 	for (var i = 0; i < NUM_PLAYERS; i++) {
 		var sprite = fetchPlayer(i);
-		var playerObject = new Player(sprite,i,1);
+		var playerObject = new Player(sprite,i);
 		Object.seal(playerObject);
 		players.push(playerObject);
 	}

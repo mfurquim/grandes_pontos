@@ -47,6 +47,13 @@ var GameObject = function (sprite, positionCoordinates, color, scale) {
  * atlasImage to crop the sprite from
  */
 GameObject.prototype.drawItself = function(context, atlasImage) {
+	if (DEBUG_ON) {
+		console.log("GameObject: " + this._sprite.name +
+			"\nSource: (" + this._sprite.sourceCoordinates.x + "," +
+			this._sprite.sourceCoordinates.y + ")" +
+			"\nDimension: (" + this._positionCoordinates.x + "," +
+			this._positionCoordinates.y + ")");
+	}
 	context.drawImage(atlasImage,
 		this._sprite.sourceCoordinates.x,
 		this._sprite.sourceCoordinates.y,
@@ -67,6 +74,12 @@ GameObject.prototype.drawItself = function(context, atlasImage) {
 GameObject.prototype.move = function(positionCoordinates) {
 	this._sprite.positionCoordinates = positionCoordinates;
 }
+
+GameObject.prototype.getCoordinates = function() {
+	return this._sprite.positionCoordinates;
+}
+
+
 
 /**
  * Scale a GameObject
@@ -114,4 +127,8 @@ GameObject.prototype.changeName = function(border, type, color) {
 GameObject.prototype.makeName = function(border, type, color) {
 	var newName = border + "/" + type + "_" + color + ".png";
 	return newName;
+}
+
+GameObject.prototype.getColor = function() {
+	return 	this._color;
 }

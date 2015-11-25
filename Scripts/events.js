@@ -29,6 +29,8 @@ var EVENTS = (function() {
     }
   };
 
+  var i = 0;
+
   var addCaptureEvents = function() {
     // Listen to key pressing events
     window.addEventListener("keypress", doKeyDown, false);
@@ -107,6 +109,14 @@ var EVENTS = (function() {
         var color = prompt("Pawn's color (green, blue, red, purple, yellow)");
         var position = prompt("Pawn's position (0,4)");
         board.pawns[position].changeName(border, type, color);
+      }
+      break;
+
+      // If the key O is pressed, collectDisc
+      case "KeyO":
+      if (DEBUG_ON) {
+        board.players[i%4].collectDisc(board.discs[i]);
+        i++;
       }
       break;
 
