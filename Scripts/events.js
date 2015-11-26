@@ -125,7 +125,7 @@ var EVENTS = (function() {
       // If the key O is pressed, collectDisc
       case "KeyO":
       if (DEBUG_ON) {
-        board.players[i%4].collectDisc(board.discs[i]);
+        board.players[0].collectDisc(board.discs[i]);
         i++;
       }
       break;

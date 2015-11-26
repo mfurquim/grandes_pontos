@@ -134,5 +134,9 @@ GameObject.prototype.makeName = function(border, type, color) {
 }
 
 GameObject.prototype.getColor = function() {
-	return 	this._color;
+	return this._color;
+}
+
+GameObject.prototype.getSprite = function() {
+	return this._sprite;
 }
