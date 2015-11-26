@@ -33,8 +33,18 @@ var EVENTS = (function() {
 
   var addCaptureEvents = function() {
     // Listen to key pressing events
-    window.addEventListener("keypress", doKeyDown, false);
-
+    try {
+      if (window.addEventListener) {
+          window.addEventListener("keydown", doKeyDown, true);
+      } else if (document.attachEvent) { // IE
+          alert(document);
+          document.attachEvent("onkeydown", doKeyDown);
+      } else {
+          document.addEventListener("keydown", doKeyDown, true);
+      }
+    } catch (e) {
+      alert(e);
+    }
 
     /**
     * Window On Click adjust the mouseClick to gridClick and calls resolveTurn()
