@@ -1,0 +1,32 @@
+{
+  "name": "GrandesPontos",
+  "description": "Jogo desenvolvido utilizando Scrum e boas práticas aprendido na disciplina Técnicas de Programação da Faculdade UnB Gama.",
+  "version": "0.0.1",
+  "licenses": {
+    "type": "GPL3",
+    "url": "https://github.com/mfurquim/grandes_pontos/blob/master/LICENSE"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mfurquim/grandes_pontos.git"
+  },
+  "dependencies": "",
+  "devDependencies": {
+    "coveralls": "latest",
+    "nodeunit": "latest"
+  },
+  "man": "",
+  "scripts": {
+    "jshint": "./node_modules/.bin/jshint --verbose --config .jshintrc lib/",
+    "coverage": "jscoverage lib --exclude *.ejs,*.json && NIGHTWATCH_COV=1 node ./tests/run_tests.js lcov > ./lib-cov/lcov.info",
+    "test": "nosetests  tests/blackbox.py -v"
+  },
+  "files": [
+    "bin",
+    "examples",
+    "lib",
+    "README.md",
+    "LICENSE.md",
+    "index.js"
+  ]
+}
