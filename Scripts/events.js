@@ -218,29 +218,26 @@ var EVENTS = (function() {
         nextMove = nextPossibleMove(currentPawn);
       }
       else {
-        switch (nextMove._color) {
-          case 0: color = "green";
-          break;
-          case 1: color = "blue";
-          break;
-          case 2: color = "red";
-          break;
-          case 3: color = "purple";
-          break;
-          case 4: color = "yellow";
-          break;
-          case 5: color = "white";
-          break;
-          case 6: color = "black";
-          break;
+        if (nextMove !== null && typeof(nextMove) !== "undefined") {
+          switch (nextMove._color) {
+            case 0: color = "green";
+            break;
+            case 1: color = "blue";
+            break;
+            case 2: color = "red";
+            break;
+            case 3: color = "purple";
+            break;
+            case 4: color = "yellow";
+            break;
+            case 5: color = "white";
+            break;
+            case 6: color = "black";
+            break;
+          }
+        } else {
+          console.log("nextMove null");
         }
-        //console.log(color);
-
-        if (nextMove !== null && typeof(nextMove) === 'object') {
-          //  console.log(nextMove);
-          //  nextMove.changeName("Multi","disc",color);
-        }
-
       }
     }
   };
