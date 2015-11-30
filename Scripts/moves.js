@@ -112,4 +112,5 @@ function next (hoveredPawn){
       }
     }
   }
+  board.podium.stepup(hoveredPawn);
 }
