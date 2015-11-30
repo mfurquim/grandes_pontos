@@ -47,19 +47,24 @@ function createCookie(name,value,days) {
 
 // function used to retrieve created cookies
 function readCookie(name) {
+  var searchedCookie = null;
   // formatting name to be searched in user cookies
   var nameToBeSearched = name + "=";
-  // creating array of cookies
+  // creating array of user cookies
   var splittedCookies = document.cookie.split(';');
 
   for(var index=0;index < splittedCookies.length;index++) {
     var currentCookie = splittedCookies[index];
     while (currentCookie.charAt(0)==' ') {
+      // separe cookie value string
       currentCookie = currentCookie.substring(1,currentCookie.length);
     }
-    if (currentCookie.indexOf(nameToBeSearched) === 0) return currentCookie.substring(nameToBeSearched.length,currentCookie.length);
+    if (currentCookie.indexOf(nameToBeSearched) === 0){
+      searchedCookie = currentCookie.substring(nameToBeSearched.length,
+      currentCookie.length);
+    }
   }
-  return null;
+  return searchedCookie;
 }
 
 // function used to delete created cookies
