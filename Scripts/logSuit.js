@@ -1,3 +1,5 @@
+
+// function used to create cookie
 function createCookie(name,value,days) {
   var expires = "";
 
@@ -12,6 +14,7 @@ function createCookie(name,value,days) {
   document.cookie = name+"="+value+expires+"; path=/";
 }
 
+// function used to retrieve created cookies
 function readCookie(name) {
   var nameEQ = name + "=";
   var ca = document.cookie.split(';');
@@ -23,6 +26,9 @@ function readCookie(name) {
   return null;
 }
 
+// function used to delete created cookies
 function eraseCookie(name) {
+  /* setting cookie with name: name to an empty string and than deleting it
+   by passing negative duration. */
   createCookie(name,"",-1);
 }
