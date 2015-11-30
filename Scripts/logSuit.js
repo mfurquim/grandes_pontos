@@ -1,5 +1,6 @@
 function createCookie(name,value,days) {
   var expires = "";
+
   if (days) {
     var date = new Date();
     date.setTime(date.getTime()+(days*24*60*60*1000));
@@ -25,10 +26,3 @@ function readCookie(name) {
 function eraseCookie(name) {
   createCookie(name,"",-1);
 }
-
-
-createCookie("author", "aurelio", 30);
-createCookie("author", "asdasd", 30);
-
-console.log(readCookie("author")); // print aurelio
-console.log(readCookie("nothing")); // print null
