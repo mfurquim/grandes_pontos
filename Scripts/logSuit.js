@@ -1,13 +1,42 @@
+/**
+ * event.js
+ *
+ * @var
+ * gridConfiguration describes the rows, columns, width, height and offset
+ *
+ * @function
+ * windows.onclick [will] call resolveTurn if the click was inside grid
+ * window.onmousemove
+ * function getClickedElement(gridClick)
+ * function getHoveredElement(gridClick)
+ * function doKeyDown(event)
+ *
+ *
+ * @author
+ * Matheus Mello
+ */
+
+// Date variables
+var hours = 24,
+    minutes = 60,
+    seconds = 60,
+    milliseconds = 1000;
 
 // function used to create cookie
 function createCookie(name,value,days) {
   var expires = "";
 
+  // create cookie with expire date
   if (days) {
+    // current date
     var date = new Date();
-    date.setTime(date.getTime()+(days*24*60*60*1000));
+    // calculating days argument in milliseconds
+    daysInMilliseconds = days * hours * minutes * seconds * milliseconds;
+    // setting expire date
+    date.setTime(date.getTime() + daysInMilliseconds);
     expires = "; expires="+date.toGMTString();
   }
+  // create cookie without expire date
   else {
   expires = "";
 }
