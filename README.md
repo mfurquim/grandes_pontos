@@ -1,5 +1,6 @@
 # Grandes Pontos
 [![Code Climate](https://codeclimate.com/github/mfurquim/grandes_pontos/badges/gpa.svg)](https://codeclimate.com/github/mfurquim/grandes_pontos)
+[![Build Status](https://travis-ci.org/Ziul/grandes_pontos.svg?branch=master)](https://travis-ci.org/Ziul/grandes_pontos)
 
 Jogo desenvolvido utilizando XP e boas práticas aprendido na disciplina Técnicas de Programação da Faculdade UnB Gama.
 
