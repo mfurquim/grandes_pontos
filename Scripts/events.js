@@ -162,32 +162,30 @@ var EVENTS = (function() {
         if (DEBUG_ON === true) {
           console.log(currentPawn);
         }
+        console.log(currentPawn);
         nextMove = next(currentPawn);
       }
       else {
-        switch (nextMove._color) {
-          case 0: color = "green";
-          break;
-          case 1: color = "blue";
-          break;
-          case 2: color = "red";
-          break;
-          case 3: color = "purple";
-          break;
-          case 4: color = "yellow";
-          break;
-          case 5: color = "white";
-          break;
-          case 6: color = "black";
-          break;
+        if (nextMove !== null && typeof(nextMove) !== "undefined") {
+          switch (nextMove._color) {
+            case 0: color = "green";
+            break;
+            case 1: color = "blue";
+            break;
+            case 2: color = "red";
+            break;
+            case 3: color = "purple";
+            break;
+            case 4: color = "yellow";
+            break;
+            case 5: color = "white";
+            break;
+            case 6: color = "black";
+            break;
+          }
+        } else {
+          board.podium.stepup(currentPawn);
         }
-        //console.log(color);
-
-        if (nextMove !== null && typeof(nextMove) === 'object') {
-          //  console.log(nextMove);
-          //  nextMove.changeName("Multi","disc",color);
-        }
-
       }
     }
   };

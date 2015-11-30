@@ -21,7 +21,72 @@ const PODIUM_INITIAL_COORDINATE = {
 var Podium = function () {
   this.generateStackDisc();
   this.generateSteps();
+  this._pawnsPosition = [];
 };
+
+Podium.prototype.stepup = function(pawn) {
+  var newPawn = true;
+  console.log(this._pawnsPosition);
+  for (innerPawn in this._pawnsPosition) {
+    if (innerPawn.getColor() === pawn.getColor()) {
+      newPawn = false;
+      break;
+    }
+  }
+  if (newPawn === true) {
+    this._pawnsPosition.push(pawn);
+  }
+
+  this._steps = [];
+
+  var scale = {
+    width: 1,
+    height: 0.5
+  };
+
+  for (var i = 0; i < this._pawnsPosition.length; i++) {
+    this._sprite = {};
+
+    var brickSpriteName = "brick_black.png";
+    switch (this._pawnsPosition[i].getColor()) {
+      case GREEN:
+        brickSpriteName = "brick_green.png";
+        break;
+
+      case BLUE:
+        brickSpriteName = "brick_blue.png";
+        break;
+
+      case RED:
+        brickSpriteName = "brick_red.png";
+        break;
+
+      case PURPLE:
+        brickSpriteName = "brick_purple.png";
+        break;
+
+      case YELLOW:
+        brickSpriteName = "brick_yellow.png";
+        break;
+
+      default:
+        // Should never be reached. There are only five Pawn's colors.
+    }
+    brickSprite = ATLAS.fetchSprite(brickSpriteName);
+    this._sprite.name = brickSprite.name;
+    this._sprite.sourceCoordinates = brickSprite.sourceCoordinates;
+    this._sprite.dimensions = brickSprite.dimensions;
+    for (var j = 0; j <= i; j++) {
+      var positionCoordinates = {
+        x: PODIUM_INITIAL_COORDINATE.x + (brickSprite.dimensions.width*(i+1)),
+        y: PODIUM_INITIAL_COORDINATE.y - (brickSprite.dimensions.height*scale.height*(j+1)) + (4*(j+1))
+      };
+
+      var step = new GameObject(brickSprite, positionCoordinates, -1, scale);
+      this._steps.push(step);
+    }
+  }
+}
 
 Podium.prototype.generateStackDisc = function() {
   this._stackDisc = [];
