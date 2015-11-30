@@ -1,15 +1,17 @@
 /**
- * event.js
+ * logSuit.js
  *
  * @var
- * gridConfiguration describes the rows, columns, width, height and offset
+ * hours defines the number of hours in one day
+ * minutes defines the number of minutes in one hours
+ * seconds defines the number of seconds in one minute
+ * milliseconds defines the number of milliseconds in one seconds
  *
  * @function
- * windows.onclick [will] call resolveTurn if the click was inside grid
- * window.onmousemove
- * function getClickedElement(gridClick)
- * function getHoveredElement(gridClick)
- * function doKeyDown(event)
+ * function createCookie creates a cookie with the specified name, value and
+ * expire date
+ * function readCookie retrieves a cookie with the specified name
+ * function eraseCookie deletes a cookie with the specified name as well
  *
  *
  * @author
@@ -45,12 +47,17 @@ function createCookie(name,value,days) {
 
 // function used to retrieve created cookies
 function readCookie(name) {
-  var nameEQ = name + "=";
-  var ca = document.cookie.split(';');
-  for(var i=0;i < ca.length;i++) {
-    var c = ca[i];
-    while (c.charAt(0)==' ') c = c.substring(1,c.length);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+  // formatting name to be searched in user cookies
+  var nameToBeSearched = name + "=";
+  // creating array of cookies
+  var splittedCookies = document.cookie.split(';');
+
+  for(var index=0;index < splittedCookies.length;index++) {
+    var currentCookie = splittedCookies[index];
+    while (currentCookie.charAt(0)==' ') {
+      currentCookie = currentCookie.substring(1,currentCookie.length);
+    }
+    if (currentCookie.indexOf(nameToBeSearched) === 0) return currentCookie.substring(nameToBeSearched.length,currentCookie.length);
   }
   return null;
 }
