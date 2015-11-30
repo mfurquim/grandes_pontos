@@ -91,27 +91,60 @@ Player.prototype.drawItself = function(context, atlasImage) {
 	*/
 };
 
-Player.prototype.collectDisc = function(miniDisc) {
+Player.prototype.collectDisc = function(fullDisc) {
 	var miniScale = {
 		width: 0.20,
 		height: 0.20
 	};
 
-	var color = miniDisc.getColor();
+	var color = fullDisc.getColor();
 
-	miniDisc.scale(miniScale);
 	var miniPositionCoordinates = {
 		x:8*color + this._positionCoordinates.x + this._sprite.dimensions.width + 2,
 		y:4*this._countDiscs[color]
 	};
 
 	this._countDiscs[color]++;
-
-	console.log(miniPositionCoordinates);
-
-	miniDisc.move(miniPositionCoordinates);
-	console.log(miniDisc.getCoordinates());
+	var miniDiscSprite = fullDisc.getSprite();
+	miniDisc = new GameObject(miniDiscSprite, miniPositionCoordinates, color, miniScale);
 	this._pool.push(miniDisc);
+
+	var discImageName = "";
+
+	switch (color) {
+		case GREEN:
+			discImageName = IMAGE_COLOR_GREEN;
+			break;
+
+		case BLUE:
+			discImageName = IMAGE_COLOR_BLUE;
+			break;
+
+		case RED:
+			discImageName = IMAGE_COLOR_RED;
+			break;
+
+		case PURPLE:
+			discImageName = IMAGE_COLOR_PURPLE;
+			break;
+
+		case YELLOW:
+			discImageName = IMAGE_COLOR_YELLOW;
+			break;
+
+		case WHITE:
+			discImageName = IMAGE_COLOR_WHITE;
+			break;
+
+		case BLACK:
+			discImageName = IMAGE_COLOR_BLACK;
+			break;
+
+		default:
+			// Should never be reached. There are only seven Discs's colors.
+	}
+
+	fullDisc.changeName(IMAGE_BORDER_SINGLE,IMAGE_TYPE_DISC,discImageName);
 };
 
 /**
