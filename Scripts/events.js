@@ -19,8 +19,8 @@
 
 var EVENTS = (function() {
   var gridConfiguration = {
-    rows: NUMBER_DISC_ROW,
-    cols: NUMBER_DISC_COL,
+    rows: NUMBER_DISC_COL,
+    cols: NUMBER_DISC_ROW,
     width: DISC_DIMENSION.WIDTH,
     height: DISC_DIMENSION.HEIGHT,
     offset: {

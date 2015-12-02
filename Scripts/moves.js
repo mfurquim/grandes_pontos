@@ -17,11 +17,11 @@ function nextPossibleMove (hoveredPawn){
   //console.log(hoveredPawn);
   pawnColor = hoveredPawn._color;
 
-  for (var j = NUMBER_DISC_COL; j > 0; j--) {
-    for (var i = NUMBER_DISC_ROW; i > 0; i--) {
+  for (var j = NUMBER_DISC_ROW; j > 0; j--) {
+    for (var i = NUMBER_DISC_COL; i > 0; i--) {
       var num = 0;
       if (j % 2 === 0) {
-        num = ((NUMBER_DISC_ROW-i)*5)+(j-1);
+        num = ((NUMBER_DISC_COL-i)*5)+(j-1);
         if (DEBUG_ON) {
           console.log("Par");
           console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));
@@ -75,11 +75,11 @@ function next (hoveredPawn){
   //console.log(hoveredPawn);
   pawnColor = hoveredPawn._color;
 
-  for (var j = NUMBER_DISC_COL; j > 0; j--) {
-    for (var i = NUMBER_DISC_ROW; i > 0; i--) {
+  for (var j = NUMBER_DISC_ROW; j > 0; j--) {
+    for (var i = NUMBER_DISC_COL; i > 0; i--) {
       var num = 0;
       if (j % 2 === 0) {
-        num = ((NUMBER_DISC_ROW-i)*5)+(j-1);
+        num = ((NUMBER_DISC_COL-i)*5)+(j-1);
         if (DEBUG_ON) {
           console.log("Par");
           console.log("(" + String(i) + "," + String(j) + ") -> " + String(num));

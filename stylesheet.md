@@ -90,7 +90,7 @@ GameObject.prototype.move = function(positionCoordinates) {
 2.e) Constants names must be capitalized and use underscore between names.
 ```javascript
 // Number of discs' colors
-const NUMBER_DISC_COLORS = 7;
+const NUMBER_DISC_ROWORS = 7;
 ```
 <!--2.f) To reduce the scope, a variable which is used only in the current scope must be declared as let:
 ```javascript
@@ -251,8 +251,8 @@ while ( count < numElements ) {
 
 ```javascript
 // Fill the board with random discs along the x and y axis (rows and columns)
-for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
-  for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
+for (var discX = 0; discX < NUMBER_DISC_COL; discX++) {
+  for (var discY = 0; discY < NUMBER_DISC_ROW; discY++) {
     // ---
     var positionCoordinates = {
         x:((discX * DISC_DIMENSION.HEIGHT) + BOADR_OFFSET.X),

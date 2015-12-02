@@ -145,7 +145,7 @@ names.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{// Number of discs' colors}
-\KeywordTok{const} \NormalTok{NUMBER_DISC_COLORS = }\DecValTok{7}\NormalTok{;}
+\KeywordTok{const} \NormalTok{NUMBER_DISC_ROWORS = }\DecValTok{7}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
 
@@ -338,8 +338,8 @@ comparison, and an empty space after it.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{// Fill the board with random discs along the x and y axis (rows and columns)}
-\KeywordTok{for} \NormalTok{(}\KeywordTok{var} \NormalTok{discX = }\DecValTok{0}\NormalTok{; discX < NUMBER_DISC_ROW; discX++) \{}
-  \KeywordTok{for} \NormalTok{(}\KeywordTok{var} \NormalTok{discY = }\DecValTok{0}\NormalTok{; discY < NUMBER_DISC_COL; discY++) \{}
+\KeywordTok{for} \NormalTok{(}\KeywordTok{var} \NormalTok{discX = }\DecValTok{0}\NormalTok{; discX < NUMBER_DISC_COL; discX++) \{}
+  \KeywordTok{for} \NormalTok{(}\KeywordTok{var} \NormalTok{discY = }\DecValTok{0}\NormalTok{; discY < NUMBER_DISC_ROW; discY++) \{}
     \CommentTok{// ---}
     \KeywordTok{var} \NormalTok{positionCoordinates = \{}
         \DataTypeTok{x}\NormalTok{:((discX * }\OtherTok{DISC_DIMENSION}\NormalTok{.}\FunctionTok{HEIGHT}\NormalTok{) + }\OtherTok{BOADR_OFFSET}\NormalTok{.}\FunctionTok{X}\NormalTok{),}

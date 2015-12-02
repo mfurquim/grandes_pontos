@@ -16,6 +16,52 @@
  */
 
 var ATLAS = (function() {
+
+  // Color constants
+  const GREEN  = 0,
+  			BLUE   = 1,
+  			RED    = 2,
+  			PURPLE = 3,
+  			YELLOW = 4,
+  			WHITE  = 5,
+  			BLACK  = 6;
+
+  // Constants to capture images
+  const IMAGE_BORDER_MULTI		= "Multi",
+  			IMAGE_BORDER_SINGLE		= "Single",
+  			IMAGE_BORDER_BORDERED	= "Bordered",
+  			IMAGE_TYPE_DISC				= "disc",
+  			IMAGE_TYPE_PAWN1			= "pawn1",
+  			IMAGE_TYPE_PAWN2			= "pawn2",
+  			IMAGE_TYPE_PAWN3			= "pawn3",
+  			IMAGE_TYPE_CLASSIC 		= "classic",
+  			IMAGE_TYPE_THIN				= "thin",
+  			IMAGE_TYPE_HUMAN			= "human"
+  			IMAGE_TYPE_MEEPLE			= "meeple",
+  			IMAGE_COLOR_GREEN 		= "green",
+  			IMAGE_COLOR_BLUE			= "blue",
+  			IMAGE_COLOR_RED				= "red",
+  			IMAGE_COLOR_PURPLE		= "purple",
+  			IMAGE_COLOR_YELLOW		= "yellow",
+  			IMAGE_COLOR_WHITE			= "white",
+  			IMAGE_COLOR_BLACK			= "black";
+
+  // Discs sprite name
+  const	GREEN_DISC_NAME		= "Multi/disc_green.png",
+  			BLUE_DISC_NAME		= "Multi/disc_blue.png",
+  			RED_DISC_NAME			= "Multi/disc_red.png",
+  			PURPLE_DISC_NAME	= "Multi/disc_purple.png",
+  			YELLOW_DISC_NAME	= "Multi/disc_yellow.png",
+  			WHITE_DISC_NAME		= "Multi/disc_white.png",
+  			BLACK_DISC_NAME		= "Multi/disc_black.png";
+
+  // Pawns sprite name
+  const GREEN_PAWN_NAME		= "Multi/classic_green.png",
+  			BLUE_PAWN_NAME		= "Multi/classic_blue.png",
+  			RED_PAWN_NAME			= "Multi/classic_red.png",
+  			PURPLE_PAWN_NAME	= "Multi/classic_purple.png",
+  			YELLOW_PAWN_NAME	= "Multi/classic_yellow.png";
+
   var atlasAsset = null,
       sprites = [],
       url = "./Assets/Assets.png";
@@ -125,6 +171,47 @@ var ATLAS = (function() {
     fetchSprite: function(name) {
       return searchSprite(name);
     },
+
+    fetchDisc: function(color) {
+
+    }
+
+    /**
+     * Fetch pawn receives a color and returns its sprite
+     */
+    fetchPawnByNumber: function(pawnColor) {
+
+    	var pawnSpriteName = "";
+
+    	switch (pawnColor) {
+    		case GREEN:
+    			pawnSpriteName = GREEN_PAWN_NAME;
+    			break;
+
+    		case BLUE:
+    			pawnSpriteName = BLUE_PAWN_NAME;
+    			break;
+
+    		case RED:
+    			pawnSpriteName = RED_PAWN_NAME;
+    			break;
+
+    		case PURPLE:
+    			pawnSpriteName = PURPLE_PAWN_NAME;
+    			break;
+
+    		case YELLOW:
+    			pawnSpriteName = YELLOW_PAWN_NAME;
+    			break;
+
+    		default:
+    			// Should never be reached. There are only five Pawns's colors.
+    	}
+
+    	var pawnSprite = ATLAS.fetchSprite(pawnSpriteName);
+    	return pawnSprite;
+    },
+
 
     fetchAtlas: function() {
       return atlasAsset;

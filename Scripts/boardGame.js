@@ -1,61 +1,17 @@
-// Color constants
-const GREEN  = 0,
-			BLUE   = 1,
-			RED    = 2,
-			PURPLE = 3,
-			YELLOW = 4,
-			WHITE  = 5,
-			BLACK  = 6;
-
+// Number of players
 const NUM_PLAYERS = 4;
 
-// Constants to capture images
-const IMAGE_BORDER_MULTI		= "Multi",
-			IMAGE_BORDER_SINGLE		= "Single",
-			IMAGE_BORDER_BORDERED	= "Bordered",
-			IMAGE_TYPE_DISC				= "disc",
-			IMAGE_TYPE_PAWN1			= "pawn1",
-			IMAGE_TYPE_PAWN2			= "pawn2",
-			IMAGE_TYPE_PAWN3			= "pawn3",
-			IMAGE_TYPE_CLASSIC 		= "classic",
-			IMAGE_TYPE_THIN				= "thin",
-			IMAGE_TYPE_HUMAN			= "human"
-			IMAGE_TYPE_MEEPLE			= "meeple",
-			IMAGE_COLOR_GREEN 		= "green",
-			IMAGE_COLOR_BLUE			= "blue",
-			IMAGE_COLOR_RED				= "red",
-			IMAGE_COLOR_PURPLE		= "purple",
-			IMAGE_COLOR_YELLOW		= "yellow",
-			IMAGE_COLOR_WHITE			= "white",
-			IMAGE_COLOR_BLACK			= "black";
-
-// Discs sprite name
-const	GREEN_DISC_NAME		= "Multi/disc_green.png",
-			BLUE_DISC_NAME		= "Multi/disc_blue.png",
-			RED_DISC_NAME			= "Multi/disc_red.png",
-			PURPLE_DISC_NAME	= "Multi/disc_purple.png",
-			YELLOW_DISC_NAME	= "Multi/disc_yellow.png",
-			WHITE_DISC_NAME		= "Multi/disc_white.png",
-			BLACK_DISC_NAME		= "Multi/disc_black.png";
-
-// Pawns sprite name
-const GREEN_PAWN_NAME		= "Multi/classic_green.png",
-			BLUE_PAWN_NAME		= "Multi/classic_blue.png",
-			RED_PAWN_NAME			= "Multi/classic_red.png",
-			PURPLE_PAWN_NAME	= "Multi/classic_purple.png",
-			YELLOW_PAWN_NAME	= "Multi/classic_yellow.png";
-
 // Number of discs' colors
-const NUMBER_DISC_COLORS = 7;
+const NUMBER_DISC_ROWORS = 7;
 
 // Disc's width plus offset (42 + 8)
 const DISC_DIMENSION = {WIDTH: 50, HEIGHT: 50};
 
 // Number of discs in a row
-const NUMBER_DISC_ROW = 11;
+const NUMBER_DISC_COL = 11;
 
 // Number of discs in a row
-const NUMBER_DISC_COL = 5;
+const NUMBER_DISC_ROW = 5;
 
 // Black and White discs are specials, other colors are regular ones
 const DISC_LIMIT = 9,
@@ -72,7 +28,7 @@ const PAWN_DIMENSION = {WIDTH: 50, HEIGHT: 50};
 
 // Initial Pawns' position is located at the board's right
 const PAWN_INITIAL_COORDINATES = {
-	X: (DISC_DIMENSION.WIDTH * NUMBER_DISC_ROW),
+	X: (DISC_DIMENSION.WIDTH * NUMBER_DISC_COL),
 	Y: (PAWN_DIMENSION.HEIGHT * (NUMBER_PAWNS - 1))
 };
 
@@ -166,7 +122,7 @@ function generatePawns() {
 				+ BOARD_OFFSET.Y
 		};
 
-		var sprite = fetchPawn(item);
+		var sprite = ATLAS.fetchPawnByNumber(item);
 
 		var scale = {
 			width: 0.8,
@@ -193,7 +149,7 @@ function generateDiscs() {
 	var discCount = [];
 
 	// There are no discs of any color right now
-	for (var i = 0; i < NUMBER_DISC_COLORS; i++) {
+	for (var i = 0; i < NUMBER_DISC_ROWORS; i++) {
 		discCount[i] = 0;
 	}
 
@@ -202,12 +158,12 @@ function generateDiscs() {
 
 	// Fill the board with random discs along the x and y axis (rows and columns)
 
-		for (var discX = 0; discX < NUMBER_DISC_ROW; discX++) {
-			for (var discY = 0; discY < NUMBER_DISC_COL; discY++) {
+		for (var discX = 0; discX < NUMBER_DISC_COL; discX++) {
+			for (var discY = 0; discY < NUMBER_DISC_ROW; discY++) {
 
 
 
-			var discColor = Math.floor(Math.random()*(NUMBER_DISC_COLORS));
+			var discColor = Math.floor(Math.random()*(NUMBER_DISC_ROWORS));
 
 			// If the number of discs of a given color does not exceed the maximum
 			if (validateDisc(discCount, discColor) === true) {
@@ -236,46 +192,10 @@ function generateDiscs() {
 			else {
 				discY-=1;
 			}
-		} // End for discY < NUMBER_DISC_COL
-	} // End for discX < NUMBER_DISC_ROW
+		} // End for discY < NUMBER_DISC_ROW
+	} // End for discX < NUMBER_DISC_COL
 
 	return discs;
-}
-
-/**
- * Fetch pawn receives a color and returns its sprite
- */
-function fetchPawn(pawnColor) {
-
-	var pawnSpriteName = "";
-
-	switch (pawnColor) {
-		case GREEN:
-			pawnSpriteName = GREEN_PAWN_NAME;
-			break;
-
-		case BLUE:
-			pawnSpriteName = BLUE_PAWN_NAME;
-			break;
-
-		case RED:
-			pawnSpriteName = RED_PAWN_NAME;
-			break;
-
-		case PURPLE:
-			pawnSpriteName = PURPLE_PAWN_NAME;
-			break;
-
-		case YELLOW:
-			pawnSpriteName = YELLOW_PAWN_NAME;
-			break;
-
-		default:
-			// Should never be reached. There are only five Pawns's colors.
-	}
-
-	var pawnSprite = ATLAS.fetchSprite(pawnSpriteName);
-	return pawnSprite;
 }
 
 /**
