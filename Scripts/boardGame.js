@@ -2,7 +2,7 @@
 const NUM_PLAYERS = 4;
 
 // Number of discs' colors
-const NUMBER_DISC_ROWORS = 7;
+const NUMBER_DISC_COLORS = 7;
 
 // Disc's width plus offset (42 + 8)
 const DISC_DIMENSION = {WIDTH: 50, HEIGHT: 50};
@@ -149,7 +149,7 @@ function generateDiscs() {
 	var discCount = [];
 
 	// There are no discs of any color right now
-	for (var i = 0; i < NUMBER_DISC_ROWORS; i++) {
+	for (var i = 0; i < NUMBER_DISC_COLORS; i++) {
 		discCount[i] = 0;
 	}
 
@@ -163,7 +163,7 @@ function generateDiscs() {
 
 
 
-			var discColor = Math.floor(Math.random()*(NUMBER_DISC_ROWORS));
+			var discColor = Math.floor(Math.random()*(NUMBER_DISC_COLORS));
 
 			// If the number of discs of a given color does not exceed the maximum
 			if (validateDisc(discCount, discColor) === true) {
