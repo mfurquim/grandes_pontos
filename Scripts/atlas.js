@@ -172,9 +172,48 @@ var ATLAS = (function() {
       return searchSprite(name);
     },
 
+    /**
+     * Fetch disc receives a color and returns its sprite
+     */
     fetchDisc: function(color) {
+      var discSpriteName = "";
 
-    }
+      switch (color) {
+        case GREEN:
+          discSpriteName = GREEN_DISC_NAME;
+          break;
+
+        case BLUE:
+          discSpriteName = BLUE_DISC_NAME;
+          break;
+
+        case RED:
+          discSpriteName = RED_DISC_NAME;
+          break;
+
+        case PURPLE:
+          discSpriteName = PURPLE_DISC_NAME;
+          break;
+
+        case YELLOW:
+          discSpriteName = YELLOW_DISC_NAME;
+          break;
+
+        case WHITE:
+          discSpriteName = WHITE_DISC_NAME;
+          break;
+
+        case BLACK:
+          discSpriteName = BLACK_DISC_NAME;
+          break;
+
+        default:
+          // Should never be reached. There are only seven Discs's colors.
+      }
+
+      var discSprite = ATLAS.fetchSprite(discSpriteName);
+      return discSprite;
+    },
 
     /**
      * Fetch pawn receives a color and returns its sprite
@@ -210,6 +249,10 @@ var ATLAS = (function() {
 
     	var pawnSprite = ATLAS.fetchSprite(pawnSpriteName);
     	return pawnSprite;
+    },
+
+    getColorPawns: function() {
+      return [GREEN, BLUE, RED, PURPLE, YELLOW];
     },
 
 

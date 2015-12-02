@@ -18,7 +18,7 @@ const DISC_LIMIT = 9,
 			DISC_SPECIAL_LIMIT = 5;
 
 // All five pawns' colors
-const COLOR_PAWNS = [GREEN, BLUE, RED, PURPLE, YELLOW];
+const COLOR_PAWNS = ATLAS.getColorPawns();
 
 // Number of pawns to be drawn
 const NUMBER_PAWNS = 5;
@@ -106,7 +106,7 @@ function fetchPlayer(number) {
  * and poised them in the board.
  */
 function generatePawns() {
-
+	console.log("Generate Pawns");
 	// Array containing all five pawns
 	var pawns = [];
 
@@ -115,7 +115,8 @@ function generatePawns() {
 	 * Its y coordinate is changed to be drawn on top of the previous one.
 	 */
 	COLOR_PAWNS.forEach( function(item, index) {
-
+		console.log("For each" + index + "item: ");
+		console.log(item);
 		var positionCoordinates = {
 			x:PAWN_INITIAL_COORDINATES.X + BOARD_OFFSET.X,
 			y:PAWN_INITIAL_COORDINATES.Y - (PAWN_DIMENSION.HEIGHT * index)
@@ -161,8 +162,6 @@ function generateDiscs() {
 		for (var discX = 0; discX < NUMBER_DISC_COL; discX++) {
 			for (var discY = 0; discY < NUMBER_DISC_ROW; discY++) {
 
-
-
 			var discColor = Math.floor(Math.random()*(NUMBER_DISC_COLORS));
 
 			// If the number of discs of a given color does not exceed the maximum
@@ -176,7 +175,7 @@ function generateDiscs() {
 					y:((discY * DISC_DIMENSION.WIDTH) + BOARD_OFFSET.Y)
 				};
 
-				var discSprite = fetchDisc(discColor);
+				var discSprite = ATLAS.fetchDisc(discColor);
 
 				var scale = {
 					width: 1,
@@ -199,50 +198,6 @@ function generateDiscs() {
 }
 
 /**
- * Fetch disc receives a color and returns its sprite
- */
-function fetchDisc(discColor) {
-
-	var discSpriteName = "";
-
-	switch (discColor) {
-		case GREEN:
-			discSpriteName = GREEN_DISC_NAME;
-			break;
-
-		case BLUE:
-			discSpriteName = BLUE_DISC_NAME;
-			break;
-
-		case RED:
-			discSpriteName = RED_DISC_NAME;
-			break;
-
-		case PURPLE:
-			discSpriteName = PURPLE_DISC_NAME;
-			break;
-
-		case YELLOW:
-			discSpriteName = YELLOW_DISC_NAME;
-			break;
-
-		case WHITE:
-			discSpriteName = WHITE_DISC_NAME;
-			break;
-
-		case BLACK:
-			discSpriteName = BLACK_DISC_NAME;
-			break;
-
-		default:
-			// Should never be reached. There are only seven Discs's colors.
-	}
-
-	var discSprite = ATLAS.fetchSprite(discSpriteName);
-	return discSprite;
-}
-
-/**
  * Validate disc checks whether there are enough discs of that color.
  */
 function validateDisc(discCount, discColor) {
@@ -250,7 +205,7 @@ function validateDisc(discCount, discColor) {
 	var isValid = false;
 
 	// Discs white and black are considered special discs
-	if (discColor === WHITE || discColor === BLACK) {
+	if (discColor === 5 || discColor === 6) {
 		isValid = (discCount[discColor] < DISC_SPECIAL_LIMIT);
 	} else {
 		isValid = (discCount[discColor] < DISC_LIMIT);

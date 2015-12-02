@@ -31,7 +31,7 @@ var Player = function (sprite, number, scale) {
 	this._pool = [];
 	this._countDiscs = [];
 
-	for (var i = 0; i < NUMBER_DISC_ROWORS; i++) {
+	for (var i = 0; i < NUMBER_DISC_COLORS; i++) {
 		this._countDiscs[i] = 0;
 	}
 

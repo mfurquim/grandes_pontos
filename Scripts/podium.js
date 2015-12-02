@@ -49,23 +49,23 @@ Podium.prototype.stepup = function(pawn) {
 
     var brickSpriteName = "brick_black.png";
     switch (this._pawnsPosition[i].getColor()) {
-      case GREEN:
+      case 0:
         brickSpriteName = "brick_green.png";
         break;
 
-      case BLUE:
+      case 1:
         brickSpriteName = "brick_blue.png";
         break;
 
-      case RED:
+      case 2:
         brickSpriteName = "brick_red.png";
         break;
 
-      case PURPLE:
+      case 3:
         brickSpriteName = "brick_purple.png";
         break;
 
-      case YELLOW:
+      case 4:
         brickSpriteName = "brick_yellow.png";
         break;
 
@@ -96,36 +96,10 @@ Podium.prototype.generateStackDisc = function() {
     height: 1
   };
 
+
   // One disc for each pawn
   for (var i = 0; i < NUMBER_PAWNS; i++) {
-    var discSpriteName = "";
-
-  	switch (i) {
-  		case GREEN:
-  			discSpriteName = GREEN_DISC_NAME;
-  			break;
-
-  		case BLUE:
-  			discSpriteName = BLUE_DISC_NAME;
-  			break;
-
-  		case RED:
-  			discSpriteName = RED_DISC_NAME;
-  			break;
-
-  		case PURPLE:
-  			discSpriteName = PURPLE_DISC_NAME;
-  			break;
-
-  		case YELLOW:
-  			discSpriteName = YELLOW_DISC_NAME;
-  			break;
-
-  		default:
-  			// Should never be reached. There are only five Pawn's colors.
-  	}
-
-  	var discSprite = ATLAS.fetchSprite(discSpriteName);
+  	var discSprite = ATLAS.fetchDisc(i);
     var positionCoordinates = {
       x: 430,
       y: 70 - (i*10)
