@@ -3,13 +3,23 @@
  */
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> testing boardGame with qunit.js
 QUnit.module( "Board Game" );
 
 
 QUnit.test( "Loading boardGame variables", function( assert ) {
 
+<<<<<<< HEAD
   // quantity of expected asserts during test
   assert.expect(14);
+=======
+  assert.expect(11);
+>>>>>>> testing boardGame with qunit.js
 
   assert.equal( NUM_PLAYERS,4, "Players Number: Passed!" );
 
@@ -26,6 +36,7 @@ QUnit.test( "Loading boardGame variables", function( assert ) {
   assert.equal(NUMBER_DISC_ROW,11,"Disc Row Number: Passed!");
   assert.equal(NUMBER_DISC_COL,5,"Disc Col Number: Passed!");
 
+<<<<<<< HEAD
   // Testing Board Offset Objetct variables
   assert.equal(BOARD_OFFSET.X,50,"X Offset: Passed!");
   assert.equal(BOARD_OFFSET.Y,100,"Y Offset: Passed!");
@@ -87,4 +98,6 @@ QUnit.test("Test log suit methods", function(assert) {
 
   assert.equal( readCookie("field"),null,"cookie retrieved according to expected response");
 
+=======
+>>>>>>> testing boardGame with qunit.js
 });
