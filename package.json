@@ -13,7 +13,8 @@
   "dependencies": "",
   "devDependencies": {
     "coveralls": "latest",
-    "nodeunit": "latest"
+    "nodeunit": "latest",
+    "qunitjs": "~1.20.0"
   },
   "man": "",
   "scripts": {
