@@ -1,9 +1,5 @@
 ATLAS.loadingAssets();
 
-QUnit.test( "hello test", function( assert ) {
-  assert.ok( 1 == "1", "Passed!" );
-});
-
 QUnit.module( "ATLAS" );
 
 QUnit.test("Test Fecth Atlas", function(assert) {
@@ -11,21 +7,32 @@ QUnit.test("Test Fecth Atlas", function(assert) {
 });
 
 QUnit.test("Test Fecth Sprite", function(assert) {
-  assert.expect( 1 );
-  var done = assert.async( 1 );
+  assert.expect( 5 );
+  var done = assert.async( 5 );
 
   setTimeout(function() {
-    assert.ok( ATLAS.fetchSprite("Multi/disc_green.png") !== null, "Sprite loaded!");
+    assert.ok( ATLAS.fetchSprite("Bordered/disc_green.png") !== null, "Sprite Multi Disc Green loaded!");
     done();
-  }, 500 );
-});
+  }, 2000 );
 
+  setTimeout(function() {
+    assert.ok( ATLAS.fetchSprite("Multi/classic_blue.png") !== null, "Sprite Bordered Classic Blue loaded!");
+    done();
+  }, 2000 );
 
+  setTimeout(function() {
+    assert.ok( ATLAS.fetchSprite("Single/meeple_yellow.png") !== null, "Sprite Single Meeple Yellow loaded!");
+    done();
+  }, 2000 );
 
-QUnit.module( "group b" );
-QUnit.test( "a basic test example 3", function( assert ) {
-  assert.ok( true, "this test is fine" );
-});
-QUnit.test( "a basic test example 4", function( assert ) {
-  assert.ok( true, "this test is fine" );
+  setTimeout(function() {
+    assert.ok( ATLAS.fetchSprite("gamepad4.png") !== null, "Sprite Gamepad 4 loaded!");
+    done();
+  }, 2000 );
+
+  setTimeout(function() {
+    assert.ok( ATLAS.fetchSprite("brick_black.png") !== null, "Sprite Brick Black loaded!");
+    done();
+  }, 2000 );
+
 });
