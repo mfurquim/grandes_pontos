@@ -11,7 +11,8 @@ QUnit.module( "Board Game" );
 
 QUnit.test( "Loading boardGame variables", function( assert ) {
 
-  assert.expect(11);
+  // quantity of expected asserts during test
+  assert.expect(14);
 
   assert.equal( NUM_PLAYERS,4, "Players Number: Passed!" );
 
@@ -27,5 +28,12 @@ QUnit.test( "Loading boardGame variables", function( assert ) {
 
   assert.equal(NUMBER_DISC_ROW,11,"Disc Row Number: Passed!");
   assert.equal(NUMBER_DISC_COL,5,"Disc Col Number: Passed!");
+
+  // Testing Board Offset Objetct variables
+  assert.equal(BOARD_OFFSET.X,50,"X Offset: Passed!");
+  assert.equal(BOARD_OFFSET.Y,100,"Y Offset: Passed!");
+
+  assert.equal(NUMBER_PAWNS,5,"Pawns Number: Passed!");
+
 
 });
