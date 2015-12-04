@@ -112,3 +112,11 @@ QUnit.test("Test log suit methods", function(assert) {
 =======
 >>>>>>> testing more boardGame variables
 });
+
+QUnit.test("Test Generate Board", function(assert) {
+  assert.ok( generateBoard !== null, "Board Generated");
+});
+
+QUnit.test("Test Generate Players", function(assert) {
+  assert.ok( generatePlayers !== null, "Players Generated");
+});
