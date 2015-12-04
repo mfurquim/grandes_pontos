@@ -120,3 +120,19 @@ QUnit.test("Test Generate Board", function(assert) {
 QUnit.test("Test Generate Players", function(assert) {
   assert.ok( generatePlayers !== null, "Players Generated");
 });
+
+QUnit.test("Test Fetches", function(assert) {
+
+  assert.expect(2);
+
+  assert.ok( fetchPawn !== null, "Pawn Fetched");
+
+  assert.ok(fetchDisc !== null,"Disc fetched");
+});
+
+
+QUnit.test("Validatinf Discs", function(assert) {
+
+  assert.expect();
+  assert.ok( generatePlayers !== null, "Players Generated");
+});
