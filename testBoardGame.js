@@ -3,9 +3,6 @@
  */
 
 
-
-
-
 QUnit.module( "Board Game" );
 
 
@@ -55,11 +52,12 @@ QUnit.test("Test Fetches", function(assert) {
   assert.ok(fetchDisc !== null,"Disc fetched");
 });
 
-
+// testing validateDisc method
 QUnit.test("Validating Discs", function(assert) {
 
   assert.expect(2);
-
+  // Special Discs should return false when there are more than 5 discs
   assert.equal( validateDisc(6,WHITE),false, "Any special disc with more than count more than 5 should be invalidated");
+  // Special Discs should return false when there are more than 9 discs
   assert.equal( validateDisc(10,WHITE),false, "Any normal disc with more than count more than 9 should be invalidated");
 });
