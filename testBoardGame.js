@@ -15,11 +15,16 @@ QUnit.module( "Board Game" );
 QUnit.test( "Loading boardGame variables", function( assert ) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   // quantity of expected asserts during test
   assert.expect(14);
 =======
   assert.expect(11);
 >>>>>>> testing boardGame with qunit.js
+=======
+  // quantity of expected asserts during test
+  assert.expect(14);
+>>>>>>> testing more boardGame variables
 
   assert.equal( NUM_PLAYERS,4, "Players Number: Passed!" );
 
@@ -37,6 +42,9 @@ QUnit.test( "Loading boardGame variables", function( assert ) {
   assert.equal(NUMBER_DISC_COL,5,"Disc Col Number: Passed!");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> testing more boardGame variables
   // Testing Board Offset Objetct variables
   assert.equal(BOARD_OFFSET.X,50,"X Offset: Passed!");
   assert.equal(BOARD_OFFSET.Y,100,"Y Offset: Passed!");
@@ -44,6 +52,7 @@ QUnit.test( "Loading boardGame variables", function( assert ) {
   assert.equal(NUMBER_PAWNS,5,"Pawns Number: Passed!");
 
 
+<<<<<<< HEAD
 });
 
 QUnit.test("Test Generate Board", function(assert) {
@@ -100,4 +109,6 @@ QUnit.test("Test log suit methods", function(assert) {
 
 =======
 >>>>>>> testing boardGame with qunit.js
+=======
+>>>>>>> testing more boardGame variables
 });
