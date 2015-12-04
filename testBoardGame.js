@@ -37,3 +37,11 @@ QUnit.test( "Loading boardGame variables", function( assert ) {
 
 
 });
+
+QUnit.test("Test Generate Board", function(assert) {
+  assert.ok( generateBoard !== null, "Board Generated");
+});
+
+QUnit.test("Test Generate Players", function(assert) {
+  assert.ok( generatePlayers !== null, "Players Generated");
+});
