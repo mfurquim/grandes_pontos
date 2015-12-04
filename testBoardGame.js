@@ -56,8 +56,10 @@ QUnit.test("Test Fetches", function(assert) {
 });
 
 
-QUnit.test("Validatinf Discs", function(assert) {
+QUnit.test("Validating Discs", function(assert) {
 
-  assert.expect();
-  assert.ok( generatePlayers !== null, "Players Generated");
+  assert.expect(2);
+
+  assert.equal( validateDisc(6,WHITE),false, "Any special disc with more than count more than 5 should be invalidated");
+  assert.equal( validateDisc(10,WHITE),false, "Any normal disc with more than count more than 9 should be invalidated");
 });
