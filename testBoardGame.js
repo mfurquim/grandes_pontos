@@ -74,3 +74,17 @@ QUnit.test("Test log suit methods", function(assert) {
   assert.ok( eraseCookie !== null, "erase cookie method");
 
 });
+
+QUnit.test("Test log suit methods", function(assert) {
+
+  assert.expect(2);
+
+  createCookie("field","value",30);
+
+  assert.equal(readCookie("field"),"value","cookie retrieved according to expected response");
+
+  eraseCookie("field");
+
+  assert.equal( readCookie("field"),null,"cookie retrieved according to expected response");
+
+});
