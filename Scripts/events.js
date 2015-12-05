@@ -51,6 +51,9 @@ var EVENTS = (function() {
     * @param mouseClick
     */
     window.onmousemove = function(mouseMove){
+      if (typeof(board.pawns) === "undefined") {
+        return ;
+      }
 
       var mousePosition = {
         x: mouseMove.pageX,
@@ -76,7 +79,12 @@ var EVENTS = (function() {
     };
 
     window.onclick = function(mouseClick){
-      console.log(mouseClick);
+      if (typeof(board.pawns) === "undefined") {
+        return ;
+      }
+      if (DEBUG_ON) {
+        console.log(mouseClick);
+      }
       var mousePosition = {
         x: mouseClick.pageX,
         y: mouseClick.pageY
