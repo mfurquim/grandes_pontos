@@ -61,3 +61,30 @@ QUnit.test("Validating Discs", function(assert) {
   // Special Discs should return false when there are more than 9 discs
   assert.equal( validateDisc(10,WHITE),false, "Any normal disc with more than count more than 9 should be invalidated");
 });
+
+
+QUnit.module( "Log Suit" );
+
+QUnit.test("Test log suit methods", function(assert) {
+
+  assert.expect(3);
+
+  assert.ok( createCookie !== null, "create cookie method");
+  assert.ok( readCookie !== null, "read cookie method");
+  assert.ok( eraseCookie !== null, "erase cookie method");
+
+});
+
+QUnit.test("Test log suit methods", function(assert) {
+
+  assert.expect(2);
+
+  createCookie("field","value",30);
+
+  assert.equal(readCookie("field"),"value","cookie retrieved according to expected response");
+
+  eraseCookie("field");
+
+  assert.equal( readCookie("field"),null,"cookie retrieved according to expected response");
+
+});
