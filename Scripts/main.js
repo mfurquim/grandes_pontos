@@ -28,7 +28,8 @@ var tryGeneratingBoard = function() {
 var setup = function() {
 
 	var date = new Date();
-	createCookie("gameLoaded",date,1);
+
+	createCookie(date,"gameLoaded",1);
 
 	canvas = document.getElementById("myCanvas");
 	context = canvas.getContext("2d");
