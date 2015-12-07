@@ -1,5 +1,6 @@
 ATLAS.loadingAssets();
 
+//Testando Atlas
 QUnit.module( "ATLAS" );
 
 QUnit.test("Test Fecth Atlas", function(assert) {
@@ -11,6 +12,7 @@ QUnit.test("Test Fecth Atlas", function(assert) {
   }, 2000 );
 });
 
+//Testando Sprites
 QUnit.test("Test Fecth Sprite", function(assert) {
   assert.expect( 5 );
   var done = assert.async( 5 );
