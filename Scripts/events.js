@@ -170,7 +170,7 @@ var EVENTS = (function() {
         if (DEBUG_ON === true) {
           console.log(currentPawn);
         }
-        console.log(currentPawn);
+      
         nextMove = next(currentPawn);
       }
       else {

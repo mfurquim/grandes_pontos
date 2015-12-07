@@ -15,6 +15,8 @@
 function nextPossibleMove (hoveredPawn){
   //console.log(board.pawns[2].color);
   //console.log(hoveredPawn);
+
+
   pawnColor = hoveredPawn._color;
 
   for (var j = NUMBER_DISC_COL; j > 0; j--) {
